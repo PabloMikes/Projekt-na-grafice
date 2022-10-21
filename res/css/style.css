@@ -1,4 +1,4 @@
-img{
+#enemy{
     border: 4px solid black;
     cursor: pointer;
     transition: .3s;
@@ -6,28 +6,43 @@ img{
     display: block;
     margin-top: 18%;
 }
+#deadEnemy{
+    border: 4px solid black;
+    cursor: pointer;
+    transition: .3s;
+    margin: 0 auto;
+    display: block;
+    margin-top: 18%;
+}
+
 #obal{
     display:flex;
     justify-content: center;
 }
 .one{
     background-image: url(../img/background2.png);
-    width: 500px;
+    width: 300px;
     background-repeat: no-repeat;
 }
 .two{
     flex: 5
 }
 p{
-    font-size: 50px;
+    font-size: 40px;
 }
 #counter{
     text-align: center;
+    display:flex;
+    justify-content: center;
 }
 #deadEnemy{
     display: none;
 }
 #money{
+    font-size: 50px;
+    margin-left: 5px;
+}
+#damage{
     font-size: 50px;
     margin-left: 5px;
 }
@@ -40,7 +55,7 @@ body{
     background-size: 100%;
 }
 button{
-    font-size: 30px;
+    font-size: 20px;
     margin-top: 5px;
     margin-left: 5px;
     width: 98%;
@@ -48,26 +63,38 @@ button{
 }
 .three{
     background-image: url(../img/background2.png);
-    width: 500px;
+    width: 300px;
     background-repeat: no-repeat;
 }
 #club{
     width: 100px;
     height: 100px;
     margin-left: 5px;
+    border: 4px solid black;
+    cursor: pointer;
 }
 #music{
-    width: 50px;
+    width: 30px;
     margin: 0;
     padding: 0;
     background-color: black;
 }
 #mutedMusic{
-    width: 50px;
+    width: 30px;
     margin: 0;
     padding: 0;
     background-color: black;
     display: none;
+}
+#deathCounter{
+    margin-left: 10px;
+    background-color: bisque;
+    width: max-content;
+}
+#hp{
+    margin: 0;
+    padding: 0;
+    border: none;
 }
 /*html{
     cursor: url(pointer), url(../img/club.png), auto;

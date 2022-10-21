@@ -19,12 +19,14 @@ const damageCounter = document.getElementById("damage");
 const musicButton = document.getElementById("music");
 const musicMutedButton = document.getElementById("mutedMusic");
 const audio = document.getElementById("audio");
+const deathCounter = document.getElementById("deathCounter")
 
 let maxHp = 20;
 let hp = 20;
 let damage = 1;
 let money = 0;
 let maxMoney = 10;
+let deaths = 0;
 let up1 = 0;
 let price1 = 10;
 let up2 = 0;
@@ -52,7 +54,7 @@ window.onload = () => {
   setInterval(() => {
     if (hp > 0) {
       hp -= damageOverTime;
-      counter.innerHTML = `HP: ${hp}/${maxHp}`;
+      counter.innerHTML = `<img src="./res/img/hp" alt="">: ${hp}/${maxHp}`;
     }
   }, 1000); 
 
@@ -70,8 +72,9 @@ window.onload = () => {
     if (hp <= 0) {
       enemy.style.display = "none";
       deadEnemy.style.display = "block";
-
-      money += maxMoney;
+      
+      hp = Math.min(0);
+      money += maxMoney; 
       maxMoney *= 1.3;                            //money scaling
       maxMoney = Math.round(maxMoney);
       moneyCounter.innerHTML = `Money: ${money}`;
@@ -79,8 +82,10 @@ window.onload = () => {
       maxHp = Math.round(maxHp);
 
       setTimeout(() => {
+        deaths ++;
+        deathCounter.innerHTML = `Kills: ${deaths}`
         hp += maxHp;
-        counter.innerHTML = `HP: ${hp}/${maxHp}`;
+        counter.innerHTML = `<img src="./res/img/hp" alt="">: ${hp}/${maxHp}`;
         enemy.style.display = "block";
         deadEnemy.style.display = "none";
       }, 1000);
@@ -93,7 +98,7 @@ enemy.onclick = () => {
     hp -= damage;
   }
   enemy.style.transform = "scale(0.9)";
-  counter.innerHTML = `HP: ${hp}/${maxHp}`;
+  counter.innerHTML = `<img src="./res/img/hp" alt="">: ${hp}/${maxHp}`;
 
   setTimeout(() => {
     enemy.style.transform = "scale(1)";
@@ -229,8 +234,7 @@ factory.onclick = () => {
 
 club.onclick = () =>{
   if (money >= 100){
-    damage *= 1.4;
-    damage = Math.round(damage);
+    damage += 20;
    // html.style.cursor = "url(../img/club.png), auto"; !!!!!otázečka na Honzíka!!!!!
     club.style.display = "none";
     money -= 100;
@@ -252,3 +256,4 @@ musicMutedButton.onclick = () =>{
   musicMutedButton.style.display = "none";
   musicButton.style.display = "block";
 }
+

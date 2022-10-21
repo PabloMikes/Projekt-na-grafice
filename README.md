@@ -1,2 +1,2 @@
 # Projekt-na-grafice
-[View](https://github.com/PabloMikes/Projekt-na-grafice.git)
+[View](https://pablomikes.github.io/Projekt-na-grafice/)

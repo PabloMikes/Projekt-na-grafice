@@ -15,7 +15,10 @@ const workshop = document.getElementById("workshop");
 const manufacture = document.getElementById("manufacture");
 const factory = document.getElementById("factory");
 const club = document.getElementById("club");
-const damageCounter = document.getElementById("damage")
+const damageCounter = document.getElementById("damage");
+const musicButton = document.getElementById("music");
+const musicMutedButton = document.getElementById("mutedMusic");
+const audio = document.getElementById("audio").loop = true;
 
 let maxHp = 20;
 let hp = 20;
@@ -234,4 +237,18 @@ club.onclick = () =>{
     moneyCounter.innerHTML = `Money: ${money}`;
     damageCounter.innerHTML = `Damage: ${damage}`
   }
+}
+
+musicButton.onclick = () =>{
+  audio.play();
+  musicButton.style.display = "none";
+  musicMutedButton.style.display = "block";
+  
+}
+
+musicMutedButton.onclick = () =>{
+  audio.pause();
+  audio.currentTime=0;
+  musicMutedButton.style.display = "none";
+  musicButton.style.display = "block";
 }

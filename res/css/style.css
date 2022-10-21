@@ -56,6 +56,19 @@ button{
     height: 100px;
     margin-left: 5px;
 }
+#music{
+    width: 50px;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+#mutedMusic{
+    width: 50px;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    display: none;
+}
 /*html{
     cursor: url(pointer), url(../img/club.png), auto;
 } TEST

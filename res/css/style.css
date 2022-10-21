@@ -1,0 +1,61 @@
+img{
+    border: 4px solid black;
+    cursor: pointer;
+    transition: .3s;
+    margin: 0 auto;
+    display: block;
+    margin-top: 18%;
+}
+#obal{
+    display:flex;
+    justify-content: center;
+}
+.one{
+    background-image: url(../img/background2.png);
+    width: 500px;
+    background-repeat: no-repeat;
+}
+.two{
+    flex: 5
+}
+p{
+    font-size: 50px;
+}
+#counter{
+    text-align: center;
+}
+#deadEnemy{
+    display: none;
+}
+#money{
+    font-size: 50px;
+    margin-left: 5px;
+}
+*{
+    box-sizing: border-box;
+}
+body{
+    background-image: url(../img/background.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+button{
+    font-size: 30px;
+    margin-top: 5px;
+    margin-left: 5px;
+    width: 98%;
+    text-align: left;
+}
+.three{
+    background-image: url(../img/background2.png);
+    width: 500px;
+    background-repeat: no-repeat;
+}
+#club{
+    width: 100px;
+    height: 100px;
+    margin-left: 5px;
+}
+/*html{
+    cursor: url(pointer), url(../img/club.png), auto;
+} TEST

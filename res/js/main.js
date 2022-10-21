@@ -18,7 +18,7 @@ const club = document.getElementById("club");
 const damageCounter = document.getElementById("damage");
 const musicButton = document.getElementById("music");
 const musicMutedButton = document.getElementById("mutedMusic");
-const audio = document.getElementById("audio").loop = true;
+const audio = document.getElementById("audio");
 
 let maxHp = 20;
 let hp = 20;

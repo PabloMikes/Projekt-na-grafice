@@ -172,11 +172,18 @@ body {
 }
 #obal{
     display: flex;
-    margin-top: 90px;
+    margin-top: 230px;
 }
 #mainChar{
     display: block;
+    transition: ease 2.5;
     margin: 0 auto;
+}
+#flex1{
+    flex: 50%;
+}
+#flex2{
+    flex: 50%;
 }
 #goInside{
     display: none;

@@ -21,6 +21,8 @@ const musicMutedButton = document.getElementById("mutedMusic");
 const audio = document.getElementById("audio");
 const audio2 = document.getElementById("audio2");
 const audio3 = document.getElementById("audio3");
+const audio4 = document.getElementById("audio4");
+const audio5 = document.getElementById("audio5");
 const deathCounter = document.getElementById("deathCounter");
 const menuButton = document.getElementById("menu");
 const main = document.getElementById("main");
@@ -36,6 +38,7 @@ const description = document.getElementById("description");
 const kostelButton = document.getElementById("church");
 const goInside = document.getElementById("goInside");
 const goBack = document.getElementById("goBack");
+const mainChar = document.getElementById("mainChar");
 
 let maxHp = 20;
 let hp = 20;
@@ -91,6 +94,7 @@ window.onload = () => {
     if (hp <= 0) {
       enemy.style.display = "none";
       deadEnemy.style.display = "block";
+      audio5.play();
 
       hp = Math.min(0);
       money += maxMoney;
@@ -116,6 +120,11 @@ window.onload = () => {
 enemy.onclick = () => {
   if (hp > 0) {
     hp -= damage;
+    audio4.play();
+    mainChar.style.marginLeft = "55%";
+    setTimeout(() => {
+      mainChar.style.margin = "0 auto";
+    }, 100);
   }
   enemy.style.transform = "scale(0.9)";
   counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
@@ -275,6 +284,7 @@ musicMutedButton.onclick = () => {
   musicMutedButton.style.display = "none";
   musicButton.style.display = "block";
 };
+
 menuButton.onclick = () => {
   if (x.matches && kostelButton.style.display == "none") {
     main.style.display = "none";
@@ -423,6 +433,7 @@ shop.onclick = () => {
     kostelButton.style.display = "none";
   }
 };
+
 backButton2.onclick = () => {
   if (x.matches) {
     hospoda.style.display = "block";
@@ -485,6 +496,7 @@ goInside.onclick = () => {
   body.style.backgroundImage = "url(./res/img/insideKostel.jpg)";
   menuButton.style.display = "none";
 };
+
 goBack.onclick = () => {
   audio3.pause();
   audio3.currentTime = 0;

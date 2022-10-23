@@ -19,7 +19,15 @@ const damageCounter = document.getElementById("damage");
 const musicButton = document.getElementById("music");
 const musicMutedButton = document.getElementById("mutedMusic");
 const audio = document.getElementById("audio");
-const deathCounter = document.getElementById("deathCounter")
+const audio2 = document.getElementById("audio2");
+const deathCounter = document.getElementById("deathCounter");
+const menuButton = document.getElementById("menu");
+const main = document.getElementById("main");
+const mainMenu = document.getElementById("mainMenu");
+const mesto = document.getElementById("mesto");
+const hospoda = document.getElementById("hospoda");
+const backButton = document.getElementById("back");
+const nextUpdate = document.getElementById("nextUpdate");
 
 let maxHp = 20;
 let hp = 20;
@@ -50,42 +58,46 @@ let up8 = 0;
 let up9 = 0;
 let up10 = 0;
 
+var body = document.getElementsByTagName("body")[0];
+var x = window.matchMedia("(max-width: 1024px)");
+
 window.onload = () => {
   setInterval(() => {
     if (hp > 0) {
       hp -= damageOverTime;
-      counter.innerHTML = `<img src="./res/img/hp" alt="">: ${hp}/${maxHp}`;
+      counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
     }
-  }, 1000); 
+  }, 1000);
 
   setInterval(() => {
-      damagePerSecondCounter.innerHTML = `Damage per second: ${damageOverTime}`;
-  }, 1000); 
+    damagePerSecondCounter.innerHTML = `Damage per second: ${damageOverTime}`;
+  }, 1000);
 
   setInterval(() => {
     money += moneyPerSecond;
     moneyPerSecondCounter.innerHTML = `Money per second: ${moneyPerSecond}`;
     moneyCounter.innerHTML = `Money: ${money}`;
-  }, 1000);        // peníze za sekundu 
+  }, 1000); // peníze za sekundu
 
   setInterval(() => {
     if (hp <= 0) {
       enemy.style.display = "none";
       deadEnemy.style.display = "block";
-      
+
       hp = Math.min(0);
-      money += maxMoney; 
-      maxMoney *= 1.3;                            //money scaling
+      money += maxMoney;
+      maxMoney *= 1.3; //money scaling
       maxMoney = Math.round(maxMoney);
       moneyCounter.innerHTML = `Money: ${money}`;
-      maxHp *= 1.3;                               //hp scaling
+      maxHp *= 1.2; //hp scaling
       maxHp = Math.round(maxHp);
 
       setTimeout(() => {
-        deaths ++;
-        deathCounter.innerHTML = `Kills: ${deaths}`
+        deaths++;
+        deathCounter.innerHTML = `Kills: ${deaths}`;
         hp += maxHp;
-        counter.innerHTML = `<img src="./res/img/hp" alt="">: ${hp}/${maxHp}`;
+        hp = Math.max(maxHp);
+        counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
         enemy.style.display = "block";
         deadEnemy.style.display = "none";
       }, 1000);
@@ -98,7 +110,7 @@ enemy.onclick = () => {
     hp -= damage;
   }
   enemy.style.transform = "scale(0.9)";
-  counter.innerHTML = `<img src="./res/img/hp" alt="">: ${hp}/${maxHp}`;
+  counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
 
   setTimeout(() => {
     enemy.style.transform = "scale(1)";
@@ -119,7 +131,7 @@ sword.onclick = () => {
     price1 = Math.round(price1);
     sword.innerHTML = `Sword: ${up1} Gold: ${price1}`;
     moneyCounter.innerHTML = `Money: ${money}`;
-    damageCounter.innerHTML = `Damage: ${damage}`
+    damageCounter.innerHTML = `Damage: ${damage}`;
   }
 };
 
@@ -232,28 +244,97 @@ factory.onclick = () => {
   }
 };
 
-club.onclick = () =>{
-  if (money >= 100){
+club.onclick = () => {
+  if (money >= 100) {
     damage += 20;
-   // html.style.cursor = "url(../img/club.png), auto"; !!!!!otázečka na Honzíka!!!!!
     club.style.display = "none";
     money -= 100;
     moneyCounter.innerHTML = `Money: ${money}`;
-    damageCounter.innerHTML = `Damage: ${damage}`
+    damageCounter.innerHTML = `Damage: ${damage}`;
   }
-}
+};
 
-musicButton.onclick = () =>{
+musicButton.onclick = () => {
   audio.play();
   musicButton.style.display = "none";
   musicMutedButton.style.display = "block";
-  
-}
+};
 
-musicMutedButton.onclick = () =>{
+musicMutedButton.onclick = () => {
   audio.pause();
-  audio.currentTime=0;
+  audio.currentTime = 0;
   musicMutedButton.style.display = "none";
   musicButton.style.display = "block";
-}
+};
+menuButton.onclick = () => {
+  if (x.matches && main.style.display == "block") {
+    main.style.display = "none";
+    body.style.backgroundImage = "none";
+    body.style.backgroundColor = "bisque";
+    mesto.style.display = "block";
+  } else if (x.matches && main.display == "none") {
+    main.style.display = "block";
+    main.style.display = "block";
+    body.style.backgroundImage = "url(./res/img/background3.jpg)";
+    mesto.style.display = "none";
+  } else if (main.style.display == "block") {
+    main.style.display = "none";
+    body.style.backgroundImage = "url(./res/img/background.jpg)";
+    mesto.style.display = "block";
+  } else {
+    main.style.display = "block";
+    body.style.backgroundImage = "url(./res/img/background3.jpg)";
+    mesto.style.display = "none";
+  }
+};
 
+hospoda.onclick = () => {
+  if(x.matches){
+  hospoda.style.display = "none";
+  body.style.backgroundImage = "none";
+  body.style.backgroundColor = "gray";
+  musicMutedButton.style.display = "none";
+  musicButton.style.display = "none";
+  menuButton.style.display = "none";
+  backButton.style.display = "block";
+  audio.pause();
+  audio.currentTime = 0;
+  audio2.play();
+  nextUpdate.style.display = "block";
+}
+else{
+  hospoda.style.display = "none";
+  body.style.backgroundImage = "url(./res/img/quest.jpg)";
+  musicMutedButton.style.display = "none";
+  musicButton.style.display = "none";
+  menuButton.style.display = "none";
+  backButton.style.display = "block";
+  audio.pause();
+  audio.currentTime = 0;
+  audio2.play();
+  nextUpdate.style.display = "block";
+}
+};
+backButton.onclick = () => {
+  if(x.matches){
+    audio2.pause();
+    audio2.currentTime = 0;
+    hospoda.style.display = "block";
+    body.style.backgroundImage = "none";
+    body.style.backgroundColor = "bisque";
+    musicButton.style.display = "block";
+    menuButton.style.display = "block";
+    backButton.style.display = "none";
+    nextUpdate.style.display = "none";
+  }
+  else{
+    audio2.pause();
+    audio2.currentTime = 0;
+    hospoda.style.display = "block";
+    body.style.backgroundImage = "url(./res/img/background.jpg)";
+    musicButton.style.display = "block";
+    menuButton.style.display = "block";
+    backButton.style.display = "none";
+    nextUpdate.style.display = "none";
+  }
+};

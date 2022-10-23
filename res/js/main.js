@@ -505,3 +505,4 @@ goBack.onclick = () => {
   body.style.backgroundImage = "url(./res/img/kostel.png)";
   menuButton.style.display = "block";
 };
+

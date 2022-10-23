@@ -20,6 +20,7 @@ const musicButton = document.getElementById("music");
 const musicMutedButton = document.getElementById("mutedMusic");
 const audio = document.getElementById("audio");
 const audio2 = document.getElementById("audio2");
+const audio3 = document.getElementById("audio3");
 const deathCounter = document.getElementById("deathCounter");
 const menuButton = document.getElementById("menu");
 const main = document.getElementById("main");
@@ -463,6 +464,7 @@ kostelButton.onclick = () => {
     kostelButton.style.display = "none";
     menuButton.innerHTML = `Elektropolis`;
     goInside.style.display = "block";
+
   } else {
     hospoda.style.display = "none";
     body.style.backgroundImage = "url(./res/img/kostel.png)";
@@ -477,12 +479,15 @@ kostelButton.onclick = () => {
 };
 
 goInside.onclick = () => {
+  audio3.play();
   goBack.style.display = "block";
   goInside.style.display = "none";
   body.style.backgroundImage = "url(./res/img/insideKostel.jpg)";
   menuButton.style.display = "none";
 };
 goBack.onclick = () => {
+  audio3.pause();
+  audio3.currentTime = 0;
   goBack.style.display = "none";
   goInside.style.display = "block";
   body.style.backgroundImage = "url(./res/img/kostel.png)";

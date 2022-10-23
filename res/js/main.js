@@ -28,6 +28,13 @@ const mesto = document.getElementById("mesto");
 const hospoda = document.getElementById("hospoda");
 const backButton = document.getElementById("back");
 const nextUpdate = document.getElementById("nextUpdate");
+const shop = document.getElementById("thr");
+const backButton2 = document.getElementById("backButton2");
+const items = document.getElementById("oball");
+const description = document.getElementById("description");
+const kostelButton = document.getElementById("church");
+const goInside = document.getElementById("goInside");
+const goBack = document.getElementById("goBack");
 
 let maxHp = 20;
 let hp = 20;
@@ -251,6 +258,7 @@ club.onclick = () => {
     money -= 100;
     moneyCounter.innerHTML = `Money: ${money}`;
     damageCounter.innerHTML = `Damage: ${damage}`;
+    description.style.display = "none";
   }
 };
 
@@ -267,56 +275,102 @@ musicMutedButton.onclick = () => {
   musicButton.style.display = "block";
 };
 menuButton.onclick = () => {
-  if (x.matches && main.style.display == "block") {
+  if (x.matches && kostelButton.style.display == "none") {
     main.style.display = "none";
+    goInside.style.display = "none";
+    menuButton.innerHTML = `Battle`;
     body.style.backgroundImage = "none";
     body.style.backgroundColor = "bisque";
     mesto.style.display = "block";
-  } else if (x.matches && main.display == "none") {
-    main.style.display = "block";
-    main.style.display = "block";
-    body.style.backgroundImage = "url(./res/img/background3.jpg)";
-    mesto.style.display = "none";
-  } else if (main.style.display == "block") {
+    musicButton.style.display = "block";
+    menuButton.style.display = "block";
+    backButton.style.display = "none";
+    nextUpdate.style.display = "none";
+    shop.style.display = "block";
+    hospoda.style.display = "block";
+    hospoda.style.marginTop = "0";
+    backButton2.style.display = "none";
+    items.style.display = "none";
+    kostelButton.style.display = "block";
+  } else if (kostelButton.style.display == "none") {
     main.style.display = "none";
+    goInside.style.display = "none";
+    menuButton.innerHTML = `Battle`;
     body.style.backgroundImage = "url(./res/img/background.jpg)";
     mesto.style.display = "block";
+    musicButton.style.display = "block";
+    menuButton.style.display = "block";
+    backButton.style.display = "none";
+    nextUpdate.style.display = "none";
+    shop.style.display = "block";
+    hospoda.style.display = "block";
+    hospoda.style.marginTop = "0";
+    backButton2.style.display = "none";
+    items.style.display = "none";
+    kostelButton.style.display = "block";
+  } else if (x.matches && main.style.display == "block") {
+    main.style.display = "none";
+    menuButton.innerHTML = `Battle`;
+    body.style.backgroundImage = "none";
+    body.style.backgroundColor = "bisque";
+    mesto.style.display = "block";
+    items.style.display = "none";
+  } else if (x.matches && main.display == "none") {
+    main.style.display = "block";
+    menuButton.innerHTML = `Elektropolis`;
+    main.style.display = "block";
+    body.style.backgroundImage = "none";
+    body.style.backgroundColor = "bisque";
+    mesto.style.display = "none";
+    items.style.display = "none";
+  } else if (main.style.display == "block") {
+    main.style.display = "none";
+    menuButton.innerHTML = `Battle`;
+    body.style.backgroundImage = "url(./res/img/background.jpg)";
+    mesto.style.display = "block";
+    items.style.display = "none";
   } else {
+    menuButton.innerHTML = `Elektropolis`;
     main.style.display = "block";
     body.style.backgroundImage = "url(./res/img/background3.jpg)";
     mesto.style.display = "none";
+    items.style.display = "none";
   }
 };
 
 hospoda.onclick = () => {
-  if(x.matches){
-  hospoda.style.display = "none";
-  body.style.backgroundImage = "none";
-  body.style.backgroundColor = "gray";
-  musicMutedButton.style.display = "none";
-  musicButton.style.display = "none";
-  menuButton.style.display = "none";
-  backButton.style.display = "block";
-  audio.pause();
-  audio.currentTime = 0;
-  audio2.play();
-  nextUpdate.style.display = "block";
-}
-else{
-  hospoda.style.display = "none";
-  body.style.backgroundImage = "url(./res/img/quest.jpg)";
-  musicMutedButton.style.display = "none";
-  musicButton.style.display = "none";
-  menuButton.style.display = "none";
-  backButton.style.display = "block";
-  audio.pause();
-  audio.currentTime = 0;
-  audio2.play();
-  nextUpdate.style.display = "block";
-}
+  if (x.matches) {
+    hospoda.style.display = "none";
+    body.style.backgroundImage = "none";
+    body.style.backgroundColor = "gray";
+    musicMutedButton.style.display = "none";
+    musicButton.style.display = "none";
+    menuButton.style.display = "none";
+    backButton.style.display = "block";
+    audio.pause();
+    audio.currentTime = 0;
+    audio2.play();
+    nextUpdate.style.display = "block";
+    shop.style.display = "none";
+    kostelButton.style.display = "none";
+  } else {
+    hospoda.style.display = "none";
+    body.style.backgroundImage = "url(./res/img/quest.jpg)";
+    musicMutedButton.style.display = "none";
+    musicButton.style.display = "none";
+    menuButton.style.display = "none";
+    backButton.style.display = "block";
+    audio.pause();
+    audio.currentTime = 0;
+    audio2.play();
+    nextUpdate.style.display = "block";
+    shop.style.display = "none";
+    kostelButton.style.display = "none";
+  }
 };
+
 backButton.onclick = () => {
-  if(x.matches){
+  if (x.matches) {
     audio2.pause();
     audio2.currentTime = 0;
     hospoda.style.display = "block";
@@ -326,15 +380,111 @@ backButton.onclick = () => {
     menuButton.style.display = "block";
     backButton.style.display = "none";
     nextUpdate.style.display = "none";
-  }
-  else{
+    shop.style.display = "block";
+    hospoda.style.marginTop = "0";
+    kostelButton.style.display = "block";
+  } else {
     audio2.pause();
     audio2.currentTime = 0;
-    hospoda.style.display = "block";
     body.style.backgroundImage = "url(./res/img/background.jpg)";
     musicButton.style.display = "block";
     menuButton.style.display = "block";
     backButton.style.display = "none";
     nextUpdate.style.display = "none";
+    shop.style.display = "block";
+    hospoda.style.display = "block";
+    hospoda.style.marginTop = "0";
+    kostelButton.style.display = "block";
   }
+};
+
+shop.onclick = () => {
+  if (x.matches) {
+    hospoda.style.display = "none";
+    body.style.backgroundImage = "none";
+    body.style.backgroundColor = "bisque";
+    musicMutedButton.style.display = "none";
+    musicButton.style.display = "none";
+    menuButton.style.display = "none";
+    backButton2.style.display = "block";
+    shop.style.display = "none";
+    items.style.display = "block";
+    kostelButton.style.display = "none";
+  } else {
+    hospoda.style.display = "none";
+    body.style.backgroundImage = "url(./res/img/merchant.jpg)";
+    musicMutedButton.style.display = "none";
+    musicButton.style.display = "none";
+    menuButton.style.display = "none";
+    backButton2.style.display = "block";
+    shop.style.display = "none";
+    items.style.display = "block";
+    kostelButton.style.display = "none";
+  }
+};
+backButton2.onclick = () => {
+  if (x.matches) {
+    hospoda.style.display = "block";
+    body.style.backgroundImage = "none";
+    body.style.backgroundColor = "bisque";
+    musicButton.style.display = "block";
+    menuButton.style.display = "block";
+    backButton.style.display = "none";
+    nextUpdate.style.display = "none";
+    shop.style.display = "block";
+    hospoda.style.marginTop = "25%";
+    backButton2.style.display = "none";
+    items.style.display = "none";
+    kostelButton.style.display = "block";
+  } else {
+    body.style.backgroundImage = "url(./res/img/background.jpg)";
+    musicButton.style.display = "block";
+    menuButton.style.display = "block";
+    backButton.style.display = "none";
+    nextUpdate.style.display = "none";
+    shop.style.display = "block";
+    hospoda.style.display = "block";
+    hospoda.style.marginTop = "0";
+    backButton2.style.display = "none";
+    items.style.display = "none";
+    kostelButton.style.display = "block";
+  }
+};
+
+kostelButton.onclick = () => {
+  if (x.matches) {
+    hospoda.style.display = "none";
+    body.style.backgroundImage = "none";
+    body.style.backgroundColor = "bisque";
+    musicMutedButton.style.display = "none";
+    musicButton.style.display = "none";
+    menuButton.style.display = "block";
+    shop.style.display = "none";
+    kostelButton.style.display = "none";
+    menuButton.innerHTML = `Elektropolis`;
+    goInside.style.display = "block";
+  } else {
+    hospoda.style.display = "none";
+    body.style.backgroundImage = "url(./res/img/kostel.png)";
+    musicMutedButton.style.display = "none";
+    musicButton.style.display = "none";
+    menuButton.style.display = "block";
+    shop.style.display = "none";
+    kostelButton.style.display = "none";
+    menuButton.innerHTML = `Elektropolis`;
+    goInside.style.display = "block";
+  }
+};
+
+goInside.onclick = () => {
+  goBack.style.display = "block";
+  goInside.style.display = "none";
+  body.style.backgroundImage = "url(./res/img/insideKostel.jpg)";
+  menuButton.style.display = "none";
+};
+goBack.onclick = () => {
+  goBack.style.display = "none";
+  goInside.style.display = "block";
+  body.style.backgroundImage = "url(./res/img/kostel.png)";
+  menuButton.style.display = "block";
 };

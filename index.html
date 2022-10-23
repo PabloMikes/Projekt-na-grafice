@@ -10,63 +10,66 @@
   </head>
   <body>
     <div id="mainMenu">
-      <button id="menu">📜</button><br />
+      <button id="menu">Elektropolis</button><br />
       <button id="music">🔇</button>
       <button id="mutedMusic">🔊</button>
     </div>
     <div id="main">
       <div id="obal">
-        <div class="one">
+        <img src="./res/img/mainChar.jpg" alt="" id="mainChar" />
+        <img id="enemy" src="./res/img/negr.png" alt="" />
+        <img src="./res/img/negr2.png" alt="" id="deadEnemy" />
+      </div>
+      <p id="counter"><img id="hp" src="./res/img/hp.png" alt="" />: 20/20</p>
+      <audio src="./res/img/tutututu.mp3" id="audio" loop="loop"></audio>
+      <div id="verze">
+        <div>Verze 1.5</div>
+        <div>Made by: Pavel Mík</div>
+        <div>Graphics and music: Tadeáš Mejzlík a Matěj Landa</div>
+      </div>
+    </div>
+    <div id="mesto">
+      <button id="church">To Church</button>
+      <button id="goInside">Go inside</button>
+      <button id="goBack">Go back</button>
+      <button id="hospoda">QUESTS</button>
+      <button id="back">Back to Elektropolis</button>
+      <audio id="audio2" src="./res/img/hospodafinal.mp3" loop="loop"></audio>
+      <div id="nextUpdate">QUESTS IN UPDATE 2.0</div>
+      <button id="thr">SHOP</button>
+      <button id="backButton2">Back to Elektropolis</button>
+      <div id="oball">
+        <div class="stats">
+          <p id="damage">Damage: 1</p>
+          <p id="damagePerSecond">Damage per second: 0</p>
+          <p id="deathCounter">Kills: 0</p>
+        </div>
+        <div class="stats">
           <p id="money">Money: 0</p>
           <p id="moneyPerSecond">Money per second: 0</p>
+        </div>
+        <div class="shop1">
           <button id="secondJob">Second Job: 0 Gold: 10</button><br />
           <button id="merchant">Merchant: 0 Gold: 50</button><br />
           <button id="workshop">Workshop: 0 Gold: 300</button><br />
           <button id="manufacture">Manufacture: 0 Gold: 1000</button><br />
           <button id="factory">Factory: 0 Gold: 2000</button><br />
         </div>
-        <div class="two">
-          <p id="deathCounter">Kills: 0</p>
-          <img id="enemy" src="./res/img/negr.png" alt="" />
-          <img src="./res/img/negr2.png" alt="" id="deadEnemy" />
-          <p id="counter">
-            <img id="hp" src="./res/img/hp.png" alt="" />: 20/20
-          </p>
-        </div>
-        <div class="three">
-          <p id="damage">Damage: 1</p>
-          <p id="damagePerSecond">Damage per second: 0</p>
+        <div class="shop2">
           <button id="sword">Sword: 0 Gold: 10</button><br />
           <button id="poison">Poison: 0 Gold: 50</button><br />
           <button id="knight">Knight: 0 Gold: 300</button><br />
           <button id="archer">Archer: 0 Gold: 1000</button><br />
           <button id="mage">Mage: 0 Gold: 2000</button><br />
-          <img
-            id="club"
-            src="./res/img/club.png"
-            title="Gold: 100; +20 dmg"
-            alt=""
-          />
+        </div>
+        <div class="shop3">
+          <img id="club" src="./res/img/club.png" alt="" />
+          <div id="description">
+            Club: 100G <br />
+            +20 dmg
+          </div>
         </div>
       </div>
-      <audio src="./res/img/tutututu.mp3" id="audio" loop="loop"></audio>
-      <div id="verze">
-        <div>
-          Verze 1.4
-        </div>
-        <div>
-          Made by: Pavel Mík
-        </div>
-        <div>
-          Graphics and music: Tadeáš Mejzlík
-        </div>
-      </div>
-    </div>
-    <div id="mesto">
-      <button id="hospoda">QUESTS</button>
-      <button id="back">Back to Elektropolis</button>
-      <audio id="audio2" src="./res/img/hospodafinal.mp3" loop="loop"></audio>
-      <div id="nextUpdate">QUESTS IN NEXT UPDATE 2.0</div>
     </div>
     <script src="./res/js/main.js"></script>
   </body>

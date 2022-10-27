@@ -3,17 +3,9 @@ const enemy = document.getElementById("enemy");
 const deadEnemy = document.getElementById("deadEnemy");
 const moneyCounter = document.getElementById("money");
 const sword = document.getElementById("sword");
-const poison = document.getElementById("poison");
-const knight = document.getElementById("knight");
-const archer = document.getElementById("archer");
-const mage = document.getElementById("mage");
+const MaxHealth = document.getElementById("MaxHealth");
+const potion = document.getElementById("potion");
 const moneyPerSecondCounter = document.getElementById("moneyPerSecond");
-const damagePerSecondCounter = document.getElementById("damagePerSecond");
-const secondJob = document.getElementById("secondJob");
-const merchant = document.getElementById("merchant");
-const workshop = document.getElementById("workshop");
-const manufacture = document.getElementById("manufacture");
-const factory = document.getElementById("factory");
 const club = document.getElementById("club");
 const damageCounter = document.getElementById("damage");
 const musicButton = document.getElementById("music");
@@ -23,6 +15,7 @@ const audio2 = document.getElementById("audio2");
 const audio3 = document.getElementById("audio3");
 const audio4 = document.getElementById("audio4");
 const audio5 = document.getElementById("audio5");
+const audio6 = document.getElementById("audio6");
 const deathCounter = document.getElementById("deathCounter");
 const menuButton = document.getElementById("menu");
 const main = document.getElementById("main");
@@ -39,17 +32,27 @@ const kostelButton = document.getElementById("church");
 const goInside = document.getElementById("goInside");
 const goBack = document.getElementById("goBack");
 const mainChar = document.getElementById("mainChar");
+const earnings = document.getElementById("earnings");
+const hpCounter = document.getElementById("hpCounter");
+const verze = document.getElementById("verze");
+const attack = document.getElementById("attack");
+const heal = document.getElementById("heal");
+const def = document.getElementById("def");
+const potionCounter = document.getElementById("potionCounter");
 
 let maxHp = 20;
 let hp = 20;
+let charHp = 20;
+let charMaxHp = 20;
 let damage = 1;
+let enemyDamage = 1;
 let money = 0;
 let maxMoney = 10;
 let deaths = 0;
 let up1 = 0;
 let price1 = 10;
 let up2 = 0;
-let price2 = 50;
+let price2 = 10;
 let damageOverTime = 0;
 let up3 = 0;
 let price3 = 300;
@@ -58,39 +61,97 @@ let price4 = 1000;
 let up5 = 0;
 let price5 = 2000;
 let moneyPerSecond = 0;
-let price6 = 10;
-let price7 = 50;
-let price8 = 300;
-let price9 = 1000;
-let price10 = 2000;
-let up6 = 0;
-let up7 = 0;
-let up8 = 0;
-let up9 = 0;
-let up10 = 0;
 
 var body = document.getElementsByTagName("body")[0];
-var x = window.matchMedia("(max-width: 1024px)");
 
 window.onload = () => {
-  setInterval(() => {
-    if (hp > 0) {
-      hp -= damageOverTime;
-      counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
-    }
-  }, 1000);
-
-  setInterval(() => {
-    damagePerSecondCounter.innerHTML = `Damage per second: ${damageOverTime}`;
-  }, 1000);
-
-  setInterval(() => {
+  /* setInterval(() => {
     money += moneyPerSecond;
     moneyPerSecondCounter.innerHTML = `Money per second: ${moneyPerSecond}`;
     moneyCounter.innerHTML = `Money: ${money}`;
-  }, 1000); // peníze za sekundu
+  }, 1000); // peníze za sekundu vyuziju do budoucna probably vyber dani smthin like that */
 
   setInterval(() => {
+    if (main.style.display == "block") {
+      if (charHp >= 0) {
+        enemy.style.margin = "0";
+        enemy.style.marginTop = "10%";
+        charHp -= enemyDamage;
+        audio6.play();
+        hpCounter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${charHp}/${charMaxHp}`;
+
+        setTimeout(() =>{
+          enemy.style.margin = "0 auto";
+          enemy.style.marginTop = "10%";
+        }, 100);
+        
+        if (hp <= 0) {
+          enemy.style.display = "none";
+          deadEnemy.style.display = "block";
+          audio5.play();
+    
+          hp = Math.min(0);
+          money += maxMoney;
+          earnings.style.display = "block";
+          earnings.innerHTML = `+${maxMoney}G`;
+    
+          setTimeout(() => {
+            earnings.style.display = "none";
+          }, 1000);
+    
+          maxMoney *= 1.3; //money scaling
+          maxMoney = Math.round(maxMoney);
+          moneyCounter.innerHTML = `Money: ${money}`;
+          maxHp *= 1.2; //hp scaling
+          maxHp = Math.round(maxHp);
+    
+          charHp -= charHp;
+          charHp += charMaxHp;
+    
+          setTimeout(() => {
+            deaths++;
+            deathCounter.innerHTML = `Kills: ${deaths}`;
+            hp += maxHp;
+            hp = Math.max(maxHp);
+            counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
+            enemy.style.display = "block";
+            deadEnemy.style.display = "none";
+    
+            main.style.display = "none";
+            menuButton.innerHTML = `Battle!`;
+            body.style.backgroundImage = "url(./res/img/background.jpg)";
+            mesto.style.display = "block";
+            items.style.display = "none";
+            menuButton.style.display = "block";
+            verze.style.display = "block";
+          }, 1000);
+        }
+      }
+      else{
+        main.style.display = "none";
+        goInside.style.display = "none";
+        menuButton.innerHTML = `Battle!`;
+        body.style.backgroundImage = "url(./res/img/background.jpg)";
+        mesto.style.display = "block";
+        musicButton.style.display = "block";
+        menuButton.style.display = "block";
+        backButton.style.display = "none";
+        nextUpdate.style.display = "none";
+        shop.style.display = "block";
+        hospoda.style.display = "block";
+        hospoda.style.marginTop = "0";
+        backButton2.style.display = "none";
+        items.style.display = "none";
+        kostelButton.style.display = "block";
+        
+        charHp -= charHp;
+        charHp += charMaxHp;
+      }
+    }
+  }, 1500);
+
+
+ /* setInterval(() => {
     if (hp <= 0) {
       enemy.style.display = "none";
       deadEnemy.style.display = "block";
@@ -98,11 +159,21 @@ window.onload = () => {
 
       hp = Math.min(0);
       money += maxMoney;
+      earnings.style.display = "block";
+      earnings.innerHTML = `+${maxMoney}G`;
+
+      setTimeout(() => {
+        earnings.style.display = "none";
+      }, 1000);
+
       maxMoney *= 1.3; //money scaling
       maxMoney = Math.round(maxMoney);
       moneyCounter.innerHTML = `Money: ${money}`;
       maxHp *= 1.2; //hp scaling
       maxHp = Math.round(maxHp);
+
+      charHp -= charHp;
+      charHp += charMaxHp;
 
       setTimeout(() => {
         deaths++;
@@ -112,12 +183,19 @@ window.onload = () => {
         counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
         enemy.style.display = "block";
         deadEnemy.style.display = "none";
+
+        main.style.display = "none";
+        menuButton.innerHTML = `Battle!`;
+        body.style.backgroundImage = "url(./res/img/background.jpg)";
+        mesto.style.display = "block";
+        items.style.display = "none";
+        menuButton.style.display = "block";
+        verze.style.display = "block";
       }, 1000);
     }
-  }, 1500);
-};
-
-enemy.onclick = () => {
+  }, 1500);*/
+}
+attack.onclick = () => {
   if (hp > 0) {
     hp -= damage;
     audio4.play();
@@ -139,125 +217,54 @@ enemy.onclick = () => {
   }
 };
 
+heal.onclick = () => {
+  if (up3 > 0) {
+    charHp += 20;
+    up3 -= 1;
+
+    if (charHp > charMaxHp) {
+      charHp = Math.max(charMaxHp);
+    }
+    potionCounter.innerHTML = `${up3}`;
+    hpCounter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${charHp}/${charMaxHp}`;
+    potion.innerHTML = `Poťáček: ${up3} Gold: ${price3}`;
+  }
+};
+
 sword.onclick = () => {
   if (money >= price1) {
     up1++;
     damage++;
     money -= price1;
-    price1 *= 1.8;
+    price1 *= 1.3;
     price1 = Math.round(price1);
-    sword.innerHTML = `Sword: ${up1} Gold: ${price1}`;
+    sword.innerHTML = `Sharpness: ${up1} Gold: ${price1}`;
     moneyCounter.innerHTML = `Money: ${money}`;
     damageCounter.innerHTML = `Damage: ${damage}`;
   }
 };
 
-poison.onclick = () => {
+MaxHealth.onclick = () => {
   if (money >= price2) {
     money -= price2;
-    price2 *= 1.8;
-    damageOverTime += 2;
+    price2 *= 1.5;
     up2 += 1;
-    moneyCounter.innerHTML = `Money: ${money}`;
-
+    charHp += 10;
+    charMaxHp += 10;
+    hpCounter.innerHTML = `<img id="hp" src="./res/img/hp.png" alt="" />: ${charHp}/${charMaxHp}`;
     price2 = Math.round(price2);
-    poison.innerHTML = `Poison: ${up2} Gold: ${price2}`;
+    MaxHealth.innerHTML = `BUFF: ${up2} Gold: ${price2}`;
   }
 };
 
-knight.onclick = () => {
+potion.onclick = () => {
   if (money >= price3) {
     money -= price3;
-    price3 *= 1.8;
-    damageOverTime += 15;
     up3 += 1;
     moneyCounter.innerHTML = `Money: ${money}`;
     price3 = Math.round(price3);
-    knight.innerHTML = `Knight: ${up3} Gold: ${price3}`;
-  }
-};
-
-archer.onclick = () => {
-  if (money >= price4) {
-    money -= price4;
-    price4 *= 1.8;
-    damageOverTime += 50;
-    up4 += 1;
-    moneyCounter.innerHTML = `Money: ${money}`;
-    price4 = Math.round(price4);
-    archer.innerHTML = `Archer: ${up4} Gold: ${price4}`;
-  }
-};
-
-mage.onclick = () => {
-  if (money >= price5) {
-    money -= price5;
-    price5 *= 1.8;
-    damageOverTime += 100;
-    up5 += 1;
-    moneyCounter.innerHTML = `Money: ${money}`;
-    price5 = Math.round(price5);
-    mage.innerHTML = `Mage: ${up5} Gold: ${price5}`;
-  }
-};
-
-secondJob.onclick = () => {
-  if (money >= price6) {
-    money -= price6;
-    price6 *= 1.8;
-    moneyPerSecond += 1;
-    up6 += 1;
-    moneyCounter.innerHTML = `Money: ${money}`;
-    price6 = Math.round(price6);
-    secondJob.innerHTML = `Second Job: ${up6} Gold: ${price6}`;
-  }
-};
-
-merchant.onclick = () => {
-  if (money >= price7) {
-    money -= price7;
-    price7 *= 1.8;
-    moneyPerSecond += 3;
-    up7 += 1;
-    moneyCounter.innerHTML = `Money: ${money}`;
-    price7 = Math.round(price7);
-    merchant.innerHTML = `Merchant: ${up7} Gold: ${price7}`;
-  }
-};
-
-workshop.onclick = () => {
-  if (money >= price8) {
-    money -= price8;
-    price8 *= 1.8;
-    moneyPerSecond += 10;
-    up8 += 1;
-    moneyCounter.innerHTML = `Money: ${money}`;
-    price8 = Math.round(price8);
-    workshop.innerHTML = `Workshop: ${up8} Gold: ${price8}`;
-  }
-};
-
-manufacture.onclick = () => {
-  if (money >= price9) {
-    money -= price9;
-    price9 *= 1.8;
-    moneyPerSecond += 15;
-    up9 += 1;
-    moneyCounter.innerHTML = `Money: ${money}`;
-    price9 = Math.round(price9);
-    manufacture.innerHTML = `Manufacture: ${up9} Gold: ${price9}`;
-  }
-};
-
-factory.onclick = () => {
-  if (money >= price10) {
-    money -= price10;
-    price10 *= 1.8;
-    moneyPerSecond += 20;
-    up10 += 1;
-    moneyCounter.innerHTML = `Money: ${money}`;
-    price10 = Math.round(price10);
-    factory.innerHTML = `Factory: ${up10} Gold: ${price10}`;
+    potion.innerHTML = `Poťáček: ${up3} Gold: ${price3}`;
+    potionCounter.innerHTML = `${up3}`;
   }
 };
 
@@ -286,27 +293,10 @@ musicMutedButton.onclick = () => {
 };
 
 menuButton.onclick = () => {
-  if (x.matches && kostelButton.style.display == "none") {
+  if (kostelButton.style.display == "none") {
     main.style.display = "none";
     goInside.style.display = "none";
-    menuButton.innerHTML = `Battle`;
-    body.style.backgroundImage = "none";
-    body.style.backgroundColor = "bisque";
-    mesto.style.display = "block";
-    musicButton.style.display = "block";
-    menuButton.style.display = "block";
-    backButton.style.display = "none";
-    nextUpdate.style.display = "none";
-    shop.style.display = "block";
-    hospoda.style.display = "block";
-    hospoda.style.marginTop = "0";
-    backButton2.style.display = "none";
-    items.style.display = "none";
-    kostelButton.style.display = "block";
-  } else if (kostelButton.style.display == "none") {
-    main.style.display = "none";
-    goInside.style.display = "none";
-    menuButton.innerHTML = `Battle`;
+    menuButton.innerHTML = `Battle!`;
     body.style.backgroundImage = "url(./res/img/background.jpg)";
     mesto.style.display = "block";
     musicButton.style.display = "block";
@@ -319,174 +309,88 @@ menuButton.onclick = () => {
     backButton2.style.display = "none";
     items.style.display = "none";
     kostelButton.style.display = "block";
-  } else if (x.matches && main.style.display == "block") {
-    main.style.display = "none";
-    menuButton.innerHTML = `Battle`;
-    body.style.backgroundImage = "none";
-    body.style.backgroundColor = "bisque";
-    mesto.style.display = "block";
-    items.style.display = "none";
-  } else if (x.matches && main.display == "none") {
-    main.style.display = "block";
-    menuButton.innerHTML = `Elektropolis`;
-    main.style.display = "block";
-    body.style.backgroundImage = "none";
-    body.style.backgroundColor = "bisque";
-    mesto.style.display = "none";
-    items.style.display = "none";
   } else if (main.style.display == "block") {
     main.style.display = "none";
-    menuButton.innerHTML = `Battle`;
+    menuButton.innerHTML = `Battle!`;
     body.style.backgroundImage = "url(./res/img/background.jpg)";
     mesto.style.display = "block";
     items.style.display = "none";
   } else {
-    menuButton.innerHTML = `Elektropolis`;
+    hpCounter.innerHTML = `<img id="hp" src="./res/img/hp.png" alt="" />: ${charHp}/${charMaxHp}`;
+    menuButton.style.display = "none";
     main.style.display = "block";
     body.style.backgroundImage = "url(./res/img/background3.jpg)";
     mesto.style.display = "none";
     items.style.display = "none";
+    verze.style.display = "none";
   }
 };
 
 hospoda.onclick = () => {
-  if (x.matches) {
-    hospoda.style.display = "none";
-    body.style.backgroundImage = "none";
-    body.style.backgroundColor = "gray";
-    musicMutedButton.style.display = "none";
-    musicButton.style.display = "none";
-    menuButton.style.display = "none";
-    backButton.style.display = "block";
-    audio.pause();
-    audio.currentTime = 0;
-    audio2.play();
-    nextUpdate.style.display = "block";
-    shop.style.display = "none";
-    kostelButton.style.display = "none";
-  } else {
-    hospoda.style.display = "none";
-    body.style.backgroundImage = "url(./res/img/quest.jpg)";
-    musicMutedButton.style.display = "none";
-    musicButton.style.display = "none";
-    menuButton.style.display = "none";
-    backButton.style.display = "block";
-    audio.pause();
-    audio.currentTime = 0;
-    audio2.play();
-    nextUpdate.style.display = "block";
-    shop.style.display = "none";
-    kostelButton.style.display = "none";
-  }
+  hospoda.style.display = "none";
+  body.style.backgroundImage = "url(./res/img/quest.jpg)";
+  musicMutedButton.style.display = "none";
+  musicButton.style.display = "none";
+  menuButton.style.display = "none";
+  backButton.style.display = "block";
+  audio.pause();
+  audio.currentTime = 0;
+  audio2.play();
+  nextUpdate.style.display = "block";
+  shop.style.display = "none";
+  kostelButton.style.display = "none";
 };
 
 backButton.onclick = () => {
-  if (x.matches) {
-    audio2.pause();
-    audio2.currentTime = 0;
-    hospoda.style.display = "block";
-    body.style.backgroundImage = "none";
-    body.style.backgroundColor = "bisque";
-    musicButton.style.display = "block";
-    menuButton.style.display = "block";
-    backButton.style.display = "none";
-    nextUpdate.style.display = "none";
-    shop.style.display = "block";
-    hospoda.style.marginTop = "0";
-    kostelButton.style.display = "block";
-  } else {
-    audio2.pause();
-    audio2.currentTime = 0;
-    body.style.backgroundImage = "url(./res/img/background.jpg)";
-    musicButton.style.display = "block";
-    menuButton.style.display = "block";
-    backButton.style.display = "none";
-    nextUpdate.style.display = "none";
-    shop.style.display = "block";
-    hospoda.style.display = "block";
-    hospoda.style.marginTop = "0";
-    kostelButton.style.display = "block";
-  }
+  audio2.pause();
+  audio2.currentTime = 0;
+  body.style.backgroundImage = "url(./res/img/background.jpg)";
+  musicButton.style.display = "block";
+  menuButton.style.display = "block";
+  backButton.style.display = "none";
+  nextUpdate.style.display = "none";
+  shop.style.display = "block";
+  hospoda.style.display = "block";
+  hospoda.style.marginTop = "0";
+  kostelButton.style.display = "block";
 };
 
 shop.onclick = () => {
-  if (x.matches) {
-    hospoda.style.display = "none";
-    body.style.backgroundImage = "none";
-    body.style.backgroundColor = "bisque";
-    musicMutedButton.style.display = "none";
-    musicButton.style.display = "none";
-    menuButton.style.display = "none";
-    backButton2.style.display = "block";
-    shop.style.display = "none";
-    items.style.display = "block";
-    kostelButton.style.display = "none";
-  } else {
-    hospoda.style.display = "none";
-    body.style.backgroundImage = "url(./res/img/merchant.jpg)";
-    musicMutedButton.style.display = "none";
-    musicButton.style.display = "none";
-    menuButton.style.display = "none";
-    backButton2.style.display = "block";
-    shop.style.display = "none";
-    items.style.display = "block";
-    kostelButton.style.display = "none";
-  }
+  hospoda.style.display = "none";
+  body.style.backgroundImage = "url(./res/img/merchant.jpg)";
+  musicMutedButton.style.display = "none";
+  musicButton.style.display = "none";
+  menuButton.style.display = "none";
+  backButton2.style.display = "block";
+  shop.style.display = "none";
+  items.style.display = "block";
+  kostelButton.style.display = "none";
 };
 
 backButton2.onclick = () => {
-  if (x.matches) {
-    hospoda.style.display = "block";
-    body.style.backgroundImage = "none";
-    body.style.backgroundColor = "bisque";
-    musicButton.style.display = "block";
-    menuButton.style.display = "block";
-    backButton.style.display = "none";
-    nextUpdate.style.display = "none";
-    shop.style.display = "block";
-    hospoda.style.marginTop = "25%";
-    backButton2.style.display = "none";
-    items.style.display = "none";
-    kostelButton.style.display = "block";
-  } else {
-    body.style.backgroundImage = "url(./res/img/background.jpg)";
-    musicButton.style.display = "block";
-    menuButton.style.display = "block";
-    backButton.style.display = "none";
-    nextUpdate.style.display = "none";
-    shop.style.display = "block";
-    hospoda.style.display = "block";
-    hospoda.style.marginTop = "0";
-    backButton2.style.display = "none";
-    items.style.display = "none";
-    kostelButton.style.display = "block";
-  }
+  body.style.backgroundImage = "url(./res/img/background.jpg)";
+  musicButton.style.display = "block";
+  menuButton.style.display = "block";
+  backButton.style.display = "none";
+  nextUpdate.style.display = "none";
+  shop.style.display = "block";
+  hospoda.style.display = "block";
+  hospoda.style.marginTop = "0";
+  backButton2.style.display = "none";
+  items.style.display = "none";
+  kostelButton.style.display = "block";
 };
 
 kostelButton.onclick = () => {
-  if (x.matches) {
-    hospoda.style.display = "none";
-    body.style.backgroundImage = "none";
-    body.style.backgroundColor = "bisque";
-    musicMutedButton.style.display = "none";
-    musicButton.style.display = "none";
-    menuButton.style.display = "block";
-    shop.style.display = "none";
-    kostelButton.style.display = "none";
-    menuButton.innerHTML = `Elektropolis`;
-    goInside.style.display = "block";
-
-  } else {
-    hospoda.style.display = "none";
-    body.style.backgroundImage = "url(./res/img/kostel.png)";
-    musicMutedButton.style.display = "none";
-    musicButton.style.display = "none";
-    menuButton.style.display = "block";
-    shop.style.display = "none";
-    kostelButton.style.display = "none";
-    menuButton.innerHTML = `Elektropolis`;
-    goInside.style.display = "block";
-  }
+  hospoda.style.display = "none";
+  body.style.backgroundImage = "url(./res/img/kostel.png)";
+  musicMutedButton.style.display = "none";
+  musicButton.style.display = "none";
+  menuButton.style.display = "block";
+  shop.style.display = "none";
+  kostelButton.style.display = "none";
+  menuButton.innerHTML = `Elektropolis`;
+  goInside.style.display = "block";
 };
 
 goInside.onclick = () => {
@@ -504,5 +408,5 @@ goBack.onclick = () => {
   goInside.style.display = "block";
   body.style.backgroundImage = "url(./res/img/kostel.png)";
   menuButton.style.display = "block";
-};
+}
 

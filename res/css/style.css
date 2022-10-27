@@ -1,10 +1,10 @@
 #enemy {
   border: 4px solid black;
-  cursor: pointer;
   transition: 0.3s;
   margin: 0 auto;
   display: block;
   margin-top: 10%;
+  
 }
 #deadEnemy {
   border: 4px solid black;
@@ -20,10 +20,19 @@ p {
 #counter {
   text-align: center;
   display: flex;
-  justify-content: center;
   background-color: bisque;
   width: max-content;
-  margin-left: 73%;
+  margin-left: 43%;
+}
+#hpCounter{
+  text-align: center;
+  display: flex;
+  background-color: bisque;
+  width: max-content;
+  margin-left: 23%;
+}
+#hpObal{
+  display: flex;
 }
 #deadEnemy {
   display: none;
@@ -60,6 +69,9 @@ button {
   margin: 0;
   padding: 0;
   background-color: black;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 #mutedMusic {
   width: 30px;
@@ -67,6 +79,9 @@ button {
   padding: 0;
   background-color: black;
   display: none;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 #deathCounter {
   margin-left: 5px;
@@ -80,16 +95,20 @@ button {
 }
 #menu {
   font-size: 40px;
-  width: max-content;
+  width: 300px;
+  height: 100px;
   margin: 0;
   padding: 0;
 }
 body {
-  background-image: url(../img/background3.jpg);
+  background-image: url(../img/background.jpg);
   background-size: 100%;
   background-repeat: no-repeat;
 }
 #mesto {
+  display: block;
+}
+#main{
   display: none;
 }
 #hospoda {
@@ -145,10 +164,10 @@ body {
   margin-left: 30%;
 }
 #oball{
-    display: none;
     display: flex;
     justify-content: center;
     align-items: center;
+    display: none;
 }
 .shop1{
     width: 15%;
@@ -197,48 +216,49 @@ body {
     width: 300px;
     height: 100px;
 }
-@media all and (max-width: 1024px) {
-  body {
-    background-size: cover;
-  }
-  #counter {
-    background-color: bisque;
-    width: 100%;
-    margin: 0;
-  }
-  #hospoda {
-    width: 100%;
-    margin: 0;
-  }
-  #verze {
-    position: static;
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    text-align: center;
-  }
-  #nextUpdate {
-    width: 300px;
-    height: 300px;
-    float: none;
-    font-size: 65px;
-    margin-right: 0;
-    margin: 0 auto;
-    margin-top: 20px;
-  }
-  #thr{
-    width: 100%;
-    margin: 0;
-  }
-  #church{
-    position: static;
-    width: 100%;
-    margin: 0;
-  }
-  #goInside{
-    width: 100%;
+#earnings{
+  font-size: 50px;
+  color: gold;
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
-#goBack{
-    width: 100%;
+#buttons{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
 }
+#attack{
+  width: 200px;
+  height: 200px;
+  font-size: 30px;
+  cursor: pointer;
+  text-align: center;
+  text-justify: center;
+}
+#heal{
+  font-size: 30px;
+  cursor: pointer;
+  text-align: center;
+  text-justify: center;
+}
+#def{
+  width: 200px;
+  height: 200px;
+  font-size: 30px;
+  cursor: pointer;
+  text-align: center;
+  text-justify: center;
+}
+#pott{
+  position: relative;
+}
+#potionCounter{
+  position: absolute;
+  font-size: 80px;
+  right: 80px;
+  top: 25%;
+  pointer-events: none
 }

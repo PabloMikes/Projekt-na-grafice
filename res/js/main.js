@@ -255,6 +255,7 @@ MaxHealth.onclick = () => {
     hpCounter.innerHTML = `<img id="hp" src="./res/img/hp.png" alt="" />: ${charHp}/${charMaxHp}`;
     price2 = Math.round(price2);
     MaxHealth.innerHTML = `BUFF: ${up2} Gold: ${price2}`;
+    moneyCounter.innerHTML = `Money: ${money}`;
   }
 };
 

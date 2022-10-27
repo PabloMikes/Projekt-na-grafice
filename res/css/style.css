@@ -88,7 +88,7 @@ button {
   background-color: bisque;
   width: max-content;
 }
-#hp {
+.hp {
   margin: 0;
   padding: 0;
   border: none;
@@ -262,7 +262,7 @@ body {
   top: 25%;
   pointer-events: none
 }
- @media all and (max-width: 1080px){
+ @media all and (max-width: 1150px){
   #enemy{
     width: 300px;
   }
@@ -272,19 +272,8 @@ body {
   #mainChar{
     width: 300px;
   }
-  #attack{
-    width: 100px;
-    height: 100px;
-  }
-  #heal{
-    font-size: 30px;
-    cursor: pointer;
-    text-align: center;
-    text-justify: center;
-  }
-  #def{
-    width: 100px;
-    height: 100px;
-    font-size: 30px;
-  }
  }
+ #obal{
+  margin-top: 0;
+ }
+ 

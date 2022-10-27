@@ -248,7 +248,7 @@ sword.onclick = () => {
 MaxHealth.onclick = () => {
   if (money >= price2) {
     money -= price2;
-    price2 *= 1.5;
+    price2 *= 1.3;
     up2 += 1;
     charHp += 10;
     charMaxHp += 10;

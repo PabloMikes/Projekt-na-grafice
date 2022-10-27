@@ -262,3 +262,29 @@ body {
   top: 25%;
   pointer-events: none
 }
+ @media all and (max-width: 1080px){
+  #enemy{
+    width: 300px;
+  }
+  #deadEnemy{
+    width: 300px;
+  }
+  #mainChar{
+    width: 300px;
+  }
+  #attack{
+    width: 100px;
+    height: 100px;
+  }
+  #heal{
+    font-size: 30px;
+    cursor: pointer;
+    text-align: center;
+    text-justify: center;
+  }
+  #def{
+    width: 100px;
+    height: 100px;
+    font-size: 30px;
+  }
+ }

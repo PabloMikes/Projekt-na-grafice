@@ -83,7 +83,7 @@ window.onload = () => {
         setTimeout(() =>{
           enemy.style.margin = "0 auto";
           enemy.style.marginTop = "10%";
-        }, 100);
+        }, 100); //gay animace
         
         if (hp <= 0) {
           enemy.style.display = "none";
@@ -94,6 +94,7 @@ window.onload = () => {
           money += maxMoney;
           earnings.style.display = "block";
           earnings.innerHTML = `+${maxMoney}G`;
+          enemyDamage += .5; //enemy damage scaling
     
           setTimeout(() => {
             earnings.style.display = "none";

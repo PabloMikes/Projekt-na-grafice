@@ -147,6 +147,9 @@ window.onload = () => {
         
         charHp -= charHp;
         charHp += charMaxHp;
+
+        hp -= hp;
+        hp += maxHp;
       }
     }
   }, 1500);

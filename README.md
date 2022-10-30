@@ -8,10 +8,12 @@
 <h2>Update 1.7 </h2>
 <p>+ Attack button and Potion button</p>
 <p>+ Enemies now attack you</p>
+<p>+ SOUND EFFECTS</p>
 <h2>Update 1.6 </h2>
 <p>+ ChadTill</p>
 <p>+ Fuckin kostel - useles for now</p>
-<p>+ Gay animation cuz no time</p>
+<p>+ EVEN BETTER MUZIČKA</p>
+<p>+ Gay animation cuz no time for real animation</p>
 <p>- Damage per Sec - OP</p>
 <h2>Update 1.5 </h2>
 <p>- Money per Sec - OP</p>
@@ -22,6 +24,7 @@
 <p>+ Money per Sec</p>
 <p>+ New Upgrades</p>
 <p>+ Sum animation</p>
+<p>+ MUZIČKA</p>
 <h2>Update 1.3</h2>
 <p>Now you can go to Electropolis!!</p>
 <p>+ KoraWizard - quest system - dont know how</p>

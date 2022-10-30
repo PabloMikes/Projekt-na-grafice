@@ -64,6 +64,27 @@ button {
   border: 4px solid black;
   cursor: pointer;
 }
+#spear{
+  width: 100px;
+  height: 100px;
+  margin-left: 5px;
+  border: 4px solid black;
+  cursor: pointer;
+}
+#mace{
+  width: 100px;
+  height: 100px;
+  margin-left: 5px;
+  border: 4px solid black;
+  cursor: pointer;
+}
+#swordd{
+  width: 100px;
+  height: 100px;
+  margin-left: 5px;
+  border: 4px solid black;
+  cursor: pointer;
+}
 #music {
   width: 30px;
   margin: 0;
@@ -180,6 +201,8 @@ body {
 .shop3{
     width: 15%;
     float: left;
+    width: max-content;
+    display: flex;
 }
 .stats{
     background-color: bisque;
@@ -187,7 +210,19 @@ body {
 }
 #description{
     background-color: bisque;
-    width: max-content;
+    width: 70px;
+}
+#description2{
+  background-color: bisque;
+  width: 70px;
+}
+#description3{
+  background-color: bisque;
+  width: 70px;
+}
+#description4{
+  background-color: bisque;
+  width: 70px;
 }
 #obal{
     display: flex;
@@ -239,14 +274,6 @@ body {
   text-justify: center;
 }
 #heal{
-  font-size: 30px;
-  cursor: pointer;
-  text-align: center;
-  text-justify: center;
-}
-#def{
-  width: 200px;
-  height: 200px;
   font-size: 30px;
   cursor: pointer;
   text-align: center;

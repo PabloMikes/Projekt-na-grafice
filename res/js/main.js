@@ -6,7 +6,12 @@ const sword = document.getElementById("sword");
 const MaxHealth = document.getElementById("MaxHealth");
 const potion = document.getElementById("potion");
 const moneyPerSecondCounter = document.getElementById("moneyPerSecond");
+
 const club = document.getElementById("club");
+const spear = document.getElementById("spear");
+const mace = document.getElementById("mace");
+const swordd = document.getElementById("swordd");
+
 const damageCounter = document.getElementById("damage");
 const musicButton = document.getElementById("music");
 const musicMutedButton = document.getElementById("mutedMusic");
@@ -27,7 +32,12 @@ const nextUpdate = document.getElementById("nextUpdate");
 const shop = document.getElementById("thr");
 const backButton2 = document.getElementById("backButton2");
 const items = document.getElementById("oball");
+
 const description = document.getElementById("description");
+const description2 = document.getElementById("description2");
+const description3 = document.getElementById("description3");
+const description4 = document.getElementById("description4");
+
 const kostelButton = document.getElementById("church");
 const goInside = document.getElementById("goInside");
 const goBack = document.getElementById("goBack");
@@ -39,6 +49,7 @@ const attack = document.getElementById("attack");
 const heal = document.getElementById("heal");
 const def = document.getElementById("def");
 const potionCounter = document.getElementById("potionCounter");
+const body = document.getElementsByTagName("body")[0];
 
 let maxHp = 20;
 let hp = 20;
@@ -62,143 +73,6 @@ let up5 = 0;
 let price5 = 2000;
 let moneyPerSecond = 0;
 
-var body = document.getElementsByTagName("body")[0];
-
-window.onload = () => {
-  /* setInterval(() => {
-    money += moneyPerSecond;
-    moneyPerSecondCounter.innerHTML = `Money per second: ${moneyPerSecond}`;
-    moneyCounter.innerHTML = `Money: ${money}`;
-  }, 1000); // peníze za sekundu vyuziju do budoucna probably vyber dani smthin like that */
-
-  setInterval(() => {
-    if (main.style.display == "block") {
-      if (charHp >= 0) {
-        enemy.style.margin = "0";
-        enemy.style.marginTop = "10%";
-        charHp -= enemyDamage;
-        audio6.play();
-        hpCounter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${charHp}/${charMaxHp}`;
-
-        setTimeout(() =>{
-          enemy.style.margin = "0 auto";
-          enemy.style.marginTop = "10%";
-        }, 100); //gay animace
-        
-        if (hp <= 0) {
-          enemy.style.display = "none";
-          deadEnemy.style.display = "block";
-          audio5.play();
-    
-          hp = Math.min(0);
-          money += maxMoney;
-          earnings.style.display = "block";
-          earnings.innerHTML = `+${maxMoney}G`;
-          enemyDamage += .5; //enemy damage scaling
-    
-          setTimeout(() => {
-            earnings.style.display = "none";
-          }, 1000);
-    
-          maxMoney *= 1.3; //money scaling
-          maxMoney = Math.round(maxMoney);
-          moneyCounter.innerHTML = `Money: ${money}`;
-          maxHp *= 1.2; //hp scaling
-          maxHp = Math.round(maxHp);
-    
-          charHp -= charHp;
-          charHp += charMaxHp;
-    
-          setTimeout(() => {
-            deaths++;
-            deathCounter.innerHTML = `Kills: ${deaths}`;
-            hp += maxHp;
-            hp = Math.max(maxHp);
-            counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
-            enemy.style.display = "block";
-            deadEnemy.style.display = "none";
-    
-            main.style.display = "none";
-            menuButton.innerHTML = `Battle!`;
-            body.style.backgroundImage = "url(./res/img/background.jpg)";
-            mesto.style.display = "block";
-            items.style.display = "none";
-            menuButton.style.display = "block";
-            verze.style.display = "block";
-          }, 1000);
-        }
-      }
-      else{
-        main.style.display = "none";
-        goInside.style.display = "none";
-        menuButton.innerHTML = `Battle!`;
-        body.style.backgroundImage = "url(./res/img/background.jpg)";
-        mesto.style.display = "block";
-        musicButton.style.display = "block";
-        menuButton.style.display = "block";
-        backButton.style.display = "none";
-        nextUpdate.style.display = "none";
-        shop.style.display = "block";
-        hospoda.style.display = "block";
-        hospoda.style.marginTop = "0";
-        backButton2.style.display = "none";
-        items.style.display = "none";
-        kostelButton.style.display = "block";
-        
-        charHp -= charHp;
-        charHp += charMaxHp;
-
-        hp -= hp;
-        hp += maxHp;
-      }
-    }
-  }, 1500);
-
-
- /* setInterval(() => {
-    if (hp <= 0) {
-      enemy.style.display = "none";
-      deadEnemy.style.display = "block";
-      audio5.play();
-
-      hp = Math.min(0);
-      money += maxMoney;
-      earnings.style.display = "block";
-      earnings.innerHTML = `+${maxMoney}G`;
-
-      setTimeout(() => {
-        earnings.style.display = "none";
-      }, 1000);
-
-      maxMoney *= 1.3; //money scaling
-      maxMoney = Math.round(maxMoney);
-      moneyCounter.innerHTML = `Money: ${money}`;
-      maxHp *= 1.2; //hp scaling
-      maxHp = Math.round(maxHp);
-
-      charHp -= charHp;
-      charHp += charMaxHp;
-
-      setTimeout(() => {
-        deaths++;
-        deathCounter.innerHTML = `Kills: ${deaths}`;
-        hp += maxHp;
-        hp = Math.max(maxHp);
-        counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
-        enemy.style.display = "block";
-        deadEnemy.style.display = "none";
-
-        main.style.display = "none";
-        menuButton.innerHTML = `Battle!`;
-        body.style.backgroundImage = "url(./res/img/background.jpg)";
-        mesto.style.display = "block";
-        items.style.display = "none";
-        menuButton.style.display = "block";
-        verze.style.display = "block";
-      }, 1000);
-    }
-  }, 1500);*/
-}
 attack.onclick = () => {
   if (hp > 0) {
     hp -= damage;
@@ -274,13 +148,46 @@ potion.onclick = () => {
 };
 
 club.onclick = () => {
-  if (money >= 100) {
+  if (money >= 100 && deaths >= 5) {
     damage += 20;
     club.style.display = "none";
     money -= 100;
     moneyCounter.innerHTML = `Money: ${money}`;
     damageCounter.innerHTML = `Damage: ${damage}`;
     description.style.display = "none";
+  }
+};
+
+spear.onclick = () => {
+  if (money >= 1000 && deaths >= 15) {
+    damage += 50;
+    spear.style.display = "none";
+    money -= 1000;
+    moneyCounter.innerHTML = `Money: ${money}`;
+    damageCounter.innerHTML = `Damage: ${damage}`;
+    description2.style.display = "none";
+  }
+};
+
+mace.onclick = () => {
+  if (money >= 10000 && deaths >= 45) {
+    damage += 100;
+    mace.style.display = "none";
+    money -= 10000;
+    moneyCounter.innerHTML = `Money: ${money}`;
+    damageCounter.innerHTML = `Damage: ${damage}`;
+    description3.style.display = "none";
+  }
+};
+
+swordd.onclick = () => {
+  if (money >= 30000 && deaths >= 100) {
+    damage += 200;
+    swordd.style.display = "none";
+    money -= 30000;
+    moneyCounter.innerHTML = `Money: ${money}`;
+    damageCounter.innerHTML = `Damage: ${damage}`;
+    description4.style.display = "none";
   }
 };
 
@@ -328,6 +235,92 @@ menuButton.onclick = () => {
     mesto.style.display = "none";
     items.style.display = "none";
     verze.style.display = "none";
+
+    const interval2 = setInterval(() => {
+      if (hp <= 0) {
+        enemy.style.display = "none";
+        deadEnemy.style.display = "block";
+        audio5.play();
+
+        hp = Math.min(0);
+        money += maxMoney;
+        earnings.style.display = "block";
+        earnings.innerHTML = `+${maxMoney}G`;
+        enemyDamage += 0.5; //enemy damage scaling
+
+        setTimeout(() => {
+          earnings.style.display = "none";
+        }, 1000);
+
+        setTimeout(() => {
+
+          maxMoney *= 1.3; //money scaling
+          maxMoney = Math.round(maxMoney);
+          moneyCounter.innerHTML = `Money: ${money}`;
+          maxHp *= 1.2; //hp scaling
+          maxHp = Math.round(maxHp);
+  
+          charHp -= charHp;
+          charHp += charMaxHp;
+
+          deaths++;
+          deathCounter.innerHTML = `Kills: ${deaths}`;
+          hp += maxHp;
+          hp = Math.max(maxHp);
+          counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
+          enemy.style.display = "block";
+          deadEnemy.style.display = "none";
+
+          main.style.display = "none";
+          menuButton.innerHTML = `Battle!`;
+          body.style.backgroundImage = "url(./res/img/background.jpg)";
+          mesto.style.display = "block";
+          items.style.display = "none";
+          menuButton.style.display = "block";
+          verze.style.display = "block";
+        }, 1000);
+        clearInterval(interval);
+        clearInterval(interval2);
+      } else if (charHp <= 0) {
+        main.style.display = "none";
+        goInside.style.display = "none";
+        menuButton.innerHTML = `Battle!`;
+        body.style.backgroundImage = "url(./res/img/background.jpg)";
+        mesto.style.display = "block";
+        musicButton.style.display = "block";
+        menuButton.style.display = "block";
+        backButton.style.display = "none";
+        nextUpdate.style.display = "none";
+        shop.style.display = "block";
+        hospoda.style.display = "block";
+        hospoda.style.marginTop = "0";
+        backButton2.style.display = "none";
+        items.style.display = "none";
+        kostelButton.style.display = "block";
+
+        charHp -= charHp;
+        charHp += charMaxHp;
+
+        hp -= hp;
+        hp += maxHp;
+
+        clearInterval(interval);
+        clearInterval(interval2);
+      }
+    }, 100);
+
+    const interval = setInterval(() => {
+      enemy.style.margin = "0";
+      enemy.style.marginTop = "10%";
+      charHp -= enemyDamage;
+      audio6.play();
+      hpCounter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${charHp}/${charMaxHp}`;
+
+      setTimeout(() => {
+        enemy.style.margin = "0 auto";
+        enemy.style.marginTop = "10%";
+      }, 100); //gay animace
+    }, 1500);
   }
 };
 
@@ -413,5 +406,4 @@ goBack.onclick = () => {
   goInside.style.display = "block";
   body.style.backgroundImage = "url(./res/img/kostel.png)";
   menuButton.style.display = "block";
-}
-
+};

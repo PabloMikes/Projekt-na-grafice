@@ -3,7 +3,7 @@
 <h2>Update 1.8</h2>
 <p>NOW EVERY 10 KILLS:</p>
 <p>EPIC RAP BATTLE OF HISTORY!!!</p>
-<p>ChadTill VS GigaN1gaBOSS - currently working on name</p>
+<p>ChadTill VS GigaN1gaBOSS - still working on name...</p>
 <p>+ better buttons</p>
 <p>nerfed buff now adds only 5hp</p>
 <p>nerfed potion price went to 1000G</p>

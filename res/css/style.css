@@ -125,6 +125,10 @@ body {
   background-image: url(../img/background.jpg);
   background-size: 100%;
   background-repeat: no-repeat;
+  
+  margin: 0;
+  height: 100vh;
+  
 }
 #mesto {
   display: block;

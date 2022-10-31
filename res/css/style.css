@@ -4,7 +4,6 @@
   margin: 0 auto;
   display: block;
   margin-top: 10%;
-  
 }
 #deadEnemy {
   border: 4px solid black;
@@ -24,14 +23,14 @@ p {
   width: max-content;
   margin-left: 43%;
 }
-#hpCounter{
+#hpCounter {
   text-align: center;
   display: flex;
   background-color: bisque;
   width: max-content;
   margin-left: 23%;
 }
-#hpObal{
+#hpObal {
   display: flex;
 }
 #deadEnemy {
@@ -45,8 +44,8 @@ p {
   font-size: 50px;
   margin-left: 5px;
 }
-#damagePerSecond{
-    margin-left: 5px;
+#damagePerSecond {
+  margin-left: 5px;
 }
 * {
   box-sizing: border-box;
@@ -64,21 +63,21 @@ button {
   border: 4px solid black;
   cursor: pointer;
 }
-#spear{
+#spear {
   width: 100px;
   height: 100px;
   margin-left: 5px;
   border: 4px solid black;
   cursor: pointer;
 }
-#mace{
+#mace {
   width: 100px;
   height: 100px;
   margin-left: 5px;
   border: 4px solid black;
   cursor: pointer;
 }
-#swordd{
+#swordd {
   width: 100px;
   height: 100px;
   margin-left: 5px;
@@ -115,54 +114,101 @@ button {
   border: none;
 }
 #menu {
-  font-size: 40px;
+  font-size: 50px;
   width: 300px;
   height: 100px;
   margin: 0;
   padding: 0;
+  background-image: url(../img/button.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-align: center;
+  padding-top: 20px;
+  cursor: pointer;
+}
+#menu:hover{
+  color: white;
 }
 body {
   background-image: url(../img/background.jpg);
   background-size: 100%;
   background-repeat: no-repeat;
-  
+
   margin: 0;
   height: 100vh;
-  
 }
 #mesto {
   display: block;
 }
-#main{
+#main {
   display: none;
 }
 #hospoda {
+  font-size: 50px;
   width: 300px;
   height: 100px;
   text-align: center;
   float: right;
-  margin-top: 25%;
   margin-right: 10%;
+  background-image: url(../img/button.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-align: center;
+  padding-top: 20px;
+  cursor: pointer;
 }
-#church{
-    width: 300px;
-    height: 100px;
-    text-align: center;
-    position: absolute;
-    top: 0;
-    right: 0;
+#hospoda:hover{
+  color: white;
+}
+#church {
+  font-size: 50px;
+  width: 300px;
+  height: 100px;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-image: url(../img/button.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-align: center;
+  padding-top: 20px;
+  cursor: pointer;
+}
+#church:hover{
+  color: white;
 }
 #back {
+  font-size: 35px;
   display: none;
   width: 300px;
   height: 100px;
   text-align: center;
+  background-image: url(../img/button.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-align: center;
+  padding-top: 30px;
+  cursor: pointer;
+}
+#back:hover{
+  color: white;
 }
 #backButton2 {
+  font-size: 35px;
   display: none;
   width: 300px;
   height: 100px;
   text-align: center;
+  background-image: url(../img/button.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-align: center;
+  padding-top: 30px;
+  cursor: pointer;
+}
+#backButton2:hover{
+  color: white;
 }
 #verze {
   background-color: bisque;
@@ -182,80 +228,140 @@ body {
   margin-right: 10%;
 }
 #thr {
+  font-size: 50px;
   width: 300px;
   height: 100px;
   text-align: center;
   margin-top: 25%;
   margin-left: 30%;
+  background-image: url(../img/button.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-align: center;
+  padding-top: 20px;
+  cursor: pointer;
 }
-#oball{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    display: none;
+#enchant{
+  font-size: 40px;
+  width: 300px;
+  height: 100px;
+  text-align: center;
+  margin-top: 15%;
+  margin-left: 43.5%;
+  background-image: url(../img/button.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-align: center;
+  padding-top: 25px;
+  cursor: pointer;
+  display: none;
 }
-.shop1{
-    width: 15%;
-    float: left
+#enchant:hover{
+  color: white;
 }
-.shop2{
-    width: 15%;
-    float: left;
+#thr:hover{
+  color: white;
 }
-.shop3{
-    width: 15%;
-    float: left;
-    width: max-content;
-    display: flex;
+#oball {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
 }
-.stats{
-    background-color: bisque;
-    width: max-content;
+.shop1 {
+  width: 15%;
+  float: left;
 }
-#description{
-    background-color: bisque;
-    width: 70px;
+.shop2 {
+  width: 15%;
+  float: left;
 }
-#description2{
+.shop3 {
+  width: 15%;
+  float: left;
+  width: max-content;
+  display: flex;
+}
+#moneyCounter2{
+  display: none;
+  width: max-content;
+  background-color: bisque;
+  font-size: 40px;
+}
+.stats {
+  background-color: bisque;
+  width: max-content;
+}
+#description {
   background-color: bisque;
   width: 70px;
 }
-#description3{
+#description2 {
   background-color: bisque;
   width: 70px;
 }
-#description4{
+#description3 {
   background-color: bisque;
   width: 70px;
 }
-#obal{
-    display: flex;
-    margin-top: 230px;
+#description4 {
+  background-color: bisque;
+  width: 70px;
 }
-#mainChar{
-    display: block;
-    transition: ease 2.5;
-    margin: 0 auto;
+#obal {
+  display: flex;
+  margin-top: 230px;
 }
-#flex1{
-    flex: 50%;
+#mainChar {
+  display: block;
+  transition: ease 2.5;
+  margin: 0 auto;
 }
-#flex2{
-    flex: 50%;
+#flex1 {
+  flex: 50%;
 }
-#goInside{
-    display: none;
-    width: 300px;
-    height: 100px;
-    margin: 0 auto;
-    margin-top: 35%;
+#flex2 {
+  flex: 50%;
 }
-#goBack{
-    display: none;
-    width: 300px;
-    height: 100px;
+#goInside {
+  font-size: 50px;
+  display: none;
+  width: 300px;
+  height: 100px;
+  margin: 0 auto;
+  margin-top: 35%;
+  background-image: url(../img/button.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-align: center;
+  padding-top: 20px;
+  cursor: pointer;
 }
-#earnings{
+#goInside:hover{
+  color: white;
+}
+#typeOfEnchantment{
+  display: none;
+  color: gold;
+  background-color: gray;
+  font-size: 50px;
+}
+#goBack {
+  font-size: 50px;
+  display: none;
+  width: 300px;
+  height: 100px;
+  background-image: url(../img/button.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-align: center;
+  padding-top: 20px;
+  cursor: pointer;
+}
+#goBack:hover{
+  color: white;
+}
+#earnings {
   font-size: 50px;
   color: gold;
   display: none;
@@ -263,13 +369,13 @@ body {
   top: 50%;
   left: 50%;
 }
-#buttons{
+#buttons {
   position: absolute;
   bottom: 0;
   left: 0;
   display: flex;
 }
-#attack{
+#attack {
   width: 200px;
   height: 200px;
   font-size: 30px;
@@ -277,34 +383,47 @@ body {
   text-align: center;
   text-justify: center;
 }
-#heal{
+#heal {
   font-size: 30px;
   cursor: pointer;
   text-align: center;
   text-justify: center;
 }
-#pott{
+#pott {
   position: relative;
 }
-#potionCounter{
+#potionCounter {
   position: absolute;
   font-size: 80px;
   right: 80px;
   top: 25%;
-  pointer-events: none
+  pointer-events: none;
 }
- @media all and (max-width: 1081px){
-  #enemy{
+#boss1{
+  display: none;
+  cursor: pointer;
+  transition: 0.3s;
+  margin: 0 auto;
+  margin-top: 10%;
+}
+#deadBoss1{
+  display: none;
+  cursor: pointer;
+  transition: 0.3s;
+  margin: 0 auto;
+  margin-top: 10%;
+}
+@media all and (max-width: 1081px) {
+  #enemy {
     width: 300px;
   }
-  #deadEnemy{
+  #deadEnemy {
     width: 300px;
   }
-  #mainChar{
+  #mainChar {
     width: 300px;
   }
- }
- #obal{
+}
+#obal {
   margin-top: 100px;
- }
- 
+}

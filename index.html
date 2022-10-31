@@ -10,7 +10,7 @@
   </head>
   <body>
     <div id="mainMenu">
-      <button id="menu">Battle!</button><br />
+      <div id="menu">Battle!</div>
       <button id="music">🔇</button>
       <button id="mutedMusic">🔊</button>
     </div>
@@ -22,17 +22,21 @@
         <div id="flex2">
           <img id="enemy" src="./res/img/negr.png" alt="" />
           <img src="./res/img/negr2.png" alt="" id="deadEnemy" />
+          <img src="./res/img/boss1.png" alt="" id="boss1">
+          <img src="./res/img/deadBoss1.png" alt="" id="deadBoss1">
         </div>
       </div>
       <div id="hpObal">
         <p id="hpCounter">
           <img class="hp" src="./res/img/hp.png" alt="" />: 20/20
         </p>
-        <p id="counter"><img class="hp" src="./res/img/hp.png" alt="" />: 20/20</p>
+        <p id="counter">
+          <img class="hp" src="./res/img/hp.png" alt="" />: 20/20
+        </p>
       </div>
       <div id="buttons">
-        <div id="attack"><img src="./res/img/att.jpg" alt=""></div>
-        <div id="heal"><img id="pott" src="./res/img/pott.jpg" alt=""></div>
+        <div id="attack"><img src="./res/img/att.jpg" alt="" /></div>
+        <div id="heal"><img id="pott" src="./res/img/pott.jpg" alt="" /></div>
         <div id="potionCounter">0</div>
       </div>
       <audio src="./res/img/tutututu.mp3" id="audio" loop="loop"></audio>
@@ -43,58 +47,61 @@
     </div>
     <div id="earnings">+10G</div>
     <div id="verze">
-      <div>Verze 1.7.1</div>
+      <div>Verze 1.8</div>
       <div>Made by: Pavel Mík</div>
       <div>Graphics and music: Tadeáš Mejzlík a Matěj Landa</div>
       <div>Podobnost postav s učiteli je čistě náhodná</div>
     </div>
     <div id="mesto">
-      <button id="church">To Church</button>
-      <button id="goInside">Go inside</button>
-      <button id="goBack">Go back</button>
-      <button id="hospoda">QUESTS</button>
-      <button id="back">Back to Elektropolis</button>
+      <div id="church">To Church</div>
+      <div id="goInside">Go inside</div>
+      <div id="goBack">Go back</div>
+      <div id="enchant">Enchant: 5000G</div>
+      <div id="typeOfEnchantment">+</div>
+      <div id="moneyCounter2">Gold: 0</div>
+      <div id="hospoda">QUESTS</div>
+      <div id="back">Back to Elektropolis</div>
       <audio id="audio2" src="./res/img/hospodafinal.mp3" loop="loop"></audio>
       <div id="nextUpdate">QUESTS IN UPDATE 2.0</div>
-      <button id="thr">SHOP</button>
-      <button id="backButton2">Back to Elektropolis</button>
+      <div id="thr">SHOP</div>
+      <div id="backButton2">Back to Elektropolis</div>
       <div id="oball">
         <div class="stats">
           <p id="damage">Damage: 1</p>
           <p id="deathCounter">Kills: 0</p>
         </div>
         <div class="stats">
-          <p id="money">Money: 0</p>
+          <p id="money">Gold: 0</p>
         </div>
         <div class="shop1"></div>
         <div class="shop2">
           <button id="sword">Sharpness: 0 Gold: 10</button><br />
           <button id="MaxHealth">BUFF: 0 Gold: 10</button><br />
-          <button id="potion">Poťáček: 0 Gold: 300</button><br />
+          <button id="potion">Poťáček: 0 Gold: 500</button><br />
         </div>
         <div class="shop3">
           <img id="club" src="./res/img/club1.png" alt="" />
           <div id="description">
             Club: 100G <br />
-            Kills: 5 <br>
+            Kills: 5 <br />
             +20 dmg
           </div>
-          <img id="spear" src="./res/img/spear.png" alt="">
+          <img id="spear" src="./res/img/spear.png" alt="" />
           <div id="description2">
-            Spear: 1000G <br>
-            Kills: 15<br>
+            Spear: 1000G <br />
+            Kills: 25<br />
             +50 dmg
           </div>
-          <img id="mace" src="./res/img/mace.png" alt="">
+          <img id="mace" src="./res/img/mace.png" alt="" />
           <div id="description3">
-            Mace: 10000G <br>
-            Kills: 45<br>
+            Mace: 10000G <br />
+            Kills: 50<br />
             +100 dmg
           </div>
-          <img id="swordd" src="./res/img/sword.png" alt="">
+          <img id="swordd" src="./res/img/sword.png" alt="" />
           <div id="description4">
-            Sword: 30000G <br>
-            Kills: 100<br>
+            Sword: 30000G <br />
+            Kills: 100<br />
             +200 dmg
           </div>
         </div>

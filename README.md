@@ -1,5 +1,14 @@
 # Projekt-na-grafice
 [View](https://pablomikes.github.io/Projekt-na-grafice/)
+<h2>Update 1.8</h2>
+<p>NOW EVERY 10 KILLS:</p>
+<p>EPIC RAP BATTLE OF HISTORY!!!</p>
+<p>ChadTill VS GigaN1gaBOSS - currently working on name</p>
+<p>+ better buttons</p>
+<p>nerfed buff now adds only 5hp</p>
+<p>nerfed potion price went to 1000G</p>
+<p>+ Enchantment button - for now not workin, prob cuz i bad</p>
+<p>Aaaaand scaling still sucks from 50 kills prob unplayable</p>
 <h2>Update 1.7.1</h2>
 <p>Enemies no longer attack after dying</p>
 <p>+ New weapons</p>

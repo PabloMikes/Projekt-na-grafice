@@ -169,11 +169,11 @@ MaxHealth.onclick = () => {
     money -= price2;
     price2 *= 1.3;
     up2 += 1;
-    charHp += 5;
-    charMaxHp += 5;
+    charHp += 7;
+    charMaxHp += 7;
     hpCounter.innerHTML = `<img id="hp" src="./res/img/hp.png" alt="" />: ${charHp}/${charMaxHp}`;
     price2 = Math.round(price2);
-    MaxHealth.innerHTML = `BUFF: ${up2} Gold: ${price2}`;
+    MaxHealth.innerHTML = `Muskles: ${up2} Gold: ${price2}`;
     moneyCounter.innerHTML = `Gold: ${money}`;
     moneyCounter2.innerHTML = `Gold: ${money}`;
   }
@@ -289,7 +289,7 @@ menuButton.onclick = () => {
       enemy.style.display = "none";
       counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
 
-      const interval4 = setInterval(() => {
+      const bossAttackSpeed = setInterval(() => {
         boss1.style.margin = "0";
         boss1.style.marginTop = "10%";
         charHp -= bossDmg;
@@ -343,7 +343,7 @@ menuButton.onclick = () => {
             verze.style.display = "block";
           }, 1000);
           clearInterval(interval3);
-          clearInterval(interval4);
+          clearInterval(bossAttackSpeed);
         } else if (charHp <= 0) {
           main.style.display = "none";
           goInside.style.display = "none";
@@ -373,10 +373,8 @@ menuButton.onclick = () => {
           hp += maxHp;
           counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
 
-          clearInterval(interval);
-          clearInterval(interval2);
           clearInterval(interval3);
-          clearInterval(interval4);
+          clearInterval(bossAttackSpeed);
         }
       }, 100);
     } else {
@@ -400,7 +398,7 @@ menuButton.onclick = () => {
             maxMoney = Math.round(maxMoney);
             moneyCounter.innerHTML = `Gold: ${money}`;
             moneyCounter2.innerHTML = `Gold: ${money}`;
-            maxHp *= 1.2; //hp scaling
+            maxHp *= 1.15; //hp scaling
             maxHp = Math.round(maxHp);
 
             charHp -= charHp;

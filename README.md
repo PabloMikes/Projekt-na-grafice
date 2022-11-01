@@ -8,7 +8,7 @@
 <p>nerfed buff now adds only 5hp</p>
 <p>nerfed potion price went to 1000G</p>
 <p>+ Enchantment button - for now not workin, prob cuz i bad</p>
-<p>Aaaaand scaling still sucks from 50 kills prob unplayable</p>
+<p>Aaaaand scaling still sucks from 35 kills unbalanced af</p>
 <h2>Update 1.7.1</h2>
 <p>Enemies no longer attack after dying</p>
 <p>+ New weapons</p>

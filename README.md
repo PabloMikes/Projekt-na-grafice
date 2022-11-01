@@ -1,5 +1,9 @@
 # Projekt-na-grafice
 [View](https://pablomikes.github.io/Projekt-na-grafice/)
+<h2>Update 1.8.1</h2>
+<p>Bosses no longer gain attack speed after players death</p>
+<p>muskles = buff - now adds 7 hp</p>
+<p>improved enemy hp scaling</p>
 <h2>Update 1.8</h2>
 <p>NOW EVERY 10 KILLS:</p>
 <p>EPIC RAP BATTLE OF HISTORY!!!</p>

@@ -57,6 +57,11 @@ const body = document.getElementsByTagName("body")[0];
 const enchant = document.getElementById("enchant");
 const moneyCounter2 = document.getElementById("moneyCounter2");
 const typeOfEnchantment = document.getElementById("typeOfEnchantment");
+const levelRoom = document.getElementById("levelRoom");
+const levelObal = document.getElementById("levelObal");
+const maxLevel = document.getElementById("maxLevel");
+const minus = document.getElementById("minus");
+const plus = document.getElementById("plus");
 
 let maxHp = 20;
 let hp = 20;
@@ -66,7 +71,10 @@ let damage = 1;
 let enemyDamage = 1;
 let money = 0;
 let maxMoney = 10;
+
 let deaths = 0;
+let maxDeaths = 0;
+
 let up1 = 0;
 let price1 = 10;
 let up2 = 0;
@@ -253,7 +261,7 @@ musicMutedButton.onclick = () => {
 };
 
 menuButton.onclick = () => {
-  if (kostelButton.style.display == "none") {
+  if (kostelButton.style.display == "none" && goInside.style.display == "block") {
     main.style.display = "none";
     goInside.style.display = "none";
     menuButton.innerHTML = `Battle!`;
@@ -269,13 +277,28 @@ menuButton.onclick = () => {
     backButton2.style.display = "none";
     items.style.display = "none";
     kostelButton.style.display = "block";
-  } else if (main.style.display == "block") {
+    levelRoom.style.display = "block";
+  } 
+  else if(levelRoom.style.display == "none"){
     main.style.display = "none";
+    goInside.style.display = "none";
     menuButton.innerHTML = `Battle!`;
     body.style.backgroundImage = "url(./res/img/background.jpg)";
     mesto.style.display = "block";
+    musicButton.style.display = "block";
+    menuButton.style.display = "block";
+    backButton.style.display = "none";
+    nextUpdate.style.display = "none";
+    shop.style.display = "block";
+    hospoda.style.display = "block";
+    hospoda.style.marginTop = "0";
+    backButton2.style.display = "none";
     items.style.display = "none";
-  } else {
+    kostelButton.style.display = "block";
+    levelRoom.style.display = "block";
+    levelObal.style.display = "none";
+  }
+  else {
     hpCounter.innerHTML = `<img id="hp" src="./res/img/hp.png" alt="" />: ${charHp}/${charMaxHp}`;
     menuButton.style.display = "none";
     main.style.display = "block";
@@ -284,7 +307,7 @@ menuButton.onclick = () => {
     items.style.display = "none";
     verze.style.display = "none";
 
-    if (deaths % 10 == 0 && deaths != 0) {
+    if (deaths % 10 == 0 && deaths != 0 && deaths == maxDeaths) {
       boss1.style.display = "block";
       enemy.style.display = "none";
       counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
@@ -327,7 +350,10 @@ menuButton.onclick = () => {
             charHp += charMaxHp;
 
             deaths++;
-            deathCounter.innerHTML = `Kills: ${deaths}`;
+            maxDeaths += 1;
+
+            deathCounter.innerHTML = `Level: ${deaths}`;
+            maxLevel.innerHTML = `Highest level: ${maxDeaths}`
             bossHp += bossMaxHp;
             bossHp = Math.max(bossMaxHp);
             counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
@@ -377,7 +403,8 @@ menuButton.onclick = () => {
           clearInterval(bossAttackSpeed);
         }
       }, 100);
-    } else {
+    } 
+    else if(maxDeaths != deaths){
       const interval2 = setInterval(() => {
         if (hp <= 0) {
           enemy.style.display = "none";
@@ -405,7 +432,100 @@ menuButton.onclick = () => {
             charHp += charMaxHp;
 
             deaths++;
-            deathCounter.innerHTML = `Kills: ${deaths}`;
+
+            deathCounter.innerHTML = `Level: ${deaths}`;
+            maxLevel.innerHTML = `Highest level: ${maxDeaths}`
+
+            hp += maxHp;
+            hp = Math.max(maxHp);
+            counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
+            enemy.style.display = "block";
+            deadEnemy.style.display = "none";
+
+            main.style.display = "none";
+            menuButton.innerHTML = `Battle!`;
+            body.style.backgroundImage = "url(./res/img/background.jpg)";
+            mesto.style.display = "block";
+            items.style.display = "none";
+            menuButton.style.display = "block";
+            verze.style.display = "block";
+          }, 1000);
+          clearInterval(interval);
+          clearInterval(interval2);
+        } else if (charHp <= 0) {
+          main.style.display = "none";
+          goInside.style.display = "none";
+          menuButton.innerHTML = `Battle!`;
+          body.style.backgroundImage = "url(./res/img/background.jpg)";
+          mesto.style.display = "block";
+          musicButton.style.display = "block";
+          menuButton.style.display = "block";
+          backButton.style.display = "none";
+          nextUpdate.style.display = "none";
+          shop.style.display = "block";
+          hospoda.style.display = "block";
+          hospoda.style.marginTop = "0";
+          backButton2.style.display = "none";
+          items.style.display = "none";
+          kostelButton.style.display = "block";
+
+          charHp -= charHp;
+          charHp += charMaxHp;
+
+          hp -= hp;
+          hp += maxHp;
+
+          clearInterval(interval);
+          clearInterval(interval2);
+        }
+      }, 100);
+
+      const interval = setInterval(() => {
+        enemy.style.margin = "0";
+        enemy.style.marginTop = "10%";
+        charHp -= enemyDamage;
+        audio6.play();
+        hpCounter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${charHp}/${charMaxHp}`;
+
+        setTimeout(() => {
+          enemy.style.margin = "0 auto";
+          enemy.style.marginTop = "10%";
+        }, 100); //gay animace
+      }, 1500);
+    }
+    else {
+      const interval2 = setInterval(() => {
+        if (hp <= 0) {
+          enemy.style.display = "none";
+          deadEnemy.style.display = "block";
+          audio5.play();
+
+          money += maxMoney;
+          earnings.style.display = "block";
+          earnings.innerHTML = `+${maxMoney}G`;
+          enemyDamage += 0.5; //enemy damage scaling
+
+          setTimeout(() => {
+            earnings.style.display = "none";
+          }, 1000);
+
+          setTimeout(() => {
+            maxMoney *= 1.3; //money scaling
+            maxMoney = Math.round(maxMoney);
+            moneyCounter.innerHTML = `Gold: ${money}`;
+            moneyCounter2.innerHTML = `Gold: ${money}`;
+            maxHp *= 1.15; //hp scaling
+            maxHp = Math.round(maxHp);
+
+            charHp -= charHp;
+            charHp += charMaxHp;
+
+            deaths++;
+            maxDeaths++;
+
+            deathCounter.innerHTML = `Level: ${deaths}`;
+            maxLevel.innerHTML = `Highest level: ${maxDeaths}`
+
             hp += maxHp;
             hp = Math.max(maxHp);
             counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
@@ -479,6 +599,7 @@ hospoda.onclick = () => {
   nextUpdate.style.display = "block";
   shop.style.display = "none";
   kostelButton.style.display = "none";
+  levelRoom.style.display = "none";
 };
 
 backButton.onclick = () => {
@@ -493,6 +614,7 @@ backButton.onclick = () => {
   hospoda.style.display = "block";
   hospoda.style.marginTop = "0";
   kostelButton.style.display = "block";
+  levelRoom.style.display = "block";
 };
 
 shop.onclick = () => {
@@ -505,6 +627,7 @@ shop.onclick = () => {
   shop.style.display = "none";
   items.style.display = "block";
   kostelButton.style.display = "none";
+  levelRoom.style.display = "none";
 };
 
 backButton2.onclick = () => {
@@ -519,6 +642,7 @@ backButton2.onclick = () => {
   backButton2.style.display = "none";
   items.style.display = "none";
   kostelButton.style.display = "block";
+  levelRoom.style.display = "block";
 };
 
 kostelButton.onclick = () => {
@@ -531,6 +655,7 @@ kostelButton.onclick = () => {
   kostelButton.style.display = "none";
   menuButton.innerHTML = `Elektropolis`;
   goInside.style.display = "block";
+  levelRoom.style.display = "none";
 };
 
 goInside.onclick = () => {
@@ -552,6 +677,58 @@ goBack.onclick = () => {
   menuButton.style.display = "block";
   enchant.style.display = "none";
   moneyCounter2.style.display = "none";
+};
+
+levelRoom.onclick = () =>{
+  body.style.backgroundImage = "url(./res/img/levelRoom.jpg)"
+  hospoda.style.display = "none";
+  musicMutedButton.style.display = "none";
+  musicButton.style.display = "none";
+  menuButton.style.display = "block";
+  shop.style.display = "none";
+  kostelButton.style.display = "none";
+  menuButton.innerHTML = `Elektropolis`;
+  goInside.style.display = "none";
+  levelRoom.style.display = "none";
+  levelObal.style.display = "block";
+  maxLevel.innerHTML = `Highest level: ${maxDeaths}`
+};
+
+minus.onclick = () =>{
+  if(deaths > 0){
+    enemyDamage -= 0.5;
+    deaths--;
+    maxMoney /= 1.3; 
+    maxMoney = Math.round(maxMoney);
+
+    deathCounter.innerHTML = `Level: ${deaths}`;
+
+    maxHp /= 1.15; 
+    maxHp = Math.round(maxHp);
+
+    hp -= hp;
+    hp += maxHp
+
+    counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
+  }
+};
+plus.onclick = () =>{
+  if(deaths < maxDeaths){
+    enemyDamage += 0.5;
+    deaths++;
+    maxMoney *= 1.3; 
+    maxMoney = Math.round(maxMoney);
+
+    deathCounter.innerHTML = `Level: ${deaths}`;
+
+    maxHp *= 1.15;
+    maxHp = Math.round(maxHp);
+
+    hp -= hp;
+    hp += maxHp
+
+    counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
+  }
 };
 
 /*enchant.onclick = () => {

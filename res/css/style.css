@@ -104,9 +104,24 @@ button {
   right: 0;
 }
 #deathCounter {
-  margin-left: 5px;
-  background-color: bisque;
+  margin: 0 auto;
+  font-size: 70px;
   width: max-content;
+}
+#maxLevel{
+  margin: 0 auto;
+  margin-top: 10%;
+  font-size: 70px;
+  width: max-content;
+}
+#minus{
+  width: 25%;
+  margin-left: 25%;
+  height: 50px;
+}
+#plus{
+  width: 25%;
+  height: 50px;
 }
 .hp {
   margin: 0;
@@ -210,6 +225,9 @@ body {
 #backButton2:hover{
   color: white;
 }
+#levelObal{
+  display: none;
+}
 #verze {
   background-color: bisque;
   width: 400px;
@@ -232,7 +250,7 @@ body {
   width: 300px;
   height: 100px;
   text-align: center;
-  margin-top: 25%;
+  margin-top: -3%;
   margin-left: 30%;
   background-image: url(../img/button.png);
   background-size: contain;
@@ -357,6 +375,21 @@ body {
   text-align: center;
   padding-top: 20px;
   cursor: pointer;
+}
+#levelRoom{
+  font-size: 50px;
+  width: 300px;
+  height: 100px;
+  background-image: url(../img/button.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-align: center;
+  padding-top: 20px;
+  cursor: pointer;
+  margin-top: 25%;
+}
+#levelRoom:hover{
+  color: white;
 }
 #goBack:hover{
   color: white;

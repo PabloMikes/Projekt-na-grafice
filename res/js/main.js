@@ -327,6 +327,14 @@ menuButton.onclick = () => {
 
       const interval3 = setInterval(() => {
         if (bossHp <= 0) {
+
+          maxMoney *= 1.3; //money scaling
+            maxMoney = Math.round(maxMoney);
+            moneyCounter.innerHTML = `Gold: ${money}`;
+            moneyCounter2.innerHTML = `Gold: ${money}`;
+            maxHp *= 1.15; //hp scaling
+            maxHp = Math.round(maxHp); // cuz jinak bude levelRoom rozbitej min to bude cheetable idk
+
           boss1.style.display = "none";
           deadBoss1.style.display = "block";
           audio5.play();

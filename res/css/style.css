@@ -145,7 +145,8 @@ button {
   color: white;
 }
 body {
-  background-image: url(../img/background.jpg);
+  /*background-image: url(../img/gameMenu.jpg);*/
+  background: url(../img/gameMenu.jpg);
   background-size: 100%;
   background-repeat: no-repeat;
 
@@ -445,6 +446,23 @@ body {
   transition: 0.3s;
   margin: 0 auto;
   margin-top: 10%;
+}
+#mainObal{
+  display: none;
+}
+#play{
+  width: 25%;
+  height: 50px;
+}
+#tutorial{
+  width: 25%;
+  height: 50px;
+}
+#gameMenu{
+  margin-top: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 @media all and (max-width: 1081px) {
   #enemy {

@@ -62,6 +62,10 @@ const levelObal = document.getElementById("levelObal");
 const maxLevel = document.getElementById("maxLevel");
 const minus = document.getElementById("minus");
 const plus = document.getElementById("plus");
+const gameMenu = document.getElementById("gameMenu");
+const mainObal = document.getElementById("mainObal");
+const play = document.getElementById("play");
+const tutorial = document.getElementById("tutorial");
 
 let maxHp = 20;
 let hp = 20;
@@ -739,6 +743,18 @@ plus.onclick = () =>{
   }
 };
 
+play.onclick = () =>{
+  mainObal.style.display = "block"
+  gameMenu.style.display = "none"
+  body.style.backgroundImage = "url(./res/img/background.jpg)"
+}
+
+tutorial.onclick = () =>{
+  tutorial.innerHTML = `U know what to do...`
+  setTimeout(() =>{
+    tutorial.innerHTML = `What should i do?`
+  }, 500)
+}
 /*enchant.onclick = () => {
   if (money >= 5000) {
     money -= 5000;

@@ -1,5 +1,12 @@
 # Projekt-na-grafice
 [View](https://pablomikes.github.io/Projekt-na-grafice/)
+<h2>Update 1.9</h2>
+<p>+ Save system</p>
+<p>+ esc now puts you in a menu where u can reset everything</p>
+<p>- Level room - not part of my bigger picture</p>
+<p>+ Enchants - works kinda smoothly need sum testin</p>
+<p>+ incurable depression</p>
+<p>Responsiveness in progress</p>
 <h2>Update 1.8.6</h2>
 <p>+ Added MainMenu</p>
 <p>getting info on how to do quests n enchants</p>

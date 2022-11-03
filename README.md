@@ -1,5 +1,8 @@
 # Projekt-na-grafice
 [View](https://pablomikes.github.io/Projekt-na-grafice/)
+<h2>Update 1.8.6</h2>
+<p>+ Added MainMenu</p>
+<p>getting info on how to do quests n enchants</p>
 <h2>Update 1.8.5</h2>
 <p>totally random update numberz btw</p>
 <p>+ Added Level system</p>

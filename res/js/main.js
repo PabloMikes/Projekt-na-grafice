@@ -152,6 +152,7 @@ window.onload = () => {
     MaxHealth.innerHTML = `Muskles: ${up2} Gold: ${price2}`;
     potion.innerHTML = `Poťáček: ${up3} Gold: ${price3}`;
     potionCounter.innerHTML = `${up3}`;
+    deathCounter.innerHTML = `Kills: ${deaths}`;
 
     if (maxDeaths % 10 == 0) {
       counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
@@ -204,6 +205,7 @@ window.onload = () => {
     MaxHealth.innerHTML = `Muskles: ${up2} Gold: ${price2}`;
     potion.innerHTML = `Poťáček: ${up3} Gold: ${price3}`;
     potionCounter.innerHTML = `${up3}`;
+    deathCounter.innerHTML = `Kills: ${deaths}`;
 
     if (maxDeaths % 10 == 0) {
       counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
@@ -640,7 +642,7 @@ menuButton.onclick = () => {
             localStorage.setItem("maxDeaths", maxDeaths);
             localStorage.setItem("charHp", charHp);
 
-            deathCounter.innerHTML = `Level: ${deaths}`;
+            deathCounter.innerHTML = `Kills: ${deaths}`;
             maxLevel.innerHTML = `Highest level: ${maxDeaths}`;
             bossHp += bossMaxHp;
             bossHp = Math.max(bossMaxHp);

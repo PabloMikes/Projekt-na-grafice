@@ -49,6 +49,7 @@ p {
 }
 * {
   box-sizing: border-box;
+  user-select: none;
 }
 button {
   font-size: 20px;
@@ -105,7 +106,7 @@ button {
 }
 #deathCounter {
   margin: 0 auto;
-  font-size: 70px;
+  font-size: 50px;
   width: max-content;
 }
 #maxLevel{
@@ -251,7 +252,7 @@ body {
   width: 300px;
   height: 100px;
   text-align: center;
-  margin-top: -3%;
+  margin-top: 25%;
   margin-left: 30%;
   background-image: url(../img/button.png);
   background-size: contain;
@@ -377,21 +378,6 @@ body {
   padding-top: 20px;
   cursor: pointer;
 }
-#levelRoom{
-  font-size: 50px;
-  width: 300px;
-  height: 100px;
-  background-image: url(../img/button.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  text-align: center;
-  padding-top: 20px;
-  cursor: pointer;
-  margin-top: 25%;
-}
-#levelRoom:hover{
-  color: white;
-}
 #goBack:hover{
   color: white;
 }
@@ -463,6 +449,61 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+#saveMenu{
+  display: block;
+  position: absolute;
+  left: 40.7%;
+  top: 25%;
+  z-index: 2;
+  max-width: 400px;
+  width: 100%;
+}
+#saveObal{
+  display: none;
+}
+#saveObal #saveObalObal{
+  z-index: 5;
+  position: absolute;
+  width: 300px;
+  left: 42.5%;
+  top: 30%;
+}
+#resume{
+  font-size: 50px;
+  width: 300px;
+  height: 100px;
+  background-image: url(../img/button.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-align: center;
+  padding-top: 20px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+#unsave{
+  font-size: 48px;
+  width: 300px;
+  height: 100px;
+  background-image: url(../img/button.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-align: center;
+  padding-top: 20px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+#quit{
+  font-size: 50px;
+  width: 300px;
+  height: 100px;
+  background-image: url(../img/button.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-align: center;
+  padding-top: 20px;
+  margin-top: 20px;
+  cursor: pointer;
 }
 @media all and (max-width: 1081px) {
   #enemy {

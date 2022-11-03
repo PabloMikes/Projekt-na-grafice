@@ -57,15 +57,16 @@ const body = document.getElementsByTagName("body")[0];
 const enchant = document.getElementById("enchant");
 const moneyCounter2 = document.getElementById("moneyCounter2");
 const typeOfEnchantment = document.getElementById("typeOfEnchantment");
-const levelRoom = document.getElementById("levelRoom");
-const levelObal = document.getElementById("levelObal");
 const maxLevel = document.getElementById("maxLevel");
-const minus = document.getElementById("minus");
-const plus = document.getElementById("plus");
 const gameMenu = document.getElementById("gameMenu");
 const mainObal = document.getElementById("mainObal");
 const play = document.getElementById("play");
 const tutorial = document.getElementById("tutorial");
+const saveObal = document.getElementById("saveObal");
+
+const resume = document.getElementById("resume");
+const unsave = document.getElementById("unsave");
+const quit = document.getElementById("quit");
 
 let maxHp = 20;
 let hp = 20;
@@ -79,32 +80,218 @@ let maxMoney = 10;
 let deaths = 0;
 let maxDeaths = 0;
 
-let up1 = 0;
+let up1 = 1;
 let price1 = 10;
-let up2 = 0;
+let up2 = 1;
 let price2 = 10;
-let damageOverTime = 0;
 let up3 = 0;
 let price3 = 500;
-let up4 = 0;
-let price4 = 1000;
-let up5 = 0;
-let price5 = 2000;
-let moneyPerSecond = 0;
 
-let p = 0;
+let poison = false;
+let fire = false;
+let lightning = false;
 
-let poison = 0;
-let fire = 0;
-let doubleTap = 0;
+let poisonCounter = 0;
+let fireCounter = 0;
+let lightningCounter = 0;
 
 let bossHp = 1000;
 let bossMaxHp = 1000;
 let bossDmg = 10;
 let bossMoney = 500;
 
+let poisonDamage = 50;
+let fireDamage = 30;
+let lightDamage = 30;
+
+window.onload = () => {
+  if (localStorage.getItem("money") > 0 && localStorage.getItem("up3") > 0) {
+    console.log("negr1");
+
+    maxHp = parseInt(localStorage.getItem("maxHp"));
+    hp = parseInt(localStorage.getItem("hp"));
+    charHp = parseInt(localStorage.getItem("charHp"));
+    charMaxHp = parseInt(localStorage.getItem("charMaxHp"));
+    damage = parseInt(localStorage.getItem("damage"));
+    enemyDamage = parseInt(localStorage.getItem("enemyDamage"));
+    money = parseInt(localStorage.getItem("money"));
+    maxMoney = parseInt(localStorage.getItem("maxMoney"));
+
+    deaths = parseInt(localStorage.getItem("deaths"));
+    maxDeaths = parseInt(localStorage.getItem("maxDeaths"));
+
+    up1 = parseInt(localStorage.getItem("up1"));
+    price1 = parseInt(localStorage.getItem("price1"));
+    up2 = parseInt(localStorage.getItem("up2"));
+    price2 = parseInt(localStorage.getItem("price2"));
+    up3 = parseInt(localStorage.getItem("up3"));
+
+    poison = JSON.parse(localStorage.getItem("poison"));
+    fire = JSON.parse(localStorage.getItem("fire"));
+    lightning = JSON.parse(localStorage.getItem("lightning"));
+
+    bossHp = parseInt(localStorage.getItem("bossHp"));
+    bossMaxHp = parseInt(localStorage.getItem("bossMaxHp"));
+    bossDmg = parseInt(localStorage.getItem("bossDmg"));
+    bossMoney = parseInt(localStorage.getItem("bossMoney"));
+
+    club.style.display = localStorage.getItem("club");
+    spear.style.display = localStorage.getItem("spear");
+    mace.style.display = localStorage.getItem("mace");
+    swordd.style.display = localStorage.getItem("swordd");
+
+    description.style.display = localStorage.getItem("description");
+    description2.style.display = localStorage.getItem("description2");
+    description3.style.display = localStorage.getItem("description3");
+    description4.style.display = localStorage.getItem("description4");
+
+    moneyCounter.innerHTML = `Gold: ${money}`;
+    moneyCounter2.innerHTML = `Gold: ${money}`;
+    damageCounter.innerHTML = `Damage: ${damage}`;
+    sword.innerHTML = `Sharpness: ${up1} Gold: ${price1}`;
+    MaxHealth.innerHTML = `Muskles: ${up2} Gold: ${price2}`;
+    potion.innerHTML = `Poťáček: ${up3} Gold: ${price3}`;
+    potionCounter.innerHTML = `${up3}`;
+
+    if (maxDeaths % 10 == 0) {
+      counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
+    } else {
+      counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
+    }
+  } else if (localStorage.getItem("money") > 0) {
+    console.log("negr2");
+
+    maxHp = parseInt(localStorage.getItem("maxHp"));
+    hp = parseInt(localStorage.getItem("hp"));
+    charHp = parseInt(localStorage.getItem("charHp"));
+    charMaxHp = parseInt(localStorage.getItem("charMaxHp"));
+    damage = parseInt(localStorage.getItem("damage"));
+    enemyDamage = parseInt(localStorage.getItem("enemyDamage"));
+    money = parseInt(localStorage.getItem("money"));
+    maxMoney = parseInt(localStorage.getItem("maxMoney"));
+
+    deaths = parseInt(localStorage.getItem("deaths"));
+    maxDeaths = parseInt(localStorage.getItem("maxDeaths"));
+
+    up1 = parseInt(localStorage.getItem("up1"));
+    price1 = parseInt(localStorage.getItem("price1"));
+    up2 = parseInt(localStorage.getItem("up2"));
+    price2 = parseInt(localStorage.getItem("price2"));
+
+    poison = JSON.parse(localStorage.getItem("poison"));
+    fire = JSON.parse(localStorage.getItem("fire"));
+    lightning = JSON.parse(localStorage.getItem("lightning"));
+
+    bossHp = parseInt(localStorage.getItem("bossHp"));
+    bossMaxHp = parseInt(localStorage.getItem("bossMaxHp"));
+    bossDmg = parseInt(localStorage.getItem("bossDmg"));
+    bossMoney = parseInt(localStorage.getItem("bossMoney"));
+
+    club.style.display = localStorage.getItem("club");
+    spear.style.display = localStorage.getItem("spear");
+    mace.style.display = localStorage.getItem("mace");
+    swordd.style.display = localStorage.getItem("swordd");
+
+    description.style.display = localStorage.getItem("description");
+    description2.style.display = localStorage.getItem("description2");
+    description3.style.display = localStorage.getItem("description3");
+    description4.style.display = localStorage.getItem("description4");
+
+    moneyCounter.innerHTML = `Gold: ${money}`;
+    moneyCounter2.innerHTML = `Gold: ${money}`;
+    damageCounter.innerHTML = `Damage: ${damage}`;
+    sword.innerHTML = `Sharpness: ${up1} Gold: ${price1}`;
+    MaxHealth.innerHTML = `Muskles: ${up2} Gold: ${price2}`;
+    potion.innerHTML = `Poťáček: ${up3} Gold: ${price3}`;
+    potionCounter.innerHTML = `${up3}`;
+
+    if (maxDeaths % 10 == 0) {
+      counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
+    } else {
+      counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
+    }
+  }
+  console.log(money);
+};
+
 attack.onclick = () => {
   if (deaths % 10 == 0 && deaths != 0) {
+    if (poison == true) {
+      if (poisonCounter == 0) {
+        const poisonDamagePerSecond = setInterval(() => {
+          bossHp -= poisonDamage;
+          counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
+          poisonCounter++;
+        }, 1000);
+        const check1 = setInterval(() => {
+          if (bossHp <= 0) {
+            clearInterval(poisonDamagePerSecond);
+            clearInterval(check1);
+            poisonCounter -= poisonCounter;
+          } else if (charHp <= 0) {
+            clearInterval(poisonDamagePerSecond);
+            clearInterval(check1);
+            poisonCounter -= poisonCounter;
+          }
+        }, 100);
+        if (poisonCounter == 5) {
+          fireCounter -= 5;
+          clearInterval(fireDamagePerSecond);
+          clearInterval(check1);
+        }
+      }
+    }
+    if (fire == true) {
+      if (fireCounter == 0) {
+        const fireDamagePerSecond = setInterval(() => {
+          bossHp -= fireDamage;
+          counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
+          fireCounter++;
+        }, 1000);
+        const check2 = setInterval(() => {
+          if (bossHp <= 0) {
+            clearInterval(fireDamagePerSecond);
+            clearInterval(check2);
+            fireCounter -= fireCounter;
+          } else if (charHp <= 0) {
+            clearInterval(fireDamagePerSecond);
+            clearInterval(check2);
+            fireCounter -= fireCounter;
+          }
+        }, 100);
+        if (fireCounter == 5) {
+          fireCounter -= 5;
+          clearInterval(fireDamagePerSecond);
+          clearInterval(check2);
+        }
+      }
+    }
+    if (lightning == true) {
+      if (lightningCounter == 0) {
+        const lightDamagePerSecond = setInterval(() => {
+          bossHp -= lightDamage;
+          counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
+          lightningCounter++;
+        }, 300);
+        const check3 = setInterval(() => {
+          if (bossHp <= 0) {
+            clearInterval(lightDamagePerSecond);
+            clearInterval(check3);
+            lightningCounter -= lightningCounter;
+          } else if (charHp <= 0) {
+            clearInterval(lightDamagePerSecond);
+            clearInterval(check3);
+            lightningCounter -= lightningCounter;
+          }
+        }, 100);
+        if (lightningCounter == 5) {
+          lightningCounter -= 5;
+          clearInterval(lightDamagePerSecond);
+          clearInterval(check3);
+        }
+      }
+    }
+
     if (bossHp > 0) {
       bossHp -= damage;
       audio4.play();
@@ -126,6 +313,80 @@ attack.onclick = () => {
       deadBoss1.style.display = "block";
     }
   } else {
+    if (poison == true && poisonCounter == 0) {
+      const poisonDamagePerSecond = setInterval(() => {
+        hp -= poisonDamage;
+        counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
+        poisonCounter += 1;
+      }, 1000);
+      const check1 = setInterval(() => {
+        if (hp <= 0) {
+          clearInterval(poisonDamagePerSecond);
+          clearInterval(check1);
+          poisonCounter -= poisonCounter;
+        } else if (charHp <= 0) {
+          clearInterval(poisonDamagePerSecond);
+          clearInterval(check1);
+          poisonCounter -= poisonCounter;
+        }
+        if (poisonCounter == 5) {
+          poisonCounter -= 5;
+          clearInterval(poisonDamagePerSecond);
+          clearInterval(check1);
+        }
+      }, 100);
+    }
+    if (fire == true) {
+      if (fireCounter == 0) {
+        const fireDamagePerSecond = setInterval(() => {
+          hp -= fireDamage;
+          counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
+          fireCounter++;
+        }, 1000);
+        const check2 = setInterval(() => {
+          if (hp <= 0) {
+            clearInterval(fireDamagePerSecond);
+            clearInterval(check2);
+            fireCounter -= fireCounter;
+          } else if (charHp <= 0) {
+            clearInterval(fireDamagePerSecond);
+            clearInterval(check2);
+            fireCounter -= fireCounter;
+          }
+          if (fireCounter == 5) {
+            fireCounter -= 5;
+            clearInterval(fireDamagePerSecond);
+            clearInterval(check2);
+          }
+        }, 100);
+      }
+    }
+    if (lightning == true) {
+      if (lightningCounter == 0) {
+        const lightDamagePerSecond = setInterval(() => {
+          hp -= lightDamage;
+          counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
+          lightningCounter++;
+        }, 300);
+        const check3 = setInterval(() => {
+          if (hp <= 0) {
+            clearInterval(lightDamagePerSecond);
+            clearInterval(check3);
+            lightningCounter -= lightningCounter;
+          } else if (charHp <= 0) {
+            clearInterval(lightDamagePerSecond);
+            clearInterval(check3);
+            lightningCounter -= lightningCounter;
+          }
+          if (lightningCounter == 5) {
+            lightningCounter -= 5;
+            clearInterval(lightDamagePerSecond);
+            clearInterval(check3);
+          }
+        }, 100);
+      }
+    }
+
     if (hp > 0) {
       hp -= damage;
       audio4.play();
@@ -152,7 +413,7 @@ heal.onclick = () => {
   if (up3 > 0) {
     charHp += 20;
     up3 -= 1;
-
+    localStorage.setItem("up3", up3);
     if (charHp > charMaxHp) {
       charHp = Math.max(charMaxHp);
     }
@@ -169,6 +430,10 @@ sword.onclick = () => {
     money -= price1;
     price1 *= 1.3;
     price1 = Math.round(price1);
+    localStorage.setItem("up1", up1);
+    localStorage.setItem("damage", damage);
+    localStorage.setItem("price1", price1);
+    localStorage.setItem("money", money);
     sword.innerHTML = `Sharpness: ${up1} Gold: ${price1}`;
     moneyCounter.innerHTML = `Gold: ${money}`;
     moneyCounter2.innerHTML = `Gold: ${money}`;
@@ -183,8 +448,13 @@ MaxHealth.onclick = () => {
     up2 += 1;
     charHp += 7;
     charMaxHp += 7;
-    hpCounter.innerHTML = `<img id="hp" src="./res/img/hp.png" alt="" />: ${charHp}/${charMaxHp}`;
     price2 = Math.round(price2);
+    localStorage.setItem("up2", up2);
+    localStorage.setItem("price2", price2);
+    localStorage.setItem("charHp", charHp);
+    localStorage.setItem("charMaxHp", charMaxHp);
+    localStorage.setItem("money", money);
+    hpCounter.innerHTML = `<img id="hp" src="./res/img/hp.png" alt="" />: ${charHp}/${charMaxHp}`;
     MaxHealth.innerHTML = `Muskles: ${up2} Gold: ${price2}`;
     moneyCounter.innerHTML = `Gold: ${money}`;
     moneyCounter2.innerHTML = `Gold: ${money}`;
@@ -195,6 +465,7 @@ potion.onclick = () => {
   if (money >= price3) {
     money -= price3;
     up3 += 1;
+    localStorage.setItem("up3", up3);
     moneyCounter.innerHTML = `Gold: ${money}`;
     moneyCounter2.innerHTML = `Gold: ${money}`;
     price3 = Math.round(price3);
@@ -208,10 +479,14 @@ club.onclick = () => {
     damage += 20;
     club.style.display = "none";
     money -= 100;
+    description.style.display = "none";
+    localStorage.setItem("damage", damage);
+    localStorage.setItem("money", money);
+    localStorage.setItem("club", (club.style.display = "none"));
+    localStorage.setItem("description", (description.style.display = "none"));
     moneyCounter.innerHTML = `Gold: ${money}`;
     moneyCounter2.innerHTML = `Gold: ${money}`;
     damageCounter.innerHTML = `Damage: ${damage}`;
-    description.style.display = "none";
   }
 };
 
@@ -220,6 +495,11 @@ spear.onclick = () => {
     damage += 50;
     spear.style.display = "none";
     money -= 1000;
+    localStorage.setItem("damage", damage);
+    localStorage.setItem("money", money);
+    description2.style.display = "none";
+    localStorage.setItem("spear", (spear.style.display = "none"));
+    localStorage.setItem("description2", (description2.style.display = "none"));
     moneyCounter.innerHTML = `Gold: ${money}`;
     moneyCounter2.innerHTML = `Gold: ${money}`;
     damageCounter.innerHTML = `Damage: ${damage}`;
@@ -232,10 +512,14 @@ mace.onclick = () => {
     damage += 100;
     mace.style.display = "none";
     money -= 10000;
+    description3.style.display = "none";
+    localStorage.setItem("damage", damage);
+    localStorage.setItem("money", money);
+    localStorage.setItem("mace", (mace.style.display = "none"));
+    localStorage.setItem("description3", (description3.style.display = "none"));
     moneyCounter.innerHTML = `Gold: ${money}`;
     moneyCounter2.innerHTML = `Gold: ${money}`;
     damageCounter.innerHTML = `Damage: ${damage}`;
-    description3.style.display = "none";
   }
 };
 
@@ -244,10 +528,14 @@ swordd.onclick = () => {
     damage += 200;
     swordd.style.display = "none";
     money -= 30000;
+    description4.style.display = "none";
+    localStorage.setItem("damage", damage);
+    localStorage.setItem("money", money);
+    localStorage.setItem("swordd", (swordd.style.display = "none"));
+    localStorage.setItem("description4", (description4.style.display = "none"));
     moneyCounter.innerHTML = `Gold: ${money}`;
     moneyCounter2.innerHTML = `Gold: ${money}`;
     damageCounter.innerHTML = `Damage: ${damage}`;
-    description4.style.display = "none";
   }
 };
 
@@ -281,28 +569,7 @@ menuButton.onclick = () => {
     backButton2.style.display = "none";
     items.style.display = "none";
     kostelButton.style.display = "block";
-    levelRoom.style.display = "block";
-  } 
-  else if(levelRoom.style.display == "none"){
-    main.style.display = "none";
-    goInside.style.display = "none";
-    menuButton.innerHTML = `Battle!`;
-    body.style.backgroundImage = "url(./res/img/background.jpg)";
-    mesto.style.display = "block";
-    musicButton.style.display = "block";
-    menuButton.style.display = "block";
-    backButton.style.display = "none";
-    nextUpdate.style.display = "none";
-    shop.style.display = "block";
-    hospoda.style.display = "block";
-    hospoda.style.marginTop = "0";
-    backButton2.style.display = "none";
-    items.style.display = "none";
-    kostelButton.style.display = "block";
-    levelRoom.style.display = "block";
-    levelObal.style.display = "none";
-  }
-  else {
+  } else {
     hpCounter.innerHTML = `<img id="hp" src="./res/img/hp.png" alt="" />: ${charHp}/${charMaxHp}`;
     menuButton.style.display = "none";
     main.style.display = "block";
@@ -331,13 +598,14 @@ menuButton.onclick = () => {
 
       const interval3 = setInterval(() => {
         if (bossHp <= 0) {
-
-          maxMoney *= 1.3; //money scaling
-            maxMoney = Math.round(maxMoney);
-            moneyCounter.innerHTML = `Gold: ${money}`;
-            moneyCounter2.innerHTML = `Gold: ${money}`;
-            maxHp *= 1.15; //hp scaling
-            maxHp = Math.round(maxHp); // cuz jinak bude levelRoom rozbitej min to bude cheetable idk
+          maxMoney *= 1.15; //money scaling
+          maxMoney = Math.round(maxMoney);
+          moneyCounter.innerHTML = `Gold: ${money}`;
+          moneyCounter2.innerHTML = `Gold: ${money}`;
+          maxHp *= 1.15; //hp scaling
+          maxHp = Math.round(maxHp);
+          localStorage.setItem("maxMoney", maxMoney);
+          localStorage.setItem("maxHp", maxHp);
 
           boss1.style.display = "none";
           deadBoss1.style.display = "block";
@@ -347,6 +615,7 @@ menuButton.onclick = () => {
           earnings.style.display = "block";
           earnings.innerHTML = `+${bossMoney}G`;
           bossDmg += 10; //boss damage scaling
+          localStorage.setItem("bossDmg", bossDmg);
 
           setTimeout(() => {
             earnings.style.display = "none";
@@ -358,14 +627,21 @@ menuButton.onclick = () => {
             moneyCounter2.innerHTML = `Gold: ${money}`;
             bossMaxHp += 1000; //bosshp scaling
 
+            localStorage.setItem("bossMoney", bossMoney);
+            localStorage.setItem("bossMaxHp", bossMaxHp);
+
             charHp -= charHp;
             charHp += charMaxHp;
 
             deaths++;
             maxDeaths += 1;
 
+            localStorage.setItem("deaths", deaths);
+            localStorage.setItem("maxDeaths", maxDeaths);
+            localStorage.setItem("charHp", charHp);
+
             deathCounter.innerHTML = `Level: ${deaths}`;
-            maxLevel.innerHTML = `Highest level: ${maxDeaths}`
+            maxLevel.innerHTML = `Highest level: ${maxDeaths}`;
             bossHp += bossMaxHp;
             bossHp = Math.max(bossMaxHp);
             counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
@@ -379,6 +655,9 @@ menuButton.onclick = () => {
             items.style.display = "none";
             menuButton.style.display = "block";
             verze.style.display = "block";
+
+            localStorage.setItem("hp", hp);
+            localStorage.setItem("charHp", charHp);
           }, 1000);
           clearInterval(interval3);
           clearInterval(bossAttackSpeed);
@@ -405,106 +684,24 @@ menuButton.onclick = () => {
 
           bossHp -= bossHp;
           bossHp += bossMaxHp;
+
+          localStorage.setItem("bossHp", bossHp);
+          localStorage.setItem("bossMaxHp", bossMaxHp);
+
           counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
 
           hp -= hp;
           hp += maxHp;
           counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
 
+          localStorage.setItem("hp", hp);
+          localStorage.setItem("charHp", charHp);
+
           clearInterval(interval3);
           clearInterval(bossAttackSpeed);
         }
       }, 100);
     } 
-    else if(maxDeaths != deaths){
-      const interval2 = setInterval(() => {
-        if (hp <= 0) {
-          enemy.style.display = "none";
-          deadEnemy.style.display = "block";
-          audio5.play();
-
-          money += maxMoney;
-          earnings.style.display = "block";
-          earnings.innerHTML = `+${maxMoney}G`;
-          enemyDamage += 0.5; //enemy damage scaling
-
-          setTimeout(() => {
-            earnings.style.display = "none";
-          }, 1000);
-
-          setTimeout(() => {
-            maxMoney *= 1.3; //money scaling
-            maxMoney = Math.round(maxMoney);
-            moneyCounter.innerHTML = `Gold: ${money}`;
-            moneyCounter2.innerHTML = `Gold: ${money}`;
-            maxHp *= 1.15; //hp scaling
-            maxHp = Math.round(maxHp);
-
-            charHp -= charHp;
-            charHp += charMaxHp;
-
-            deaths++;
-
-            deathCounter.innerHTML = `Level: ${deaths}`;
-            maxLevel.innerHTML = `Highest level: ${maxDeaths}`
-
-            hp += maxHp;
-            hp = Math.max(maxHp);
-            counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
-            enemy.style.display = "block";
-            deadEnemy.style.display = "none";
-
-            main.style.display = "none";
-            menuButton.innerHTML = `Battle!`;
-            body.style.backgroundImage = "url(./res/img/background.jpg)";
-            mesto.style.display = "block";
-            items.style.display = "none";
-            menuButton.style.display = "block";
-            verze.style.display = "block";
-          }, 1000);
-          clearInterval(interval);
-          clearInterval(interval2);
-        } else if (charHp <= 0) {
-          main.style.display = "none";
-          goInside.style.display = "none";
-          menuButton.innerHTML = `Battle!`;
-          body.style.backgroundImage = "url(./res/img/background.jpg)";
-          mesto.style.display = "block";
-          musicButton.style.display = "block";
-          menuButton.style.display = "block";
-          backButton.style.display = "none";
-          nextUpdate.style.display = "none";
-          shop.style.display = "block";
-          hospoda.style.display = "block";
-          hospoda.style.marginTop = "0";
-          backButton2.style.display = "none";
-          items.style.display = "none";
-          kostelButton.style.display = "block";
-
-          charHp -= charHp;
-          charHp += charMaxHp;
-
-          hp -= hp;
-          hp += maxHp;
-
-          clearInterval(interval);
-          clearInterval(interval2);
-        }
-      }, 100);
-
-      const interval = setInterval(() => {
-        enemy.style.margin = "0";
-        enemy.style.marginTop = "10%";
-        charHp -= enemyDamage;
-        audio6.play();
-        hpCounter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${charHp}/${charMaxHp}`;
-
-        setTimeout(() => {
-          enemy.style.margin = "0 auto";
-          enemy.style.marginTop = "10%";
-        }, 100); //gay animace
-      }, 1500);
-    }
     else {
       const interval2 = setInterval(() => {
         if (hp <= 0) {
@@ -517,17 +714,31 @@ menuButton.onclick = () => {
           earnings.innerHTML = `+${maxMoney}G`;
           enemyDamage += 0.5; //enemy damage scaling
 
+          console.log(money);
+          console.log(maxMoney);
+          localStorage.setItem("money", money);
+          localStorage.setItem("damage", damage);
+          localStorage.setItem("enemyDamage", enemyDamage);
+          localStorage.setItem("up1", up1);
+          localStorage.setItem("price1", price1);
+          localStorage.setItem("up2", up2);
+          localStorage.setItem("price2", price2);
+          localStorage.setItem("charMaxHp", charMaxHp);
+
           setTimeout(() => {
             earnings.style.display = "none";
           }, 1000);
 
           setTimeout(() => {
-            maxMoney *= 1.3; //money scaling
+            maxMoney *= 1.15; //money scaling
             maxMoney = Math.round(maxMoney);
             moneyCounter.innerHTML = `Gold: ${money}`;
             moneyCounter2.innerHTML = `Gold: ${money}`;
             maxHp *= 1.15; //hp scaling
             maxHp = Math.round(maxHp);
+
+            localStorage.setItem("maxMoney", maxMoney);
+            localStorage.setItem("maxHp", maxHp);
 
             charHp -= charHp;
             charHp += charMaxHp;
@@ -535,8 +746,10 @@ menuButton.onclick = () => {
             deaths++;
             maxDeaths++;
 
+            localStorage.setItem("deaths", deaths);
+            localStorage.setItem("maxDeaths", maxDeaths);
+
             deathCounter.innerHTML = `Level: ${deaths}`;
-            maxLevel.innerHTML = `Highest level: ${maxDeaths}`
 
             hp += maxHp;
             hp = Math.max(maxHp);
@@ -551,6 +764,9 @@ menuButton.onclick = () => {
             items.style.display = "none";
             menuButton.style.display = "block";
             verze.style.display = "block";
+
+            localStorage.setItem("hp", hp);
+            localStorage.setItem("charHp", charHp);
           }, 1000);
           clearInterval(interval);
           clearInterval(interval2);
@@ -576,6 +792,9 @@ menuButton.onclick = () => {
 
           hp -= hp;
           hp += maxHp;
+
+          localStorage.setItem("hp", hp);
+          localStorage.setItem("charHp", charHp);
 
           clearInterval(interval);
           clearInterval(interval2);
@@ -611,7 +830,6 @@ hospoda.onclick = () => {
   nextUpdate.style.display = "block";
   shop.style.display = "none";
   kostelButton.style.display = "none";
-  levelRoom.style.display = "none";
 };
 
 backButton.onclick = () => {
@@ -626,7 +844,6 @@ backButton.onclick = () => {
   hospoda.style.display = "block";
   hospoda.style.marginTop = "0";
   kostelButton.style.display = "block";
-  levelRoom.style.display = "block";
 };
 
 shop.onclick = () => {
@@ -639,7 +856,6 @@ shop.onclick = () => {
   shop.style.display = "none";
   items.style.display = "block";
   kostelButton.style.display = "none";
-  levelRoom.style.display = "none";
 };
 
 backButton2.onclick = () => {
@@ -654,7 +870,6 @@ backButton2.onclick = () => {
   backButton2.style.display = "none";
   items.style.display = "none";
   kostelButton.style.display = "block";
-  levelRoom.style.display = "block";
 };
 
 kostelButton.onclick = () => {
@@ -667,7 +882,6 @@ kostelButton.onclick = () => {
   kostelButton.style.display = "none";
   menuButton.innerHTML = `Elektropolis`;
   goInside.style.display = "block";
-  levelRoom.style.display = "none";
 };
 
 goInside.onclick = () => {
@@ -691,103 +905,87 @@ goBack.onclick = () => {
   moneyCounter2.style.display = "none";
 };
 
-levelRoom.onclick = () =>{
-  body.style.backgroundImage = "url(./res/img/levelRoom.jpg)"
-  hospoda.style.display = "none";
-  musicMutedButton.style.display = "none";
-  musicButton.style.display = "none";
-  menuButton.style.display = "block";
-  shop.style.display = "none";
-  kostelButton.style.display = "none";
-  menuButton.innerHTML = `Elektropolis`;
-  goInside.style.display = "none";
-  levelRoom.style.display = "none";
-  levelObal.style.display = "block";
-  maxLevel.innerHTML = `Highest level: ${maxDeaths}`
+play.onclick = () => {
+  mainObal.style.display = "block";
+  gameMenu.style.display = "none";
+  body.style.backgroundImage = "url(./res/img/background.jpg)";
 };
 
-minus.onclick = () =>{
-  if(deaths > 0){
-    enemyDamage -= 0.5;
-    deaths--;
-    maxMoney /= 1.3; 
-    maxMoney = Math.round(maxMoney);
-
-    deathCounter.innerHTML = `Level: ${deaths}`;
-
-    maxHp /= 1.15; 
-    maxHp = Math.round(maxHp);
-
-    hp -= hp;
-    hp += maxHp
-
-    counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
-  }
-};
-plus.onclick = () =>{
-  if(deaths < maxDeaths){
-    enemyDamage += 0.5;
-    deaths++;
-    maxMoney *= 1.3; 
-    maxMoney = Math.round(maxMoney);
-
-    deathCounter.innerHTML = `Level: ${deaths}`;
-
-    maxHp *= 1.15;
-    maxHp = Math.round(maxHp);
-
-    hp -= hp;
-    hp += maxHp
-
-    counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
-  }
+tutorial.onclick = () => {
+  tutorial.innerHTML = `U know what to do...`;
+  setTimeout(() => {
+    tutorial.innerHTML = `What should i do?`;
+  }, 500);
 };
 
-play.onclick = () =>{
-  mainObal.style.display = "block"
-  gameMenu.style.display = "none"
-  body.style.backgroundImage = "url(./res/img/background.jpg)"
-}
-
-tutorial.onclick = () =>{
-  tutorial.innerHTML = `U know what to do...`
-  setTimeout(() =>{
-    tutorial.innerHTML = `What should i do?`
-  }, 500)
-}
-/*enchant.onclick = () => {
+enchant.onclick = () => {
   if (money >= 5000) {
     money -= 5000;
+    localStorage.setItem("money", money);
     moneyCounter.innerHTML = `Gold: ${money}`;
     moneyCounter2.innerHTML = `Gold: ${money}`;
     let random = Math.floor(Math.random() * 10);
     if (random == 1) {
-      poison++;
+      poison = true;
+      localStorage.setItem("poison", poison);
       typeOfEnchantment.innerHTML = `+ Poison`;
       typeOfEnchantment.style.display = "block";
       setTimeout(() => {
         typeOfEnchantment.style.display = "none";
-      }, 2000);
+      }, 300);
     } else if (random == 3) {
-      doubleTap++;
-      typeOfEnchantment.innerHTML = `+ Double Tap`;
+      lightning = true;
+      localStorage.setItem("lightning", lightning);
+      typeOfEnchantment.innerHTML = `+ Lightning`;
       typeOfEnchantment.style.display = "block";
       setTimeout(() => {
         typeOfEnchantment.style.display = "none";
-      }, 2000);
+      }, 300);
     } else if (random == 8) {
-      fire++;
+      fire = true;
+      localStorage.setItem("fire", fire);
       typeOfEnchantment.innerHTML = `+ Fire`;
       typeOfEnchantment.style.display = "block";
       setTimeout(() => {
         typeOfEnchantment.style.display = "none";
-      }, 2000);
+      }, 300);
     } else {
       typeOfEnchantment.innerHTML = `Unlucky :/`;
       setTimeout(() => {
         typeOfEnchantment.style.display = "none";
-      }, 2000);
+      }, 300);
     }
   }
 };
-*/
+
+resume.onclick = () => {
+  saveObal.style.display = "none";
+  mainObal.style.pointerEvents = "auto";
+  gameMenu.style.pointerEvents = "auto";
+};
+
+quit.onclick = () => {
+  window.close();
+};
+unsave.onclick = () => {
+  localStorage.clear();
+  location.reload();
+};
+
+function esc(e) {
+  if (
+    e.key === "Escape" &&
+    saveObal.style.display == "none" &&
+    main.style.display != "block"
+  ) {
+    saveObal.style.display = "block";
+    mainObal.style.pointerEvents = "none";
+    gameMenu.style.pointerEvents = "none";
+  } else {
+    saveObal.style.display = "none";
+    mainObal.style.pointerEvents = "auto";
+    gameMenu.style.pointerEvents = "auto";
+  }
+}
+
+body.addEventListener("keyup", esc);

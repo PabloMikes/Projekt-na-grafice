@@ -599,14 +599,14 @@ menuButton.onclick = () => {
 
       const interval3 = setInterval(() => {
         if (bossHp <= 0) {
-          maxMoney *= 1.15; //money scaling
+         /* maxMoney *= 1.15; //money scaling
           maxMoney = Math.round(maxMoney);
           moneyCounter.innerHTML = `Gold: ${money}`;
           moneyCounter2.innerHTML = `Gold: ${money}`;
           maxHp *= 1.15; //hp scaling
           maxHp = Math.round(maxHp);
           localStorage.setItem("maxMoney", maxMoney);
-          localStorage.setItem("maxHp", maxHp);
+          localStorage.setItem("maxHp", maxHp);*/
 
           boss1.style.display = "none";
           deadBoss1.style.display = "block";

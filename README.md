@@ -1,6 +1,6 @@
 # Projekt-na-grafice
 [View](https://pablomikes.github.io/Projekt-na-grafice/)
-<h2>1.9.1</h2>
+<h2>Update 1.9.1</h2>
 <p>fixed boss system</p>
 <p>fixed saving system - probably</p>
 <p>if anybody plays this report any bugs you find thx</p>

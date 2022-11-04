@@ -57,7 +57,6 @@ const body = document.getElementsByTagName("body")[0];
 const enchant = document.getElementById("enchant");
 const moneyCounter2 = document.getElementById("moneyCounter2");
 const typeOfEnchantment = document.getElementById("typeOfEnchantment");
-const maxLevel = document.getElementById("maxLevel");
 const gameMenu = document.getElementById("gameMenu");
 const mainObal = document.getElementById("mainObal");
 const play = document.getElementById("play");
@@ -643,7 +642,6 @@ menuButton.onclick = () => {
             localStorage.setItem("charHp", charHp);
 
             deathCounter.innerHTML = `Kills: ${deaths}`;
-            maxLevel.innerHTML = `Highest level: ${maxDeaths}`;
             bossHp += bossMaxHp;
             bossHp = Math.max(bossMaxHp);
             counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
@@ -726,6 +724,10 @@ menuButton.onclick = () => {
           localStorage.setItem("up2", up2);
           localStorage.setItem("price2", price2);
           localStorage.setItem("charMaxHp", charMaxHp);
+          localStorage.setItem("bossDmg", bossDmg);
+          localStorage.setItem("bossHp", bossHp);
+          localStorage.setItem("bossMaxHp", bossMaxHp);
+          localStorage.setItem("bossMoney", bossMoney);
 
           setTimeout(() => {
             earnings.style.display = "none";
@@ -751,7 +753,7 @@ menuButton.onclick = () => {
             localStorage.setItem("deaths", deaths);
             localStorage.setItem("maxDeaths", maxDeaths);
 
-            deathCounter.innerHTML = `Level: ${deaths}`;
+            deathCounter.innerHTML = `Kills: ${deaths}`;
 
             hp += maxHp;
             hp = Math.max(maxHp);

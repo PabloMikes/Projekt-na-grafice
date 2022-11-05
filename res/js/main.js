@@ -63,6 +63,7 @@ const play = document.getElementById("play");
 const tutorial = document.getElementById("tutorial");
 const saveObal = document.getElementById("saveObal");
 
+const phoneMenu = document.getElementById("phoneMenu")
 const resume = document.getElementById("resume");
 const unsave = document.getElementById("unsave");
 const quit = document.getElementById("quit");
@@ -580,6 +581,7 @@ menuButton.onclick = () => {
     mesto.style.display = "none";
     items.style.display = "none";
     verze.style.display = "none";
+    phoneMenu.style.display = "none"
 
     if (deaths % 10 == 0 && deaths != 0) {
       boss1.style.display = "block";
@@ -601,14 +603,6 @@ menuButton.onclick = () => {
 
       const interval3 = setInterval(() => {
         if (bossHp <= 0) {
-         /* maxMoney *= 1.15; //money scaling
-          maxMoney = Math.round(maxMoney);
-          moneyCounter.innerHTML = `Gold: ${money}`;
-          moneyCounter2.innerHTML = `Gold: ${money}`;
-          maxHp *= 1.15; //hp scaling
-          maxHp = Math.round(maxHp);
-          localStorage.setItem("maxMoney", maxMoney);
-          localStorage.setItem("maxHp", maxHp);*/
 
           boss1.style.display = "none";
           deadBoss1.style.display = "block";
@@ -657,6 +651,7 @@ menuButton.onclick = () => {
             items.style.display = "none";
             menuButton.style.display = "block";
             verze.style.display = "block";
+            phoneMenu.style.display = "block"
 
             localStorage.setItem("hp", hp);
             localStorage.setItem("charHp", charHp);
@@ -679,6 +674,7 @@ menuButton.onclick = () => {
           backButton2.style.display = "none";
           items.style.display = "none";
           kostelButton.style.display = "block";
+          phoneMenu.style.display = "block"
 
           charHp -= charHp;
           charHp += charMaxHp;
@@ -768,6 +764,7 @@ menuButton.onclick = () => {
             items.style.display = "none";
             menuButton.style.display = "block";
             verze.style.display = "block";
+            phoneMenu.style.display = "block"
 
             localStorage.setItem("hp", hp);
             localStorage.setItem("charHp", charHp);
@@ -790,6 +787,7 @@ menuButton.onclick = () => {
           backButton2.style.display = "none";
           items.style.display = "none";
           kostelButton.style.display = "block";
+          phoneMenu.style.display = "block"
 
           charHp -= charHp;
           charHp += charMaxHp;
@@ -975,6 +973,21 @@ unsave.onclick = () => {
   localStorage.clear();
   location.reload();
 };
+
+phoneMenu.onclick = () =>{
+  if (
+    saveObal.style.display == "none" &&
+    main.style.display != "block"
+  ) {
+    saveObal.style.display = "block";
+    mainObal.style.pointerEvents = "none";
+    gameMenu.style.pointerEvents = "none";
+  } else {
+    saveObal.style.display = "none";
+    mainObal.style.pointerEvents = "auto";
+    gameMenu.style.pointerEvents = "auto";
+  }
+}
 
 function esc(e) {
   if (

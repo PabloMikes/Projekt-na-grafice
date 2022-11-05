@@ -502,6 +502,9 @@ body {
   margin-top: 20px;
   cursor: pointer;
 }
+#phoneMenuObal{
+  display: none;
+}
 @media all and (max-width: 1081px) {
   #enemy {
     width: 300px;
@@ -622,10 +625,16 @@ body {
   }
   #buttons {
     position: absolute;
-    bottom: -30px;
+    bottom: -40px;
     left: 0;
     display: flex;
     width: 243px;
+  }
+  #music{
+    bottom: -40px
+  }
+  #mutedMusic{
+    bottom: -40px;
   }
   #verzeRes{
     display: none;
@@ -715,5 +724,44 @@ body {
   }
   #earnings{
     font-size: 12px;
+  }
+  #phoneMenuObal{
+    display: block;
+  }
+  #phoneMenu{
+    width: 30px;
+    height: 30px;
+    font-size: 19px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    bottom: -40px;
+  }
+  #saveMenu{
+    width: 200px;
+  }
+  #saveObalObal{
+    width: 100px;
+  }
+  #resume{
+    font-size: 20px;
+    width: 170px;
+    height: 100px;
+    padding-top: 18px;
+    margin-top: 5px;
+  }
+  #unsave{
+    font-size: 20px;
+    width: 170px;
+    height: 100px;
+    padding-top: 18px;
+    margin-top: 5px;
+  }
+  #quit{
+    font-size: 20px;
+    width: 170px;
+    height: 100px;
+    padding-top: 18px;
+    margin-top: 5px;
   }
 }

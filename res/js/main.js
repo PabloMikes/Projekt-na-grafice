@@ -450,8 +450,8 @@ MaxHealth.onclick = () => {
     money -= price2;
     price2 *= 1.15;
     up2 += 1;
-    charHp += 7;
-    charMaxHp += 7;
+    charHp += 5;
+    charMaxHp += 5;
     price2 = Math.round(price2);
     localStorage.setItem("up2", up2);
     localStorage.setItem("price2", price2);

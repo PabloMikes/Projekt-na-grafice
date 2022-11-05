@@ -432,7 +432,7 @@ sword.onclick = () => {
     up1++;
     damage++;
     money -= price1;
-    price1 *= 1.3;
+    price1 *= 1.15;
     price1 = Math.round(price1);
     localStorage.setItem("up1", up1);
     localStorage.setItem("damage", damage);
@@ -448,7 +448,7 @@ sword.onclick = () => {
 MaxHealth.onclick = () => {
   if (money >= price2) {
     money -= price2;
-    price2 *= 1.3;
+    price2 *= 1.15;
     up2 += 1;
     charHp += 7;
     charMaxHp += 7;

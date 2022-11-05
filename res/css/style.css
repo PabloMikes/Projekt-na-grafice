@@ -563,7 +563,7 @@ body {
     padding-top: 7px;
   }
   #enchant{
-    font-size: 12px;
+    font-size: 10px;
     width: 100px;
     height: 30px;
     padding-top: 9px;
@@ -584,26 +584,133 @@ body {
     font-size: 15px;
   }
   #attack {
-    max-width: 100px;
-    width: 100%;
+    width: 100px;
     height: 100px;
     cursor: pointer;
-    text-align: center;
-    text-justify: center;
+    display: block;
+    position: static;
   }
   #heal {
     width: 100px;
     height: 100px;
     cursor: pointer;
-    text-align: center;
-    text-justify: center;
+    display: block;
+  }
+  #pott{
+    height: 100px;
+    width: 100px;
+  }
+  #att{
+    width: 100px;
+  }
+  #potionCounter{
+    font-size: 50px;
+  }
+  #hpCounter{
+    font-size: 15px;
+  }
+  #counter{
+    font-size: 15px;
+  }
+  #hp{
+    width: 15px;
+    height: 15px;
+  }
+  #hp2{
+    width: 15px;
+    height: 15px;
   }
   #buttons {
     position: absolute;
     bottom: 0;
     left: 0;
     display: flex;
+    width: 243px;
+  }
+  #verzeRes{
+    display: none;
+  }
+  #damage{
+    font-size: 15px;
+  }
+  #money{
+    font-size: 15px;
+  }
+  #deathCounter{
+    font-size: 15px;
+  }
+  #sword{
+    font-size: 10px;
+  }
+  #MaxHealth{
+    font-size: 10px;
+  }
+  #potion{
+    font-size: 10px;
+  }
+  #club{
+    width: 65px;
+    border: thin solid;
+  }
+  #mace{
+    width: 65px;
+    border: thin solid;
+  }
+  #spear{
+    width: 65px;
+    border: thin solid;
+  }
+  #swordd{
+    width: 65px;
+    border: thin solid;
+  }
+  #description{
+    font-size: 12px;
+    height: 65px;
+  }
+  #description2{
+    font-size: 12px;
+    height: 65px;
+  }
+  #description3{
+    font-size: 12px;
+    height: 65px;
+  }
+  #description4{
+    font-size: 12px;
+    height: 65px;
+  }
+  #enemy{
+    margin: 0;
+    height: 200px;
     width: 200px;
-    height: 100px;
+    border: solid thin;
+  }
+  #deadEnemy{
+    margin: 0;
+    height: 200px;
+    width: 200px;
+    border: solid thin;
+  }
+  #mainChar{
+    width: 200px;
+  }
+  #obal{
+    margin: 0;
+  }
+  #flex2{
+    margin-left: 50px;
+    flex: 25%
+  }
+  #flex1{
+    margin-left: -50px;
+  }
+  #boss1{
+    height: 200px;
+    width: 200px;
+  }
+  #deadBoss1{
+    height: 200px;
+    width: 200px;
   }
 }

@@ -67,6 +67,8 @@ const resume = document.getElementById("resume");
 const unsave = document.getElementById("unsave");
 const quit = document.getElementById("quit");
 
+const hp2 = document.getElementById("hp2");
+
 let maxHp = 20;
 let hp = 20;
 let charHp = 20;
@@ -154,9 +156,9 @@ window.onload = () => {
     deathCounter.innerHTML = `Kills: ${deaths}`;
 
     if (maxDeaths % 10 == 0) {
-      counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
+      counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
     } else {
-      counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
+      counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
     }
   } else if (localStorage.getItem("money") > 0) {
     console.log("negr2");
@@ -207,9 +209,9 @@ window.onload = () => {
     deathCounter.innerHTML = `Kills: ${deaths}`;
 
     if (maxDeaths % 10 == 0) {
-      counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
+      counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
     } else {
-      counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
+      counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
     }
   }
   console.log(money);
@@ -221,7 +223,7 @@ attack.onclick = () => {
       if (poisonCounter == 0) {
         const poisonDamagePerSecond = setInterval(() => {
           bossHp -= poisonDamage;
-          counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
+          counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
           poisonCounter++;
         }, 1000);
         const check1 = setInterval(() => {
@@ -246,7 +248,7 @@ attack.onclick = () => {
       if (fireCounter == 0) {
         const fireDamagePerSecond = setInterval(() => {
           bossHp -= fireDamage;
-          counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
+          counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
           fireCounter++;
         }, 1000);
         const check2 = setInterval(() => {
@@ -271,7 +273,7 @@ attack.onclick = () => {
       if (lightningCounter == 0) {
         const lightDamagePerSecond = setInterval(() => {
           bossHp -= lightDamage;
-          counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
+          counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
           lightningCounter++;
         }, 300);
         const check3 = setInterval(() => {
@@ -302,7 +304,7 @@ attack.onclick = () => {
       }, 100); //gay animace
 
       boss1.style.transform = "scale(0.9)";
-      counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
+      counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
 
       setTimeout(() => {
         boss1.style.transform = "scale(1)";
@@ -317,7 +319,7 @@ attack.onclick = () => {
     if (poison == true && poisonCounter == 0) {
       const poisonDamagePerSecond = setInterval(() => {
         hp -= poisonDamage;
-        counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
+        counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
         poisonCounter += 1;
       }, 1000);
       const check1 = setInterval(() => {
@@ -341,7 +343,7 @@ attack.onclick = () => {
       if (fireCounter == 0) {
         const fireDamagePerSecond = setInterval(() => {
           hp -= fireDamage;
-          counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
+          counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
           fireCounter++;
         }, 1000);
         const check2 = setInterval(() => {
@@ -366,7 +368,7 @@ attack.onclick = () => {
       if (lightningCounter == 0) {
         const lightDamagePerSecond = setInterval(() => {
           hp -= lightDamage;
-          counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
+          counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
           lightningCounter++;
         }, 300);
         const check3 = setInterval(() => {
@@ -397,7 +399,7 @@ attack.onclick = () => {
       }, 100);
     }
     enemy.style.transform = "scale(0.9)";
-    counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
+    counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
 
     setTimeout(() => {
       enemy.style.transform = "scale(1)";
@@ -419,7 +421,7 @@ heal.onclick = () => {
       charHp = Math.max(charMaxHp);
     }
     potionCounter.innerHTML = `${up3}`;
-    hpCounter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${charHp}/${charMaxHp}`;
+    hpCounter.innerHTML = `<img id="hp" src="./res/img/hp.png" alt="">: ${charHp}/${charMaxHp}`;
     potion.innerHTML = `Poťáček: ${up3} Gold: ${price3}`;
   }
 };
@@ -579,17 +581,17 @@ menuButton.onclick = () => {
     items.style.display = "none";
     verze.style.display = "none";
 
-    if (deaths % 10 == 0 && deaths != 0 && deaths == maxDeaths) {
+    if (deaths % 10 == 0 && deaths != 0) {
       boss1.style.display = "block";
       enemy.style.display = "none";
-      counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
+      counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
 
       const bossAttackSpeed = setInterval(() => {
         boss1.style.margin = "0";
         boss1.style.marginTop = "10%";
         charHp -= bossDmg;
         audio6.play();
-        hpCounter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${charHp}/${charMaxHp}`;
+        hpCounter.innerHTML = `<img id="hp" src="./res/img/hp.png" alt="">: ${charHp}/${charMaxHp}`;
 
         setTimeout(() => {
           boss1.style.margin = "0 auto";
@@ -644,7 +646,7 @@ menuButton.onclick = () => {
             deathCounter.innerHTML = `Kills: ${deaths}`;
             bossHp += bossMaxHp;
             bossHp = Math.max(bossMaxHp);
-            counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
+            counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
             enemy.style.display = "block";
             deadBoss1.style.display = "none";
 
@@ -680,7 +682,7 @@ menuButton.onclick = () => {
 
           charHp -= charHp;
           charHp += charMaxHp;
-          hpCounter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${charHp}/${charMaxHp}`;
+          hpCounter.innerHTML = `<img id="hp" src="./res/img/hp.png" alt="">: ${charHp}/${charMaxHp}`;
 
           bossHp -= bossHp;
           bossHp += bossMaxHp;
@@ -688,11 +690,11 @@ menuButton.onclick = () => {
           localStorage.setItem("bossHp", bossHp);
           localStorage.setItem("bossMaxHp", bossMaxHp);
 
-          counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
+          counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
 
           hp -= hp;
           hp += maxHp;
-          counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
+          counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
 
           localStorage.setItem("hp", hp);
           localStorage.setItem("charHp", charHp);
@@ -757,7 +759,7 @@ menuButton.onclick = () => {
 
             hp += maxHp;
             hp = Math.max(maxHp);
-            counter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
+            counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
             enemy.style.display = "block";
             deadEnemy.style.display = "none";
 
@@ -810,13 +812,13 @@ menuButton.onclick = () => {
         enemy.style.marginTop = "10%";
         charHp -= enemyDamage;
         audio6.play();
-        hpCounter.innerHTML = `<img src="./res/img/hp.png" alt="">: ${charHp}/${charMaxHp}`;
+        hpCounter.innerHTML = `<img id="hp" src="./res/img/hp.png" alt="">: ${charHp}/${charMaxHp}`;
 
         setTimeout(() => {
           enemy.style.margin = "0 auto";
           enemy.style.marginTop = "10%";
         }, 100); //gay animace
-      }, 1500);
+      }, 1500); 
     }
   }
 };

@@ -6,6 +6,7 @@
 <h2>Update 1.9.1</h2>
 <p>* fixed boss system</p>
 <p>* fixed saving system - probably</p>
+<p>* improved scaling - I TRIED</p>
 <p>if anybody plays this, report any bugs you find thx</p>
 <h2>Update 1.9</h2>
 <p>+ Save system</p>

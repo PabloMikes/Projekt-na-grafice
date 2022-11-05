@@ -1,16 +1,16 @@
 # Projekt-na-grafice
 [View](https://pablomikes.github.io/Projekt-na-grafice/)
 <h2>Update 1.9.1</h2>
-<p>fixed boss system</p>
-<p>fixed saving system - probably</p>
+<p>* fixed boss system</p>
+<p>* fixed saving system - probably</p>
 <p>if anybody plays this, report any bugs you find thx</p>
 <h2>Update 1.9</h2>
 <p>+ Save system</p>
-<p>+ esc now puts you in a menu where u can reset everything</p>
+<p>+ esc Menu</p>
 <p>- Level room - not part of my bigger picture</p>
 <p>+ Enchants - works kinda smoothly need sum testin</p>
 <p>+ incurable depression</p>
-<p>Responsiveness in progress</p>
+<p>* Responsiveness in progress</p>
 <h2>Update 1.8.6</h2>
 <p>+ Added MainMenu</p>
 <p>getting info on how to do quests n enchants</p>
@@ -18,11 +18,11 @@
 <p>totally random update numberz btw</p>
 <p>+ Added Level system</p>
 <p>=> Level room under construction - prototype</p>
-<p>No longer need to restart whole game if u fuck up and buy too many sharpness instead of muskles</p>
+<p>* No longer need to restart whole game if u fuck up and buy too many sharpness instead of muskles</p>
 <h2>Update 1.8.1</h2>
-<p>Bosses no longer gain attack speed after players death</p>
-<p>muskles = buff - now adds 7 hp</p>
-<p>improved enemy hp scaling</p>
+<p>* Bosses no longer gain attack speed after players death</p>
+<p>* muskles = buff - now adds 7 hp</p>
+<p>* improved enemy hp scaling</p>
 <h2>Update 1.8</h2>
 <p>NOW EVERY 10 KILLS:</p>
 <p>EPIC RAP BATTLE OF HISTORY!!!</p>

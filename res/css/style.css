@@ -622,7 +622,7 @@ body {
   }
   #buttons {
     position: absolute;
-    bottom: 0;
+    bottom: -30px;
     left: 0;
     display: flex;
     width: 243px;
@@ -687,7 +687,7 @@ body {
     border: solid thin;
   }
   #deadEnemy{
-    margin-top: 0;
+    margin-top: 30px;
     height: 200px;
     width: 200px;
     border: solid thin;
@@ -712,5 +712,8 @@ body {
   #deadBoss1{
     height: 200px;
     width: 200px;
+  }
+  #earnings{
+    font-size: 12px;
   }
 }

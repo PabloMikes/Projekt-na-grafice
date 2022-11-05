@@ -716,8 +716,6 @@ menuButton.onclick = () => {
           earnings.innerHTML = `+${maxMoney}G`;
           enemyDamage += 0.5; //enemy damage scaling
 
-          console.log(money);
-          console.log(maxMoney);
           localStorage.setItem("money", money);
           localStorage.setItem("damage", damage);
           localStorage.setItem("enemyDamage", enemyDamage);

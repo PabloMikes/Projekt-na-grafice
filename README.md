@@ -3,10 +3,10 @@
 <h2>Update 1.9.2</h2>
 <p>+ works on phone now</p>
 <p>* true reset button for mobile users</p>
+<p>* improved scaling - I TRIED</p>
 <h2>Update 1.9.1</h2>
 <p>* fixed boss system</p>
 <p>* fixed saving system - probably</p>
-<p>* improved scaling - I TRIED</p>
 <p>if anybody plays this, report any bugs you find thx</p>
 <h2>Update 1.9</h2>
 <p>+ Save system</p>

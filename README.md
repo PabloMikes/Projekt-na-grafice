@@ -1,5 +1,8 @@
 # Projekt-na-grafice
 [View](https://pablomikes.github.io/Projekt-na-grafice/)
+<h2>Update 1.9.2</h2>
+<p>+ works on phone now</p>
+<p>* true reset button for mobile users</p>
 <h2>Update 1.9.1</h2>
 <p>* fixed boss system</p>
 <p>* fixed saving system - probably</p>

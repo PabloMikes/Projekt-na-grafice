@@ -459,7 +459,7 @@ body {
 #saveObal{
   display: none;
 }
-#saveObal #saveObalObal{
+#saveObalObal{
   z-index: 5;
   position: absolute;
   width: 300px;
@@ -739,9 +739,11 @@ body {
   }
   #saveMenu{
     width: 200px;
+    top: 20%;
   }
   #saveObalObal{
     width: 100px;
+    top: 25%;
   }
   #resume{
     font-size: 20px;

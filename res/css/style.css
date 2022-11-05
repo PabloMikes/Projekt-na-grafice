@@ -681,13 +681,13 @@ body {
     height: 65px;
   }
   #enemy{
-    margin: 0;
+    margin-top: 0;
     height: 200px;
     width: 200px;
     border: solid thin;
   }
   #deadEnemy{
-    margin: 0;
+    margin-top: 0;
     height: 200px;
     width: 200px;
     border: solid thin;

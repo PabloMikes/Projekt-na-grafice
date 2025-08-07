@@ -761,7 +761,6 @@ const updateBackground = () => {
     const backgrounds = ["./res/img/dungeon.jpg", "./res/img/dungeon2.jpg", "./res/img/dungeon3.jpg"];
     dungeonBackground = backgrounds[dungeonCompletions % 3];
     document.body.style.backgroundImage = `url('${dungeonBackground}')`;
-    console.log("Setting dungeon background:", dungeonBackground);
   } else {
     const hour = new Date().getHours();
     const isDay = hour >= 6 && hour < 18;

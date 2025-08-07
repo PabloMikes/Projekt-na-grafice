@@ -1,5 +1,22 @@
 # Projekt-na-grafice
 [View](https://pablomikes.github.io/Projekt-na-grafice/)
+
+Made by:
+Pavel Mík
+Tadeáš Mejzlík
+Michal Adámek
+Matěj Landa
+
+Podobnost postav s učiteli je čistě náhodná
+
+
+
+<h1>Update 2.0</h1>
+<p>+ Quests</p>
+<p>- Church / Black Market instead</p>
+<p>New fighting System</p>
+<p>New currency</p>
+
 <h2>Update 1.9.2</h2>
 <p>+ works on phone now</p>
 <p>* true reset button for mobile users</p>

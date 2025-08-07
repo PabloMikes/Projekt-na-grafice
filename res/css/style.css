@@ -1,769 +1,658 @@
-#enemy {
-  border: 4px solid black;
-  transition: 0.3s;
-  margin: 0 auto;
-  display: block;
-  margin-top: 10%;
-}
-#deadEnemy {
-  border: 4px solid black;
-  cursor: pointer;
-  transition: 0.3s;
-  margin: 0 auto;
-  display: block;
-  margin-top: 10%;
-}
-p {
-  font-size: 40px;
-}
-#counter {
-  text-align: center;
-  display: flex;
-  background-color: bisque;
-  width: max-content;
-  margin-left: 43%;
-}
-#hpCounter {
-  text-align: center;
-  display: flex;
-  background-color: bisque;
-  width: max-content;
-  margin-left: 23%;
-}
-#hpObal {
-  display: flex;
-}
-#deadEnemy {
-  display: none;
-}
-#money {
-  font-size: 50px;
-  margin-left: 5px;
-}
-#damage {
-  font-size: 50px;
-  margin-left: 5px;
-}
-#damagePerSecond {
-  margin-left: 5px;
-}
-* {
-  box-sizing: border-box;
-  user-select: none;
-}
-button {
-  font-size: 20px;
-  margin-top: 5px;
-  margin-left: 5px;
-  max-width: 380px;
-  width: 100%;
-}
-#club {
-  max-width: 100px;
-  width: 100%;
-  max-height: 100px;
-  height: 100%;
-  margin-left: 5px;
-  border: 4px solid black;
-  cursor: pointer;
-}
-#spear {
-  max-width: 100px;
-  width: 100%;
-  max-height: 100px;
-  height: 100%;
-  margin-left: 5px;
-  border: 4px solid black;
-  cursor: pointer;
-}
-#mace {
-  max-width: 100px;
-  width: 100%;
-  max-height: 100px;
-  height: 100%;
-  margin-left: 5px;
-  border: 4px solid black;
-  cursor: pointer;
-}
-#swordd {
-  max-width: 100px;
-  width: 100%;
-  max-height: 100px;
-  height: 100%;
-  margin-left: 5px;
-  border: 4px solid black;
-  cursor: pointer;
-}
-#music {
-  max-width: 30px;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  background-color: black;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
-#mutedMusic {
-  max-width: 30px;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  background-color: black;
-  display: none;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
-#deathCounter {
-  margin: 0 auto;
-  font-size: 50px;
-  width: max-content;
-}
-.hp {
-  margin: 0;
-  padding: 0;
-  border: none;
-}
-#menu {
-  font-size: 50px;
-  max-width: 300px;
-  width: 100%;
-  height: 100px;
-  margin: 0;
-  padding: 0;
-  background-image: url(../img/button.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  text-align: center;
-  padding-top: 20px;
-  cursor: pointer;
-}
-#menu:hover{
-  color: white;
-}
 body {
-  /*background-image: url(../img/gameMenu.jpg);*/
-  background: url(../img/gameMenu.jpg);
-  background-size: 100%;
+  font-family: 'Press Start 2P', cursive;
+  background-image: url('../img/gameMenu.jpg');
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
-
-  margin: 0;
-  height: 100vh;
-}
-#mesto {
-  display: block;
-}
-#main {
-  display: none;
-}
-#hospoda {
-  font-size: 50px;
-  width: 300px;
-  height: 100px;
-  text-align: center;
-  float: right;
-  margin-right: 10%;
-  background-image: url(../img/button.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  text-align: center;
-  padding-top: 20px;
-  cursor: pointer;
-} 
-#hospoda:hover{
-  color: white;
-}
-#church {
-  font-size: 50px;
-  width: 300px;
-  height: 100px;
-  text-align: center;
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-image: url(../img/button.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  text-align: center;
-  padding-top: 20px;
-  cursor: pointer;
-}
-#church:hover{
-  color: white;
-}
-#back {
-  font-size: 35px;
-  display: none;
-  width: 300px;
-  height: 100px;
-  text-align: center;
-  background-image: url(../img/button.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  text-align: center;
-  padding-top: 30px;
-  cursor: pointer;
-}
-#back:hover{
-  color: white;
-}
-#backButton2 {
-  font-size: 35px;
-  display: none;
-  width: 300px;
-  height: 100px;
-  text-align: center;
-  background-image: url(../img/button.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  text-align: center;
-  padding-top: 30px;
-  cursor: pointer;
-}
-#backButton2:hover{
-  color: white;
-}
-#levelObal{
-  display: none;
-}
-#verze {
-  background-color: bisque;
-  width: 400px;
-  position: absolute;
-  bottom: 0;
-}
-#nextUpdate {
-  width: 500px;
-  text-align: center;
-  font-size: 100px;
-  height: 500px;
-  background-color: white;
-  display: none;
-  float: right;
-  margin-top: 15%;
-  margin-right: 10%;
-}
-#thr {
-  font-size: 50px;
-  width: 300px;
-  height: 100px;
-  text-align: center;
-  margin-top: 25%;
-  margin-left: 30%;
-  background-image: url(../img/button.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  text-align: center;
-  padding-top: 20px;
-  cursor: pointer;
-}
-#enchant{
-  font-size: 40px;
-  width: 300px;
-  height: 100px;
-  text-align: center;
-  margin-top: 15%;
-  margin-left: 43.5%;
-  background-image: url(../img/button.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  text-align: center;
-  padding-top: 25px;
-  cursor: pointer;
-  display: none;
-}
-#enchant:hover{
-  color: white;
-}
-#thr:hover{
-  color: white;
-}
-#oball {
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  display: none;
+  overflow: hidden;
+  margin: 0;
+  color: #fff;
+  text-shadow: 2px 2px 4px #000;
 }
-.shop1 {
-  width: 15%;
-  float: left;
+.menu-container {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 2rem;
+  border: 4px solid #8B4513;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 90%;
+  width: 400px;
+  position: relative;
 }
-.shop2 {
-  width: 15%;
-  float: left;
-}
-.shop3 {
-  width: 15%;
-  float: left;
-  width: max-content;
-  display: flex;
-}
-#moneyCounter2{
-  display: none;
-  width: max-content;
-  background-color: bisque;
-  font-size: 40px;
-}
-.stats {
-  background-color: bisque;
-  width: max-content;
-}
-#description {
-  background-color: bisque;
-  width: 70px;
-}
-#description2 {
-  background-color: bisque;
-  width: 70px;
-}
-#description3 {
-  background-color: bisque;
-  width: 70px;
-}
-#description4 {
-  background-color: bisque;
-  width: 70px;
-}
-#obal {
-  display: flex;
-  margin-top: 230px;
-}
-#mainChar {
+.menu-button {
   display: block;
-  transition: ease 2.5;
-  margin: 0 auto;
+  margin: 1rem auto;
+  padding: 1rem;
+  font-size: 1.2rem;
+  background: #8B4513;
+  border: 2px solid #FFD700;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
 }
-#flex1 {
-  flex: 50%;
+.menu-button:hover {
+  background: #A0522D;
+  transform: scale(1.1);
 }
-#flex2 {
-  flex: 50%;
+.menu-button:active {
+  transform: scale(0.95);
 }
-#goInside {
-  font-size: 50px;
-  display: none;
-  width: 300px;
-  height: 100px;
-  margin: 0 auto;
-  margin-top: 35%;
-  background-image: url(../img/button.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  text-align: center;
-  padding-top: 20px;
+.music-button {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 1rem;
+  padding: 0.5rem;
+  background: #8B4513;
+  border: 2px solid #FFD700;
+  border-radius: 4px;
   cursor: pointer;
 }
-#goInside:hover{
-  color: white;
+.volume-slider {
+  display: block;
+  margin: 1rem auto;
+  width: 80%;
+  background: #8B4513;
+  border: 2px solid #FFD700;
+  border-radius: 4px;
+  cursor: pointer;
+  accent-color: #FFD700;
 }
-#typeOfEnchantment{
-  display: none;
-  color: gold;
-  background-color: gray;
-  font-size: 50px;
+.volume-slider::-webkit-slider-thumb {
+  background: #FFD700;
 }
-#goBack {
-  font-size: 50px;
-  display: none;
-  width: 300px;
-  height: 100px;
-  background-image: url(../img/button.png);
+.volume-slider::-moz-range-thumb {
+  background: #FFD700;
+}
+.game-container {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+}
+.game-menu {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 1rem;
+  border: 4px solid #8B4513;
+  border-radius: 8px;
+  margin: 1rem;
+}
+.game-menu-button {
+  display: block;
+  margin: 0.5rem 0;
+  padding: 0.75rem;
+  font-size: 1rem;
+  background: #8B4513;
+  border: 2px solid #FFD700;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+.game-menu-button:hover {
+  background: #A0522D;
+  transform: scale(1.1);
+}
+.game-menu-button:active {
+  transform: scale(0.95);
+}
+.main-char {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+}
+.gold-menu {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(0, 0, 0, 0.85);
+  padding: 0.5rem;
+  border: 4px solid #FFD700;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  z-index: 1000;
+  color: #FFD700;
+}
+.coin-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 0.5rem;
+}
+.notification {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.85);
+  padding: 1rem;
+  border: 4px solid #FFD700;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #FFD700;
+  text-align: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+.notification.show {
+  opacity: 1;
+}
+.shop-container {
+  background-image: url('../img/shop.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+.merchant {
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  width: 350px;
+  height: 350px;
+  object-fit: contain;
+  transform: translateX(-50%) scaleX(-1);
+}
+.shop-main-char {
+  position: absolute;
+  bottom: 50px;
+  left: 30px;
+  width: 350px;
+  height: 350px;
+  object-fit: contain;
+  transform: scaleX(-1);
+}
+.shop-back-button {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.75rem;
+  font-size: 1rem;
+  background: #8B4513;
+  border: 2px solid #FFD700;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+.shop-back-button:hover {
+  background: #A0522D;
+  transform: scale(1.1);
+}
+.shop-back-button:active {
+  transform: scale(0.95);
+}
+.shop-items {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 1rem;
+  border: 4px solid #8B4513;
+  border-radius: 8px;
+}
+.shop-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+.shop-item-button {
+  display: block;
+  margin: 0.5rem 0;
+  padding: 0.75rem;
+  font-size: 1rem;
+  background: #8B4513;
+  border: 2px solid #FFD700;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+.shop-item-button:hover {
+  background: #A0522D;
+  transform: scale(1.1);
+}
+.shop-item-button:active {
+  transform: scale(0.95);
+}
+.item-description {
+  font-size: 0.8rem;
+  color: #FFD700;
+  text-shadow: 1px 1px 2px #000;
+  margin-top: 0.25rem;
+}
+.blackmarket-container {
+  background-image: url('../img/blackmarket.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+.blackmerchant {
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  width: 350px;
+  height: 350px;
+  object-fit: contain;
+  transform: translateX(-50%) scaleX(-1);
+}
+.blackmarket-main-char {
+  position: absolute;
+  bottom: 50px;
+  left: 30px;
+  width: 350px;
+  height: 350px;
+  object-fit: contain;
+  transform: scaleX(-1);
+}
+.blackmarket-back-button {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.75rem;
+  font-size: 1rem;
+  background: #8B4513;
+  border: 2px solid #FFD700;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+.blackmarket-back-button:hover {
+  background: #A0522D;
+  transform: scale(1.1);
+}
+.blackmarket-back-button:active {
+  transform: scale(0.95);
+}
+.blackmarket-items {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 1rem;
+  border: 4px solid #8B4513;
+  border-radius: 8px;
+}
+.blackmarket-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+.blackmarket-item-button {
+  display: block;
+  margin: 0.5rem 0;
+  padding: 0.75rem;
+  font-size: 1rem;
+  background: #8B4513;
+  border: 2px solid #FFD700;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+.blackmarket-item-button:hover {
+  background: #A0522D;
+  transform: scale(1.1);
+}
+.blackmarket-item-button:active {
+  transform: scale(0.95);
+}
+.blackmarket-item > span {
+  font-size: 0.8rem;
+  color: #FFD700;
+  text-shadow: 1px 1px 2px #000;
+  margin-top: 0.25rem;
+}
+.dungeon-container {
+  background-image: url('../img/dungeon.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+.character-container {
+  position: absolute;
+  left: 30px;
+  bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.dungeon-main-char {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  transform: scaleX(-1);
+  transition: transform 0.25s ease-in-out;
+}
+.dungeon-main-char.attacking {
+  transform: translateX(50vw) scaleX(-1);
+}
+.enemy-container {
+  position: absolute;
+  right: 30px;
+  bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.enemy {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+}
+.chest-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.chest {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+}
+.chest-button {
+  margin-top: 1rem;
+  padding: 1rem;
+  font-size: 1.2rem;
+  background: #8B4513;
+  border: 2px solid #FFD700;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+.chest-button:hover {
+  background: #A0522D;
+  transform: scale(1.1);
+}
+.chest-button:active {
+  transform: scale(0.95);
+}
+.health-bar {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 0.5rem;
+  border: 2px solid #FFD700;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+.dungeon-buttons {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1rem;
+}
+.attack-button, .potion-button, .special-attack-button {
+  width: 80px;
+  height: 80px;
   background-size: contain;
   background-repeat: no-repeat;
-  text-align: center;
-  padding-top: 20px;
+  background-position: center;
+  background-color: #8B4513;
+  border: 2px solid #FFD700;
+  border-radius: 4px;
   cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
 }
-#goBack:hover{
-  color: white;
+.attack-button:hover, .potion-button:hover, .special-attack-button:hover {
+  background-color: #A0522D;
+  transform: scale(1.1);
 }
-#earnings {
-  font-size: 50px;
-  color: gold;
-  display: none;
+.attack-button:active, .potion-button:active, .special-attack-button:active {
+  transform: scale(0.95);
+}
+.special-attack-button {
+  background-image: url('../img/special_attack.jpg');
+}
+.dungeon-back-button {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.75rem;
+  font-size: 1rem;
+  background: #8B4513;
+  border: 2px solid #FFD700;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+.dungeon-back-button:hover {
+  background: #A0522D;
+  transform: scale(1.1);
+}
+.dungeon-back-button:active {
+  transform: scale(0.95);
+}
+.room-indicator {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  padding: 0.5rem;
+  border: 2px solid #FFD700;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+.modal {
+  z-index: 1000;
+}
+.quest-container {
+  background-image: url('../img/questRoom.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+.quest-main-char {
+  position: absolute;
+  bottom: 50px;
+  left: 30px;
+  width: 350px;
+  height: 350px;
+  object-fit: contain;
+  transform: scaleX(-1);
+}
+.wizard {
+  position: absolute;
+  bottom: 50px;
+  right: 30px;
+  width: 350px;
+  height: 350px;
+  object-fit: contain;
+}
+.quest-back-button {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.75rem;
+  font-size: 1rem;
+  background: #8B4513;
+  border: 2px solid #FFD700;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+.quest-back-button:hover {
+  background: #A0522D;
+  transform: scale(1.1);
+}
+.quest-back-button:active {
+  transform: scale(0.95);
+}
+.quest-list {
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 300px;
+  max-width: 80%;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 1rem;
+  border: 4px solid #FFD700;
+  border-radius: 8px;
+  font-size: 1rem;
 }
-#buttons {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  display: flex;
-}
-#attack {
-  width: 200px;
-  height: 200px;
-  font-size: 30px;
-  cursor: pointer;
-  text-align: center;
-  text-justify: center;
-}
-#heal {
-  font-size: 30px;
-  cursor: pointer;
-  text-align: center;
-  text-justify: center;
-}
-#pott {
-  position: relative;
-}
-#potionCounter {
-  position: absolute;
-  font-size: 80px;
-  right: 80px;
-  top: 25%;
-  pointer-events: none;
-}
-#boss1{
-  display: none;
-  cursor: pointer;
-  transition: 0.3s;
-  margin: 0 auto;
-  margin-top: 10%;
-}
-#deadBoss1{
-  display: none;
-  cursor: pointer;
-  transition: 0.3s;
-  margin: 0 auto;
-  margin-top: 10%;
-}
-#mainObal{
-  display: none;
-}
-#play{
-  width: 25%;
-  height: 50px;
-}
-#tutorial{
-  width: 25%;
-  height: 50px;
-}
-#gameMenu{
-  margin-top: 25%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-#saveMenu{
-  display: block;
-  position: absolute;
-  left: 40.7%;
-  top: 25%;
-  z-index: 2;
-  max-width: 400px;
-  width: 100%;
-}
-#saveObal{
-  display: none;
-}
-#saveObalObal{
-  z-index: 5;
-  position: absolute;
-  width: 300px;
-  left: 42.5%;
-  top: 30%;
-}
-#resume{
-  font-size: 50px;
-  width: 300px;
-  height: 100px;
-  background-image: url(../img/button.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  text-align: center;
-  padding-top: 20px;
-  cursor: pointer;
-  margin-top: 20px;
-}
-#unsave{
-  font-size: 48px;
-  width: 300px;
-  height: 100px;
-  background-image: url(../img/button.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  text-align: center;
-  padding-top: 20px;
-  cursor: pointer;
-  margin-top: 20px;
-}
-#quit{
-  font-size: 50px;
-  width: 300px;
-  height: 100px;
-  background-image: url(../img/button.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  text-align: center;
-  padding-top: 20px;
-  margin-top: 20px;
-  cursor: pointer;
-}
-#phoneMenuObal{
-  display: none;
-}
-@media all and (max-width: 1081px) {
-  #enemy {
-    width: 300px;
+@media (max-width: 640px) {
+  .menu-container {
+    padding: 1rem;
+    width: 100%;
   }
-  #deadEnemy {
-    width: 300px;
+  .menu-button {
+    font-size: 1rem;
+    padding: 0.75rem;
   }
-  #mainChar {
-    width: 300px;
+  .music-button {
+    font-size: 0.8rem;
+    padding: 0.4rem;
   }
-}
-#obal {
-  margin-top: 100px;
-}
-@media all and (max-width: 900px){
-  #menu {
-    font-size: 15px;
-    width: 100px;
-    height: 30px;
-    padding-top: 7px;
+  .volume-slider {
+    width: 90%;
   }
-  #hospoda {
-    font-size: 15px;
-    width: 100px;
-    height: 30px;
-    padding-top: 7px;
+  .game-menu {
+    padding: 0.5rem;
+    margin: 0.5rem;
   }
-  #church{
-    font-size: 15px;
-    width: 100px;
-    height: 30px;
-    padding-top: 7px;
+  .game-menu-button {
+    font-size: 0.9rem;
+    padding: 0.5rem;
   }
-  #back{
-    font-size: 9px;
-    width: 100px;
-    height: 30px;
-    padding-top: 10px;
-  }
-  #backButton2{
-    font-size: 9px;
-    width: 100px;
-    height: 30px;
-    padding-top: 10px;
-  }
-  #verze{
-    width: 200px;
-    font-size: 10px;
-  }
-  #nextUpdate {
+  .main-char {
     width: 150px;
-    font-size: 30px;
+    height: 150px;
+    bottom: 15px;
+    transform: translateX(-50%);
+  }
+  .gold-menu {
+    font-size: 0.8rem;
+    padding: 0.4rem;
+    z-index: 1000;
+  }
+  .coin-icon {
+    width: 20px;
+    height: 20px;
+  }
+  .notification {
+    font-size: 0.8rem;
+    padding: 0.75rem;
+    max-width: 80%;
+  }
+  .merchant, .blackmerchant {
+    width: 250px;
+    height: 250px;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%) scaleX(-1);
+  }
+  .shop-main-char, .blackmarket-main-char {
+    width: 250px;
+    height: 250px;
+    bottom: 30px;
+    left: 15px;
+    transform: scaleX(-1);
+  }
+  .shop-back-button, .blackmarket-back-button {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+  .shop-items, .blackmarket-items {
+    padding: 0.5rem;
+  }
+  .shop-item-button, .blackmarket-item-button {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+  .item-description, .blackmarket-item > span {
+    font-size: 0.7rem;
+  }
+  .character-container {
+    left: 15px;
+    bottom: 30px;
+  }
+  .dungeon-main-char, .enemy, .chest {
+    width: 150px;
     height: 150px;
   }
-  #thr{
-    font-size: 15px;
-    width: 100px;
-    height: 30px;
-    padding-top: 7px;
+  .dungeon-main-char {
+    transform: scaleX(-1);
   }
-  #enchant{
-    font-size: 10px;
-    width: 100px;
-    height: 30px;
-    padding-top: 9px;
+  .dungeon-main-char.attacking {
+    transform: translateX(50vw) scaleX(-1);
   }
-  #goInside{
-    font-size: 15px;
-    width: 100px;
-    height: 30px;
-    padding-top: 7px;
+  .enemy-container {
+    right: 15px;
+    bottom: 30px;
   }
-  #goBack{
-    font-size: 15px;
-    width: 100px;
-    height: 30px;
-    padding-top: 7px;
+  .health-bar {
+    font-size: 0.8rem;
+    padding: 0.4rem;
   }
-  #moneyCounter2{
-    font-size: 15px;
+  .attack-button, .potion-button, .special-attack-button {
+    width: 60px;
+    height: 60px;
   }
-  #attack {
-    width: 100px;
-    height: 100px;
-    cursor: pointer;
-    display: block;
-    position: static;
+  .dungeon-back-button {
+    font-size: 0.9rem;
+    padding: 0.5rem;
   }
-  #heal {
-    width: 100px;
-    height: 100px;
-    cursor: pointer;
-    display: block;
+  .chest-button {
+    font-size: 1rem;
+    padding: 0.75rem;
   }
-  #pott{
-    height: 100px;
-    width: 100px;
+  .room-indicator {
+    font-size: 0.8rem;
   }
-  #att{
-    width: 100px;
+  .quest-main-char, .wizard {
+    width: 250px;
+    height: 250px;
+    bottom: 30px;
   }
-  #potionCounter{
-    font-size: 50px;
+  .quest-main-char {
+    left: 15px;
   }
-  #hpCounter{
-    font-size: 15px;
+  .wizard {
+    right: 15px;
   }
-  #counter{
-    font-size: 15px;
+  .quest-back-button {
+    font-size: 0.9rem;
+    padding: 0.5rem;
   }
-  #hp{
-    width: 15px;
-    height: 15px;
-  }
-  #hp2{
-    width: 15px;
-    height: 15px;
-  }
-  #buttons {
-    position: absolute;
-    bottom: -40px;
-    left: 0;
-    display: flex;
-    width: 243px;
-  }
-  #music{
-    bottom: -40px
-  }
-  #mutedMusic{
-    bottom: -40px;
-  }
-  #verzeRes{
-    display: none;
-  }
-  #damage{
-    font-size: 15px;
-  }
-  #money{
-    font-size: 15px;
-  }
-  #deathCounter{
-    font-size: 15px;
-  }
-  #sword{
-    font-size: 10px;
-  }
-  #MaxHealth{
-    font-size: 10px;
-  }
-  #potion{
-    font-size: 10px;
-  }
-  #club{
-    width: 65px;
-    border: thin solid;
-  }
-  #mace{
-    width: 65px;
-    border: thin solid;
-  }
-  #spear{
-    width: 65px;
-    border: thin solid;
-  }
-  #swordd{
-    width: 65px;
-    border: thin solid;
-  }
-  #description{
-    font-size: 12px;
-    height: 65px;
-  }
-  #description2{
-    font-size: 12px;
-    height: 65px;
-  }
-  #description3{
-    font-size: 12px;
-    height: 65px;
-  }
-  #description4{
-    font-size: 12px;
-    height: 65px;
-  }
-  #enemy{
-    margin-top: 0;
-    height: 200px;
-    width: 200px;
-    border: solid thin;
-  }
-  #deadEnemy{
-    margin-top: 30px;
-    height: 200px;
-    width: 200px;
-    border: solid thin;
-  }
-  #mainChar{
-    width: 200px;
-  }
-  #obal{
-    margin: 0;
-  }
-  #flex2{
-    margin-left: 50px;
-    flex: 25%
-  }
-  #flex1{
-    margin-left: -50px;
-  }
-  #boss1{
-    height: 200px;
-    width: 200px;
-  }
-  #deadBoss1{
-    height: 200px;
-    width: 200px;
-  }
-  #earnings{
-    font-size: 12px;
-  }
-  #phoneMenuObal{
-    display: block;
-  }
-  #phoneMenu{
-    width: 30px;
-    height: 30px;
-    font-size: 19px;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    bottom: -40px;
-  }
-  #saveMenu{
-    width: 200px;
-    top: 15%;
-  }
-  #saveObalObal{
-    width: 100px;
-    top: 20%;
-  }
-  #resume{
-    font-size: 20px;
-    width: 170px;
-    height: 100px;
-    padding-top: 18px;
-    margin-top: 5px;
-  }
-  #unsave{
-    font-size: 20px;
-    width: 170px;
-    height: 100px;
-    padding-top: 18px;
-    margin-top: 5px;
-  }
-  #quit{
-    font-size: 20px;
-    width: 170px;
-    height: 100px;
-    padding-top: 18px;
-    margin-top: 5px;
+  .quest-list {
+    max-height: 200px;
+    font-size: 0.8rem;
+    padding: 0.5rem;
   }
 }

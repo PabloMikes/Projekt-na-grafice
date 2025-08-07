@@ -1,1008 +1,1314 @@
-const counter = document.getElementById("counter");
+let money = 0;
+let diamonds = 0;
+let damage = 2;
+let charHp = 30;
+let charMaxHp = 30;
+let up3 = 0;
+let weaponUpgrades = 0;
+let armorUpgrades = 0;
+let potionPurchases = 0;
+let currentRoom = 1;
+let dungeonCompletions = 0;
+let enemyType = "enemy1";
+let enemyCurrentHp = 15;
+let enemyMaxHp = 15;
+let enemyDamage = 1;
+let goldReward = 5;
+let isAttacking = false;
+let attackCount = 0;
+let enemyAttackInterval;
+let regenInterval;
+let merchantCycleInterval;
+let activeQuests = [];
+let questProgress = {
+  killEnemies: 0,
+  defeatDragon: 0,
+  defeatDemon: 0,
+  defeatMath: 0,
+  defeatServer: 0,
+  defeatLinux: 0,
+  clearDungeon: 0,
+  upgradeWeapon: 0,
+  upgradeArmor: 0,
+  purchasePotions: 0,
+  collectGold: 0
+};
+let questCompletions = {
+  killEnemies: 0,
+  defeatDragon: 0,
+  defeatDemon: 0,
+  defeatMath: 0,
+  defeatServer: 0,
+  defeatLinux: 0,
+  clearDungeon: 0,
+  upgradeWeapon: 0,
+  upgradeArmor: 0,
+  purchasePotions: 0,
+  collectGold: 0
+};
+let ownedItems = { excalibur: false, fireAspect: false, greenAmulet: false };
+let isMusicPlaying = true;
+let musicVolume = 0.5;
+let dungeonBackground = "./res/img/dungeon.jpg";
+let enemyDefeatCounts = {
+  enemy1: 0,
+  enemy2: 0,
+  enemy3: 0,
+  hardEnemy1: 0,
+  hardEnemy2: 0,
+  boss1: 0,
+  boss2: 0,
+  boss3: 0,
+  boss4: 0,
+  boss5: 0
+};
 
-const enemy = document.getElementById("enemy");
-const deadEnemy = document.getElementById("deadEnemy");
-const boss1 = document.getElementById("boss1");
-const deadBoss1 = document.getElementById("deadBoss1");
-
-const moneyCounter = document.getElementById("money");
-const sword = document.getElementById("sword");
-const MaxHealth = document.getElementById("MaxHealth");
-const potion = document.getElementById("potion");
-const moneyPerSecondCounter = document.getElementById("moneyPerSecond");
-
-const club = document.getElementById("club");
-const spear = document.getElementById("spear");
-const mace = document.getElementById("mace");
-const swordd = document.getElementById("swordd");
-
-const damageCounter = document.getElementById("damage");
+const audio = document.getElementById("audio");
+const questAudio = document.getElementById("questAudio");
+const blackmarketAudio = document.getElementById("blackmarketAudio");
+const shopAudio = document.getElementById("shopAudio");
+const dungeonAudio = document.getElementById("dungeonAudio");
 const musicButton = document.getElementById("music");
 const musicMutedButton = document.getElementById("mutedMusic");
-const audio = document.getElementById("audio");
-const audio2 = document.getElementById("audio2");
-const audio3 = document.getElementById("audio3");
-const audio4 = document.getElementById("audio4");
-const audio5 = document.getElementById("audio5");
-const audio6 = document.getElementById("audio6");
-const deathCounter = document.getElementById("deathCounter");
-const menuButton = document.getElementById("menu");
-const main = document.getElementById("main");
-const mainMenu = document.getElementById("mainMenu");
-const mesto = document.getElementById("mesto");
-const hospoda = document.getElementById("hospoda");
-const backButton = document.getElementById("back");
-const nextUpdate = document.getElementById("nextUpdate");
-const shop = document.getElementById("thr");
-const backButton2 = document.getElementById("backButton2");
-const items = document.getElementById("oball");
-
-const description = document.getElementById("description");
-const description2 = document.getElementById("description2");
-const description3 = document.getElementById("description3");
-const description4 = document.getElementById("description4");
-
-const kostelButton = document.getElementById("church");
-const goInside = document.getElementById("goInside");
-const goBack = document.getElementById("goBack");
-const mainChar = document.getElementById("mainChar");
-const earnings = document.getElementById("earnings");
-const hpCounter = document.getElementById("hpCounter");
-const verze = document.getElementById("verze");
-const attack = document.getElementById("attack");
-const heal = document.getElementById("heal");
-const def = document.getElementById("def");
-const potionCounter = document.getElementById("potionCounter");
-const body = document.getElementsByTagName("body")[0];
-const enchant = document.getElementById("enchant");
-const moneyCounter2 = document.getElementById("moneyCounter2");
-const typeOfEnchantment = document.getElementById("typeOfEnchantment");
-const gameMenu = document.getElementById("gameMenu");
-const mainObal = document.getElementById("mainObal");
-const play = document.getElementById("play");
-const tutorial = document.getElementById("tutorial");
-const saveObal = document.getElementById("saveObal");
-
-const phoneMenu = document.getElementById("phoneMenu")
-const resume = document.getElementById("resume");
-const unsave = document.getElementById("unsave");
-const quit = document.getElementById("quit");
-
-const hp2 = document.getElementById("hp2");
-
-let maxHp = 20;
-let hp = 20;
-let charHp = 20;
-let charMaxHp = 20;
-let damage = 1;
-let enemyDamage = 1;
-let money = 0;
-let maxMoney = 10;
-
-let deaths = 0;
-let maxDeaths = 0;
-
-let up1 = 1;
-let price1 = 10;
-let up2 = 1;
-let price2 = 10;
-let up3 = 0;
-let price3 = 500;
-
-let poison = false;
-let fire = false;
-let lightning = false;
-
-let poisonCounter = 0;
-let fireCounter = 0;
-let lightningCounter = 0;
-
-let bossHp = 1000;
-let bossMaxHp = 1000;
-let bossDmg = 10;
-let bossMoney = 500;
-
-let poisonDamage = 50;
-let fireDamage = 30;
-let lightDamage = 30;
-
-window.onload = () => {
-  if (localStorage.getItem("money") > 0 && localStorage.getItem("up3") > 0) {
-    console.log("negr1");
-
-    maxHp = parseInt(localStorage.getItem("maxHp"));
-    hp = parseInt(localStorage.getItem("hp"));
-    charHp = parseInt(localStorage.getItem("charHp"));
-    charMaxHp = parseInt(localStorage.getItem("charMaxHp"));
-    damage = parseInt(localStorage.getItem("damage"));
-    enemyDamage = parseInt(localStorage.getItem("enemyDamage"));
-    money = parseInt(localStorage.getItem("money"));
-    maxMoney = parseInt(localStorage.getItem("maxMoney"));
-
-    deaths = parseInt(localStorage.getItem("deaths"));
-    maxDeaths = parseInt(localStorage.getItem("maxDeaths"));
-
-    up1 = parseInt(localStorage.getItem("up1"));
-    price1 = parseInt(localStorage.getItem("price1"));
-    up2 = parseInt(localStorage.getItem("up2"));
-    price2 = parseInt(localStorage.getItem("price2"));
-    up3 = parseInt(localStorage.getItem("up3"));
-
-    poison = JSON.parse(localStorage.getItem("poison"));
-    fire = JSON.parse(localStorage.getItem("fire"));
-    lightning = JSON.parse(localStorage.getItem("lightning"));
-
-    bossHp = parseInt(localStorage.getItem("bossHp"));
-    bossMaxHp = parseInt(localStorage.getItem("bossMaxHp"));
-    bossDmg = parseInt(localStorage.getItem("bossDmg"));
-    bossMoney = parseInt(localStorage.getItem("bossMoney"));
-
-    club.style.display = localStorage.getItem("club");
-    spear.style.display = localStorage.getItem("spear");
-    mace.style.display = localStorage.getItem("mace");
-    swordd.style.display = localStorage.getItem("swordd");
-
-    description.style.display = localStorage.getItem("description");
-    description2.style.display = localStorage.getItem("description2");
-    description3.style.display = localStorage.getItem("description3");
-    description4.style.display = localStorage.getItem("description4");
-
-    moneyCounter.innerHTML = `Gold: ${money}`;
-    moneyCounter2.innerHTML = `Gold: ${money}`;
-    damageCounter.innerHTML = `Damage: ${damage}`;
-    sword.innerHTML = `Sharpness: ${up1} Gold: ${price1}`;
-    MaxHealth.innerHTML = `Muskles: ${up2} Gold: ${price2}`;
-    potion.innerHTML = `Poťáček: ${up3} Gold: ${price3}`;
-    potionCounter.innerHTML = `${up3}`;
-    deathCounter.innerHTML = `Kills: ${deaths}`;
-
-    if (maxDeaths % 10 == 0) {
-      counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
-    } else {
-      counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
-    }
-  } else if (localStorage.getItem("money") > 0) {
-    console.log("negr2");
-
-    maxHp = parseInt(localStorage.getItem("maxHp"));
-    hp = parseInt(localStorage.getItem("hp"));
-    charHp = parseInt(localStorage.getItem("charHp"));
-    charMaxHp = parseInt(localStorage.getItem("charMaxHp"));
-    damage = parseInt(localStorage.getItem("damage"));
-    enemyDamage = parseInt(localStorage.getItem("enemyDamage"));
-    money = parseInt(localStorage.getItem("money"));
-    maxMoney = parseInt(localStorage.getItem("maxMoney"));
-
-    deaths = parseInt(localStorage.getItem("deaths"));
-    maxDeaths = parseInt(localStorage.getItem("maxDeaths"));
-
-    up1 = parseInt(localStorage.getItem("up1"));
-    price1 = parseInt(localStorage.getItem("price1"));
-    up2 = parseInt(localStorage.getItem("up2"));
-    price2 = parseInt(localStorage.getItem("price2"));
-
-    poison = JSON.parse(localStorage.getItem("poison"));
-    fire = JSON.parse(localStorage.getItem("fire"));
-    lightning = JSON.parse(localStorage.getItem("lightning"));
-
-    bossHp = parseInt(localStorage.getItem("bossHp"));
-    bossMaxHp = parseInt(localStorage.getItem("bossMaxHp"));
-    bossDmg = parseInt(localStorage.getItem("bossDmg"));
-    bossMoney = parseInt(localStorage.getItem("bossMoney"));
-
-    club.style.display = localStorage.getItem("club");
-    spear.style.display = localStorage.getItem("spear");
-    mace.style.display = localStorage.getItem("mace");
-    swordd.style.display = localStorage.getItem("swordd");
-
-    description.style.display = localStorage.getItem("description");
-    description2.style.display = localStorage.getItem("description2");
-    description3.style.display = localStorage.getItem("description3");
-    description4.style.display = localStorage.getItem("description4");
-
-    moneyCounter.innerHTML = `Gold: ${money}`;
-    moneyCounter2.innerHTML = `Gold: ${money}`;
-    damageCounter.innerHTML = `Damage: ${damage}`;
-    sword.innerHTML = `Sharpness: ${up1} Gold: ${price1}`;
-    MaxHealth.innerHTML = `Muskles: ${up2} Gold: ${price2}`;
-    potion.innerHTML = `Poťáček: ${up3} Gold: ${price3}`;
-    potionCounter.innerHTML = `${up3}`;
-    deathCounter.innerHTML = `Kills: ${deaths}`;
-
-    if (maxDeaths % 10 == 0) {
-      counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
-    } else {
-      counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
-    }
-  }
-  console.log(money);
-};
-
-attack.onclick = () => {
-  if (deaths % 10 == 0 && deaths != 0) {
-    if (poison == true) {
-      if (poisonCounter == 0) {
-        const poisonDamagePerSecond = setInterval(() => {
-          bossHp -= poisonDamage;
-          counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
-          poisonCounter++;
-        }, 1000);
-        const check1 = setInterval(() => {
-          if (bossHp <= 0) {
-            clearInterval(poisonDamagePerSecond);
-            clearInterval(check1);
-            poisonCounter -= poisonCounter;
-          } else if (charHp <= 0) {
-            clearInterval(poisonDamagePerSecond);
-            clearInterval(check1);
-            poisonCounter -= poisonCounter;
-          }
-        }, 100);
-        if (poisonCounter == 5) {
-          fireCounter -= 5;
-          clearInterval(fireDamagePerSecond);
-          clearInterval(check1);
-        }
-      }
-    }
-    if (fire == true) {
-      if (fireCounter == 0) {
-        const fireDamagePerSecond = setInterval(() => {
-          bossHp -= fireDamage;
-          counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
-          fireCounter++;
-        }, 1000);
-        const check2 = setInterval(() => {
-          if (bossHp <= 0) {
-            clearInterval(fireDamagePerSecond);
-            clearInterval(check2);
-            fireCounter -= fireCounter;
-          } else if (charHp <= 0) {
-            clearInterval(fireDamagePerSecond);
-            clearInterval(check2);
-            fireCounter -= fireCounter;
-          }
-        }, 100);
-        if (fireCounter == 5) {
-          fireCounter -= 5;
-          clearInterval(fireDamagePerSecond);
-          clearInterval(check2);
-        }
-      }
-    }
-    if (lightning == true) {
-      if (lightningCounter == 0) {
-        const lightDamagePerSecond = setInterval(() => {
-          bossHp -= lightDamage;
-          counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
-          lightningCounter++;
-        }, 300);
-        const check3 = setInterval(() => {
-          if (bossHp <= 0) {
-            clearInterval(lightDamagePerSecond);
-            clearInterval(check3);
-            lightningCounter -= lightningCounter;
-          } else if (charHp <= 0) {
-            clearInterval(lightDamagePerSecond);
-            clearInterval(check3);
-            lightningCounter -= lightningCounter;
-          }
-        }, 100);
-        if (lightningCounter == 5) {
-          lightningCounter -= 5;
-          clearInterval(lightDamagePerSecond);
-          clearInterval(check3);
-        }
-      }
-    }
-
-    if (bossHp > 0) {
-      bossHp -= damage;
-      audio4.play();
-      mainChar.style.marginLeft = "55%";
-      setTimeout(() => {
-        mainChar.style.margin = "0 auto";
-      }, 100); //gay animace
-
-      boss1.style.transform = "scale(0.9)";
-      counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
-
-      setTimeout(() => {
-        boss1.style.transform = "scale(1)";
-      }, 100);
-    }
-
-    if (hp <= 0) {
-      boss1.style.display = "none";
-      deadBoss1.style.display = "block";
-    }
-  } else {
-    if (poison == true && poisonCounter == 0) {
-      const poisonDamagePerSecond = setInterval(() => {
-        hp -= poisonDamage;
-        counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
-        poisonCounter += 1;
-      }, 1000);
-      const check1 = setInterval(() => {
-        if (hp <= 0) {
-          clearInterval(poisonDamagePerSecond);
-          clearInterval(check1);
-          poisonCounter -= poisonCounter;
-        } else if (charHp <= 0) {
-          clearInterval(poisonDamagePerSecond);
-          clearInterval(check1);
-          poisonCounter -= poisonCounter;
-        }
-        if (poisonCounter == 5) {
-          poisonCounter -= 5;
-          clearInterval(poisonDamagePerSecond);
-          clearInterval(check1);
-        }
-      }, 100);
-    }
-    if (fire == true) {
-      if (fireCounter == 0) {
-        const fireDamagePerSecond = setInterval(() => {
-          hp -= fireDamage;
-          counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
-          fireCounter++;
-        }, 1000);
-        const check2 = setInterval(() => {
-          if (hp <= 0) {
-            clearInterval(fireDamagePerSecond);
-            clearInterval(check2);
-            fireCounter -= fireCounter;
-          } else if (charHp <= 0) {
-            clearInterval(fireDamagePerSecond);
-            clearInterval(check2);
-            fireCounter -= fireCounter;
-          }
-          if (fireCounter == 5) {
-            fireCounter -= 5;
-            clearInterval(fireDamagePerSecond);
-            clearInterval(check2);
-          }
-        }, 100);
-      }
-    }
-    if (lightning == true) {
-      if (lightningCounter == 0) {
-        const lightDamagePerSecond = setInterval(() => {
-          hp -= lightDamage;
-          counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
-          lightningCounter++;
-        }, 300);
-        const check3 = setInterval(() => {
-          if (hp <= 0) {
-            clearInterval(lightDamagePerSecond);
-            clearInterval(check3);
-            lightningCounter -= lightningCounter;
-          } else if (charHp <= 0) {
-            clearInterval(lightDamagePerSecond);
-            clearInterval(check3);
-            lightningCounter -= lightningCounter;
-          }
-          if (lightningCounter == 5) {
-            lightningCounter -= 5;
-            clearInterval(lightDamagePerSecond);
-            clearInterval(check3);
-          }
-        }, 100);
-      }
-    }
-
-    if (hp > 0) {
-      hp -= damage;
-      audio4.play();
-      mainChar.style.marginLeft = "55%";
-      setTimeout(() => {
-        mainChar.style.margin = "0 auto";
-      }, 100);
-    }
-    enemy.style.transform = "scale(0.9)";
-    counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
-
-    setTimeout(() => {
-      enemy.style.transform = "scale(1)";
-    }, 100);
-
-    if (hp <= 0) {
-      enemy.style.display = "none";
-      deadEnemy.style.display = "block";
-    }
-  }
-};
-
-heal.onclick = () => {
-  if (up3 > 0) {
-    charHp += 20;
-    up3 -= 1;
-    localStorage.setItem("up3", up3);
-    if (charHp > charMaxHp) {
-      charHp = Math.max(charMaxHp);
-    }
-    potionCounter.innerHTML = `${up3}`;
-    hpCounter.innerHTML = `<img id="hp" src="./res/img/hp.png" alt="">: ${charHp}/${charMaxHp}`;
-    potion.innerHTML = `Poťáček: ${up3} Gold: ${price3}`;
-  }
-};
-
-sword.onclick = () => {
-  if (money >= price1) {
-    up1++;
-    damage++;
-    money -= price1;
-    price1 *= 1.2;
-    price1 = Math.round(price1);
-    localStorage.setItem("up1", up1);
-    localStorage.setItem("damage", damage);
-    localStorage.setItem("price1", price1);
-    localStorage.setItem("money", money);
-    sword.innerHTML = `Sharpness: ${up1} Gold: ${price1}`;
-    moneyCounter.innerHTML = `Gold: ${money}`;
-    moneyCounter2.innerHTML = `Gold: ${money}`;
-    damageCounter.innerHTML = `Damage: ${damage}`;
-  }
-};
-
-MaxHealth.onclick = () => {
-  if (money >= price2) {
-    money -= price2;
-    price2 *= 1.2;
-    up2 += 1;
-    charHp += 5;
-    charMaxHp += 5;
-    price2 = Math.round(price2);
-    localStorage.setItem("up2", up2);
-    localStorage.setItem("price2", price2);
-    localStorage.setItem("charHp", charHp);
-    localStorage.setItem("charMaxHp", charMaxHp);
-    localStorage.setItem("money", money);
-    hpCounter.innerHTML = `<img id="hp" src="./res/img/hp.png" alt="" />: ${charHp}/${charMaxHp}`;
-    MaxHealth.innerHTML = `Muskles: ${up2} Gold: ${price2}`;
-    moneyCounter.innerHTML = `Gold: ${money}`;
-    moneyCounter2.innerHTML = `Gold: ${money}`;
-  }
-};
-
-potion.onclick = () => {
-  if (money >= price3) {
-    money -= price3;
-    up3 += 1;
-    localStorage.setItem("up3", up3);
-    moneyCounter.innerHTML = `Gold: ${money}`;
-    moneyCounter2.innerHTML = `Gold: ${money}`;
-    price3 = Math.round(price3);
-    potion.innerHTML = `Poťáček: ${up3} Gold: ${price3}`;
-    potionCounter.innerHTML = `${up3}`;
-  }
-};
-
-club.onclick = () => {
-  if (money >= 100 && deaths >= 5) {
-    damage += 20;
-    club.style.display = "none";
-    money -= 100;
-    description.style.display = "none";
-    localStorage.setItem("damage", damage);
-    localStorage.setItem("money", money);
-    localStorage.setItem("club", (club.style.display = "none"));
-    localStorage.setItem("description", (description.style.display = "none"));
-    moneyCounter.innerHTML = `Gold: ${money}`;
-    moneyCounter2.innerHTML = `Gold: ${money}`;
-    damageCounter.innerHTML = `Damage: ${damage}`;
-  }
-};
-
-spear.onclick = () => {
-  if (money >= 1000 && deaths >= 25) {
-    damage += 50;
-    spear.style.display = "none";
-    money -= 1000;
-    localStorage.setItem("damage", damage);
-    localStorage.setItem("money", money);
-    description2.style.display = "none";
-    localStorage.setItem("spear", (spear.style.display = "none"));
-    localStorage.setItem("description2", (description2.style.display = "none"));
-    moneyCounter.innerHTML = `Gold: ${money}`;
-    moneyCounter2.innerHTML = `Gold: ${money}`;
-    damageCounter.innerHTML = `Damage: ${damage}`;
-    description2.style.display = "none";
-  }
-};
-
-mace.onclick = () => {
-  if (money >= 10000 && deaths >= 50) {
-    damage += 100;
-    mace.style.display = "none";
-    money -= 10000;
-    description3.style.display = "none";
-    localStorage.setItem("damage", damage);
-    localStorage.setItem("money", money);
-    localStorage.setItem("mace", (mace.style.display = "none"));
-    localStorage.setItem("description3", (description3.style.display = "none"));
-    moneyCounter.innerHTML = `Gold: ${money}`;
-    moneyCounter2.innerHTML = `Gold: ${money}`;
-    damageCounter.innerHTML = `Damage: ${damage}`;
-  }
-};
-
-swordd.onclick = () => {
-  if (money >= 30000 && deaths >= 100) {
-    damage += 200;
-    swordd.style.display = "none";
-    money -= 30000;
-    description4.style.display = "none";
-    localStorage.setItem("damage", damage);
-    localStorage.setItem("money", money);
-    localStorage.setItem("swordd", (swordd.style.display = "none"));
-    localStorage.setItem("description4", (description4.style.display = "none"));
-    moneyCounter.innerHTML = `Gold: ${money}`;
-    moneyCounter2.innerHTML = `Gold: ${money}`;
-    damageCounter.innerHTML = `Damage: ${damage}`;
-  }
-};
-
-musicButton.onclick = () => {
-  audio.play();
-  musicButton.style.display = "none";
-  musicMutedButton.style.display = "block";
-};
-
-musicMutedButton.onclick = () => {
-  audio.pause();
-  audio.currentTime = 0;
-  musicMutedButton.style.display = "none";
-  musicButton.style.display = "block";
-};
-
-menuButton.onclick = () => {
-  if (kostelButton.style.display == "none" && goInside.style.display == "block") {
-    main.style.display = "none";
-    goInside.style.display = "none";
-    menuButton.innerHTML = `Battle!`;
-    body.style.backgroundImage = "url(./res/img/background.jpg)";
-    mesto.style.display = "block";
-    musicButton.style.display = "block";
-    menuButton.style.display = "block";
-    backButton.style.display = "none";
-    nextUpdate.style.display = "none";
-    shop.style.display = "block";
-    hospoda.style.display = "block";
-    hospoda.style.marginTop = "0";
-    backButton2.style.display = "none";
-    items.style.display = "none";
-    kostelButton.style.display = "block";
-  } else {
-    hpCounter.innerHTML = `<img id="hp" src="./res/img/hp.png" alt="" />: ${charHp}/${charMaxHp}`;
-    menuButton.style.display = "none";
-    main.style.display = "block";
-    body.style.backgroundImage = "url(./res/img/background3.jpg)";
-    mesto.style.display = "none";
-    items.style.display = "none";
-    verze.style.display = "none";
-    phoneMenu.style.display = "none"
-
-    if (deaths % 10 == 0 && deaths != 0) {
-      boss1.style.display = "block";
-      enemy.style.display = "none";
-      counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
-
-      const bossAttackSpeed = setInterval(() => {
-        boss1.style.margin = "0";
-        boss1.style.marginTop = "10%";
-        charHp -= bossDmg;
-        audio6.play();
-        hpCounter.innerHTML = `<img id="hp" src="./res/img/hp.png" alt="">: ${charHp}/${charMaxHp}`;
-
-        setTimeout(() => {
-          boss1.style.margin = "0 auto";
-          boss1.style.marginTop = "10%";
-        }, 100); //gay animace
-      }, 3000);
-
-      const interval3 = setInterval(() => {
-        if (bossHp <= 0) {
-
-          boss1.style.display = "none";
-          deadBoss1.style.display = "block";
-          audio5.play();
-
-          money += bossMoney;
-          earnings.style.display = "block";
-          earnings.innerHTML = `+${bossMoney}G`;
-          bossDmg += 10; //boss damage scaling
-          localStorage.setItem("bossDmg", bossDmg);
-
-          setTimeout(() => {
-            earnings.style.display = "none";
-          }, 1000);
-
-          setTimeout(() => {
-            bossMoney += 1000; //bossmoney scaling
-            moneyCounter.innerHTML = `Gold: ${money}`;
-            moneyCounter2.innerHTML = `Gold: ${money}`;
-            bossMaxHp += 1000; //bosshp scaling
-
-            localStorage.setItem("bossMoney", bossMoney);
-            localStorage.setItem("bossMaxHp", bossMaxHp);
-
-            charHp -= charHp;
-            charHp += charMaxHp;
-
-            deaths++;
-            maxDeaths += 1;
-
-            localStorage.setItem("deaths", deaths);
-            localStorage.setItem("maxDeaths", maxDeaths);
-            localStorage.setItem("charHp", charHp);
-
-            deathCounter.innerHTML = `Kills: ${deaths}`;
-            bossHp += bossMaxHp;
-            bossHp = Math.max(bossMaxHp);
-            counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
-            enemy.style.display = "block";
-            deadBoss1.style.display = "none";
-
-            main.style.display = "none";
-            menuButton.innerHTML = `Battle!`;
-            body.style.backgroundImage = "url(./res/img/background.jpg)";
-            mesto.style.display = "block";
-            items.style.display = "none";
-            menuButton.style.display = "block";
-            verze.style.display = "block";
-            phoneMenu.style.display = "block"
-
-            localStorage.setItem("hp", hp);
-            localStorage.setItem("charHp", charHp);
-          }, 1000);
-          clearInterval(interval3);
-          clearInterval(bossAttackSpeed);
-        } else if (charHp <= 0) {
-          main.style.display = "none";
-          goInside.style.display = "none";
-          menuButton.innerHTML = `Battle!`;
-          body.style.backgroundImage = "url(./res/img/background.jpg)";
-          mesto.style.display = "block";
-          musicButton.style.display = "block";
-          menuButton.style.display = "block";
-          backButton.style.display = "none";
-          nextUpdate.style.display = "none";
-          shop.style.display = "block";
-          hospoda.style.display = "block";
-          hospoda.style.marginTop = "0";
-          backButton2.style.display = "none";
-          items.style.display = "none";
-          kostelButton.style.display = "block";
-          phoneMenu.style.display = "block"
-
-          charHp -= charHp;
-          charHp += charMaxHp;
-          hpCounter.innerHTML = `<img id="hp" src="./res/img/hp.png" alt="">: ${charHp}/${charMaxHp}`;
-
-          bossHp -= bossHp;
-          bossHp += bossMaxHp;
-
-          localStorage.setItem("bossHp", bossHp);
-          localStorage.setItem("bossMaxHp", bossMaxHp);
-
-          counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${bossHp}/${bossMaxHp}`;
-
-          hp -= hp;
-          hp += maxHp;
-          counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
-
-          localStorage.setItem("hp", hp);
-          localStorage.setItem("charHp", charHp);
-
-          clearInterval(interval3);
-          clearInterval(bossAttackSpeed);
-        }
-      }, 100);
-    } 
-    else {
-      const interval2 = setInterval(() => {
-        if (hp <= 0) {
-          enemy.style.display = "none";
-          deadEnemy.style.display = "block";
-          audio5.play();
-
-          money += maxMoney;
-          earnings.style.display = "block";
-          earnings.innerHTML = `+${maxMoney}G`;
-          enemyDamage += 0.5; //enemy damage scaling
-
-          localStorage.setItem("money", money);
-          localStorage.setItem("damage", damage);
-          localStorage.setItem("enemyDamage", enemyDamage);
-          localStorage.setItem("up1", up1);
-          localStorage.setItem("price1", price1);
-          localStorage.setItem("up2", up2);
-          localStorage.setItem("price2", price2);
-          localStorage.setItem("charMaxHp", charMaxHp);
-          localStorage.setItem("bossDmg", bossDmg);
-          localStorage.setItem("bossHp", bossHp);
-          localStorage.setItem("bossMaxHp", bossMaxHp);
-          localStorage.setItem("bossMoney", bossMoney);
-
-          setTimeout(() => {
-            earnings.style.display = "none";
-          }, 1000);
-
-          setTimeout(() => {
-            maxMoney *= 1.15; //money scaling
-            maxMoney = Math.round(maxMoney);
-            moneyCounter.innerHTML = `Gold: ${money}`;
-            moneyCounter2.innerHTML = `Gold: ${money}`;
-            maxHp *= 1.15; //hp scaling
-            maxHp = Math.round(maxHp);
-
-            localStorage.setItem("maxMoney", maxMoney);
-            localStorage.setItem("maxHp", maxHp);
-
-            charHp -= charHp;
-            charHp += charMaxHp;
-
-            deaths++;
-            maxDeaths++;
-
-            localStorage.setItem("deaths", deaths);
-            localStorage.setItem("maxDeaths", maxDeaths);
-
-            deathCounter.innerHTML = `Kills: ${deaths}`;
-
-            hp += maxHp;
-            hp = Math.max(maxHp);
-            counter.innerHTML = `<img id="hp2" src="./res/img/hp.png" alt="">: ${hp}/${maxHp}`;
-            enemy.style.display = "block";
-            deadEnemy.style.display = "none";
-
-            main.style.display = "none";
-            menuButton.innerHTML = `Battle!`;
-            body.style.backgroundImage = "url(./res/img/background.jpg)";
-            mesto.style.display = "block";
-            items.style.display = "none";
-            menuButton.style.display = "block";
-            verze.style.display = "block";
-            phoneMenu.style.display = "block"
-
-            localStorage.setItem("hp", hp);
-            localStorage.setItem("charHp", charHp);
-          }, 1000);
-          clearInterval(interval);
-          clearInterval(interval2);
-        } else if (charHp <= 0) {
-          main.style.display = "none";
-          goInside.style.display = "none";
-          menuButton.innerHTML = `Battle!`;
-          body.style.backgroundImage = "url(./res/img/background.jpg)";
-          mesto.style.display = "block";
-          musicButton.style.display = "block";
-          menuButton.style.display = "block";
-          backButton.style.display = "none";
-          nextUpdate.style.display = "none";
-          shop.style.display = "block";
-          hospoda.style.display = "block";
-          hospoda.style.marginTop = "0";
-          backButton2.style.display = "none";
-          items.style.display = "none";
-          kostelButton.style.display = "block";
-          phoneMenu.style.display = "block"
-
-          charHp -= charHp;
-          charHp += charMaxHp;
-
-          hp -= hp;
-          hp += maxHp;
-
-          localStorage.setItem("hp", hp);
-          localStorage.setItem("charHp", charHp);
-
-          clearInterval(interval);
-          clearInterval(interval2);
-        }
-      }, 100);
-
-      const interval = setInterval(() => {
-        enemy.style.margin = "0";
-        enemy.style.marginTop = "10%";
-        charHp -= enemyDamage;
-        audio6.play();
-        hpCounter.innerHTML = `<img id="hp" src="./res/img/hp.png" alt="">: ${charHp}/${charMaxHp}`;
-
-        setTimeout(() => {
-          enemy.style.margin = "0 auto";
-          enemy.style.marginTop = "10%";
-        }, 100); //gay animace
-      }, 1500); 
-    }
-  }
-};
-
-hospoda.onclick = () => {
-  hospoda.style.display = "none";
-  body.style.backgroundImage = "url(./res/img/quest.jpg)";
-  musicMutedButton.style.display = "none";
-  musicButton.style.display = "none";
-  menuButton.style.display = "none";
-  backButton.style.display = "block";
-  audio.pause();
-  audio.currentTime = 0;
-  audio2.play();
-  nextUpdate.style.display = "block";
-  shop.style.display = "none";
-  kostelButton.style.display = "none";
-};
-
-backButton.onclick = () => {
-  audio2.pause();
-  audio2.currentTime = 0;
-  body.style.backgroundImage = "url(./res/img/background.jpg)";
-  musicButton.style.display = "block";
-  menuButton.style.display = "block";
-  backButton.style.display = "none";
-  nextUpdate.style.display = "none";
-  shop.style.display = "block";
-  hospoda.style.display = "block";
-  hospoda.style.marginTop = "0";
-  kostelButton.style.display = "block";
-};
-
-shop.onclick = () => {
-  hospoda.style.display = "none";
-  body.style.backgroundImage = "url(./res/img/merchant.jpg)";
-  musicMutedButton.style.display = "none";
-  musicButton.style.display = "none";
-  menuButton.style.display = "none";
-  backButton2.style.display = "block";
-  shop.style.display = "none";
-  items.style.display = "block";
-  kostelButton.style.display = "none";
-};
-
-backButton2.onclick = () => {
-  body.style.backgroundImage = "url(./res/img/background.jpg)";
-  musicButton.style.display = "block";
-  menuButton.style.display = "block";
-  backButton.style.display = "none";
-  nextUpdate.style.display = "none";
-  shop.style.display = "block";
-  hospoda.style.display = "block";
-  hospoda.style.marginTop = "0";
-  backButton2.style.display = "none";
-  items.style.display = "none";
-  kostelButton.style.display = "block";
-};
-
-kostelButton.onclick = () => {
-  hospoda.style.display = "none";
-  body.style.backgroundImage = "url(./res/img/kostel.png)";
-  musicMutedButton.style.display = "none";
-  musicButton.style.display = "none";
-  menuButton.style.display = "block";
-  shop.style.display = "none";
-  kostelButton.style.display = "none";
-  menuButton.innerHTML = `Elektropolis`;
-  goInside.style.display = "block";
-};
-
-goInside.onclick = () => {
-  audio3.play();
-  goBack.style.display = "block";
-  goInside.style.display = "none";
-  body.style.backgroundImage = "url(./res/img/insideKostel.jpg)";
-  menuButton.style.display = "none";
-  enchant.style.display = "block";
-  moneyCounter2.style.display = "block";
-};
-
-goBack.onclick = () => {
-  audio3.pause();
-  audio3.currentTime = 0;
-  goBack.style.display = "none";
-  goInside.style.display = "block";
-  body.style.backgroundImage = "url(./res/img/kostel.png)";
-  menuButton.style.display = "block";
-  enchant.style.display = "none";
-  moneyCounter2.style.display = "none";
-};
-
-play.onclick = () => {
-  mainObal.style.display = "block";
-  gameMenu.style.display = "none";
-  body.style.backgroundImage = "url(./res/img/background.jpg)";
-};
-
-tutorial.onclick = () => {
-  tutorial.innerHTML = `U know what to do...`;
+const volumeSlider = document.getElementById("volumeSlider");
+const playButton = document.getElementById("play");
+const saveLoadButton = document.getElementById("saveLoad");
+const quitButton = document.getElementById("quit");
+const exportButton = document.getElementById("export");
+const loadButton = document.getElementById("load");
+const loadFileInput = document.getElementById("loadFile");
+const resetButton = document.getElementById("reset");
+const closeSave = document.getElementById("closeSave");
+const menuContainer = document.getElementById("menuContainer");
+const gameContainer = document.getElementById("gameContainer");
+const shopContainer = document.getElementById("shopContainer");
+const blackmarketContainer = document.getElementById("blackmarketContainer");
+const dungeonContainer = document.getElementById("dungeonContainer");
+const questContainer = document.getElementById("questContainer");
+const goldMenu = document.getElementById("goldMenu");
+const goldAmount = document.getElementById("goldAmount");
+const dungeonButton = document.getElementById("dungeon");
+const shopButton = document.getElementById("shop");
+const blackmarketButton = document.getElementById("blackmarket");
+const questsButton = document.getElementById("quests");
+const backToMenuButton = document.getElementById("backToMenu");
+const backToTownButton = document.getElementById("backToTown");
+const backToTownBlackmarketButton = document.getElementById("backToTownBlackmarket");
+const backToTownDungeonButton = document.getElementById("backToTownDungeon");
+const backToTownQuestButton = document.getElementById("backToTownQuest");
+const weaponUpgradeButton = document.getElementById("weaponUpgrade");
+const armorUpgradeButton = document.getElementById("armorUpgrade");
+const potionButton = document.getElementById("potion");
+const buyExcaliburButton = document.getElementById("buyExcalibur");
+const buyFireAspectButton = document.getElementById("buyFireAspect");
+const buyGreenAmuletButton = document.getElementById("buyGreenAmulet");
+const attackButton = document.getElementById("attack");
+const usePotionButton = document.getElementById("usePotion");
+const specialAttackButton = document.getElementById("specialAttack");
+const playerHp = document.getElementById("playerHp");
+const enemyHp = document.getElementById("enemyHp");
+const merchant = document.getElementById("merchant");
+const blackmerchant = document.getElementById("blackmerchant");
+const chestContainer = document.getElementById("chestContainer");
+const openChestButton = document.getElementById("openChest");
+const roomNumber = document.getElementById("roomNumber");
+const dungeonMainChar = document.querySelector(".dungeon-main-char");
+const enemyImg = document.querySelector(".enemy");
+const enemyContainer = document.querySelector(".enemy-container");
+const notification = document.getElementById("notification");
+const questList = document.getElementById("questList");
+const excaliburItem = document.getElementById("excaliburItem");
+const fireAspectItem = document.getElementById("fireAspectItem");
+const greenAmuletItem = document.getElementById("greenAmuletItem");
+const inventoryStats = document.getElementById("inventoryStats");
+const playerStats = document.getElementById("playerStats");
+const ownedItemsElement = document.getElementById("ownedItems");
+
+// Validate DOM elements
+if (!attackButton) console.error("Attack button not found in DOM");
+if (!dungeonMainChar) console.error("Dungeon main character image not found in DOM");
+if (!enemyHp) console.error("Enemy HP element not found in DOM");
+if (!inventoryStats) console.error("Inventory stats element not found in DOM");
+if (!playerStats) console.error("Player stats element not found in DOM");
+if (!ownedItemsElement) console.error("Owned items element not found in DOM");
+
+// Show notification
+const showNotification = (message) => {
+  notification.textContent = message;
+  notification.classList.remove("hidden");
+  notification.classList.add("show");
   setTimeout(() => {
-    tutorial.innerHTML = `What should i do?`;
-  }, 500);
+    notification.classList.remove("show");
+    setTimeout(() => {
+      notification.classList.add("hidden");
+      notification.textContent = "";
+    }, 500);
+  }, 3000);
 };
 
-enchant.onclick = () => {
-  if (money >= 5000) {
-    money -= 5000;
-    localStorage.setItem("money", money);
-    moneyCounter.innerHTML = `Gold: ${money}`;
-    moneyCounter2.innerHTML = `Gold: ${money}`;
-    let random = Math.floor(Math.random() * 10);
-    if (random == 1) {
-      poison = true;
-      localStorage.setItem("poison", poison);
-      typeOfEnchantment.innerHTML = `+ Poison`;
-      typeOfEnchantment.style.display = "block";
-      setTimeout(() => {
-        typeOfEnchantment.style.display = "none";
-      }, 300);
-    } else if (random == 3) {
-      lightning = true;
-      localStorage.setItem("lightning", lightning);
-      typeOfEnchantment.innerHTML = `+ Lightning`;
-      typeOfEnchantment.style.display = "block";
-      setTimeout(() => {
-        typeOfEnchantment.style.display = "none";
-      }, 300);
-    } else if (random == 8) {
-      fire = true;
-      localStorage.setItem("fire", fire);
-      typeOfEnchantment.innerHTML = `+ Fire`;
-      typeOfEnchantment.style.display = "block";
-      setTimeout(() => {
-        typeOfEnchantment.style.display = "none";
-      }, 300);
+// Quest definitions
+const questTemplates = [
+  {
+    type: "killEnemies",
+    description: (count) => `Kill ${count} enemies`,
+    getGoal: (completions) => 3 + completions * 2,
+    reward: (completions) => ({
+      gold: 10 + completions * 5,
+      upgrade: ["weapon", "armor", "potion"][Math.floor(Math.random() * 3)]
+    })
+  },
+  {
+    type: "defeatDragon",
+    description: () => `Defeat Dragon`,
+    getGoal: () => 1,
+    reward: (completions) => ({
+      gold: 50 + completions * 10,
+      upgrade: ["weapon", "armor", "potion"][Math.floor(Math.random() * 3)]
+    })
+  },
+  {
+    type: "defeatDemon",
+    description: () => `Defeat Demon`,
+    getGoal: () => 1,
+    reward: (completions) => ({
+      gold: 50 + completions * 10,
+      upgrade: ["weapon", "armor", "potion"][Math.floor(Math.random() * 3)]
+    })
+  },
+  {
+    type: "defeatMath",
+    description: () => `Defeat Math`,
+    getGoal: () => 1,
+    reward: (completions) => ({
+      gold: 50 + completions * 10,
+      upgrade: ["weapon", "armor", "potion"][Math.floor(Math.random() * 3)]
+    })
+  },
+  {
+    type: "defeatServer",
+    description: () => `Defeat Server`,
+    getGoal: () => 1,
+    reward: (completions) => ({
+      gold: 50 + completions * 10,
+      upgrade: ["weapon", "armor", "potion"][Math.floor(Math.random() * 3)]
+    })
+  },
+  {
+    type: "defeatLinux",
+    description: () => `Defeat Linux`,
+    getGoal: () => 1,
+    reward: (completions) => ({
+      gold: 50 + completions * 10,
+      upgrade: ["weapon", "armor", "potion"][Math.floor(Math.random() * 3)]
+    })
+  },
+  {
+    type: "clearDungeon",
+    description: () => `Clear the entire dungeon`,
+    getGoal: () => 1,
+    reward: (completions) => ({
+      gold: 30 + completions * 10,
+      upgrade: ["weapon", "armor", "potion"][Math.floor(Math.random() * 3)]
+    })
+  },
+  {
+    type: "upgradeWeapon",
+    description: (count) => `Upgrade weapon ${count} times`,
+    getGoal: (completions) => 1 + Math.floor(completions / 2),
+    reward: (completions) => ({
+      gold: 15 + completions * 5,
+      upgrade: ["armor", "potion"][Math.floor(Math.random() * 2)]
+    })
+  },
+  {
+    type: "upgradeArmor",
+    description: (count) => `Upgrade armor ${count} times`,
+    getGoal: (completions) => 1 + Math.floor(completions / 2),
+    reward: (completions) => ({
+      gold: 15 + completions * 5,
+      upgrade: ["weapon", "potion"][Math.floor(Math.random() * 2)]
+    })
+  },
+  {
+    type: "purchasePotions",
+    description: (count) => `Purchase ${count} potions`,
+    getGoal: (completions) => 1 + Math.floor(completions / 2),
+    reward: (completions) => ({
+      gold: 50 + completions * 10,
+      upgrade: ["weapon", "armor"][Math.floor(Math.random() * 2)]
+    })
+  },
+  {
+    type: "collectGold",
+    description: (amount) => `Collect ${amount} gold`,
+    getGoal: (completions) => 50 + completions * 50,
+    reward: (completions) => ({
+      gold: 20 + completions * 10,
+      upgrade: ["weapon", "armor", "potion"][Math.floor(Math.random() * 3)]
+    })
+  }
+];
+
+// Load game state
+const loadGameState = () => {
+  money = parseInt(localStorage.getItem("money")) || 0;
+  diamonds = parseInt(localStorage.getItem("diamonds")) || 0;
+  damage = parseInt(localStorage.getItem("damage")) || 2;
+  charHp = parseInt(localStorage.getItem("charHp")) || 30;
+  charMaxHp = parseInt(localStorage.getItem("charMaxHp")) || 30;
+  up3 = parseInt(localStorage.getItem("up3")) || 0;
+  weaponUpgrades = parseInt(localStorage.getItem("weaponUpgrades")) || 0;
+  armorUpgrades = parseInt(localStorage.getItem("armorUpgrades")) || 0;
+  potionPurchases = parseInt(localStorage.getItem("potionPurchases")) || 0;
+  currentRoom = parseInt(localStorage.getItem("currentRoom")) || 1;
+  dungeonCompletions = parseInt(localStorage.getItem("dungeonCompletions")) || 0;
+  enemyType = localStorage.getItem("enemyType") || "enemy1";
+  enemyCurrentHp = parseInt(localStorage.getItem("enemyCurrentHp")) || 15;
+  enemyMaxHp = parseInt(localStorage.getItem("enemyMaxHp")) || 15;
+  enemyDamage = parseInt(localStorage.getItem("enemyDamage")) || 1;
+  goldReward = parseInt(localStorage.getItem("goldReward")) || 5;
+  isAttacking = localStorage.getItem("isAttacking") === "true";
+  attackCount = parseInt(localStorage.getItem("attackCount")) || 0;
+  activeQuests = JSON.parse(localStorage.getItem("activeQuests")) || getRandomQuests();
+  questProgress = JSON.parse(localStorage.getItem("questProgress")) || {
+    killEnemies: 0,
+    defeatDragon: 0,
+    defeatDemon: 0,
+    defeatMath: 0,
+    defeatServer: 0,
+    defeatLinux: 0,
+    clearDungeon: 0,
+    upgradeWeapon: 0,
+    upgradeArmor: 0,
+    purchasePotions: 0,
+    collectGold: 0
+  };
+  const savedCompletions = JSON.parse(localStorage.getItem("questCompletions"));
+  if (savedCompletions) Object.assign(questCompletions, savedCompletions);
+  const savedItems = JSON.parse(localStorage.getItem("ownedItems"));
+  if (savedItems) Object.assign(ownedItems, savedItems);
+  const savedEnemyDefeatCounts = JSON.parse(localStorage.getItem("enemyDefeatCounts"));
+  if (savedEnemyDefeatCounts) Object.assign(enemyDefeatCounts, savedEnemyDefeatCounts);
+  isMusicPlaying = localStorage.getItem("isMusicPlaying") !== "false";
+  musicVolume = parseFloat(localStorage.getItem("musicVolume")) || 0.5;
+  dungeonBackground = ["./res/img/dungeon.jpg", "./res/img/dungeon2.jpg", "./res/img/dungeon3.jpg"].includes(localStorage.getItem("dungeonBackground")) ? localStorage.getItem("dungeonBackground") : "./res/img/dungeon.jpg";
+  if (charHp > charMaxHp) charHp = charMaxHp;
+  updateUI();
+  updateQuestList();
+  updateMusicState();
+  updateSpecialAttackButton();
+};
+
+// Save game state
+const saveGameState = () => {
+  localStorage.setItem("money", money);
+  localStorage.setItem("diamonds", diamonds);
+  localStorage.setItem("damage", damage);
+  localStorage.setItem("charHp", charHp);
+  localStorage.setItem("charMaxHp", charMaxHp);
+  localStorage.setItem("up3", up3);
+  localStorage.setItem("weaponUpgrades", weaponUpgrades);
+  localStorage.setItem("armorUpgrades", armorUpgrades);
+  localStorage.setItem("potionPurchases", potionPurchases);
+  localStorage.setItem("currentRoom", currentRoom);
+  localStorage.setItem("dungeonCompletions", dungeonCompletions);
+  localStorage.setItem("enemyType", enemyType);
+  localStorage.setItem("enemyCurrentHp", enemyCurrentHp);
+  localStorage.setItem("enemyMaxHp", enemyMaxHp);
+  localStorage.setItem("enemyDamage", enemyDamage);
+  localStorage.setItem("goldReward", goldReward);
+  localStorage.setItem("isAttacking", isAttacking);
+  localStorage.setItem("attackCount", attackCount);
+  localStorage.setItem("activeQuests", JSON.stringify(activeQuests));
+  localStorage.setItem("questProgress", JSON.stringify(questProgress));
+  localStorage.setItem("questCompletions", JSON.stringify(questCompletions));
+  localStorage.setItem("ownedItems", JSON.stringify(ownedItems));
+  localStorage.setItem("enemyDefeatCounts", JSON.stringify(enemyDefeatCounts));
+  localStorage.setItem("isMusicPlaying", isMusicPlaying);
+  localStorage.setItem("musicVolume", musicVolume);
+  localStorage.setItem("dungeonBackground", dungeonBackground);
+};
+
+// Export game state
+const exportGameState = () => {
+  const gameState = {
+    money,
+    diamonds,
+    damage,
+    charHp,
+    charMaxHp,
+    up3,
+    weaponUpgrades,
+    armorUpgrades,
+    potionPurchases,
+    currentRoom,
+    dungeonCompletions,
+    enemyType,
+    enemyCurrentHp,
+    enemyMaxHp,
+    enemyDamage,
+    goldReward,
+    isAttacking,
+    attackCount,
+    activeQuests,
+    questProgress,
+    questCompletions,
+    ownedItems,
+    enemyDefeatCounts,
+    isMusicPlaying,
+    musicVolume,
+    dungeonBackground
+  };
+  const data = JSON.stringify(gameState, null, 2);
+  const blob = new Blob([data], { type: 'text/plain' });
+  const date = new Date();
+  const timestamp = date.toISOString().replace(/[:.]/g, '-').slice(0, 19);
+  const filename = `KoralsQuest_${timestamp}.txt`;
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  window.URL.revokeObjectURL(url);
+  showNotification("Game state exported to " + filename);
+};
+
+// Load game state from file
+const loadFromFile = (file) => {
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const gameState = JSON.parse(e.target.result);
+      if (!gameState || typeof gameState !== 'object') throw new Error("Invalid file format");
+      money = Number.isInteger(gameState.money) && gameState.money >= 0 ? gameState.money : 0;
+      diamonds = Number.isInteger(gameState.diamonds) && gameState.diamonds >= 0 ? gameState.diamonds : 0;
+      damage = Number.isInteger(gameState.damage) && gameState.damage >= 1 ? gameState.damage : 2;
+      charHp = Number.isInteger(gameState.charHp) && gameState.charHp >= 0 ? gameState.charHp : 30;
+      charMaxHp = Number.isInteger(gameState.charMaxHp) && gameState.charMaxHp >= 30 ? gameState.charMaxHp : 30;
+      up3 = Number.isInteger(gameState.up3) && gameState.up3 >= 0 ? gameState.up3 : 0;
+      weaponUpgrades = Number.isInteger(gameState.weaponUpgrades) && gameState.weaponUpgrades >= 0 ? gameState.weaponUpgrades : 0;
+      armorUpgrades = Number.isInteger(gameState.armorUpgrades) && gameState.armorUpgrades >= 0 ? gameState.armorUpgrades : 0;
+      potionPurchases = Number.isInteger(gameState.potionPurchases) && gameState.potionPurchases >= 0 ? gameState.potionPurchases : 0;
+      currentRoom = Number.isInteger(gameState.currentRoom) && gameState.currentRoom >= 1 && gameState.currentRoom <= 5 ? gameState.currentRoom : 1;
+      dungeonCompletions = Number.isInteger(gameState.dungeonCompletions) && gameState.dungeonCompletions >= 0 ? gameState.dungeonCompletions : 0;
+      enemyType = ['enemy1', 'enemy2', 'enemy3', 'hardEnemy1', 'hardEnemy2', 'boss1', 'boss2', 'boss3', 'boss4', 'boss5'].includes(gameState.enemyType) ? gameState.enemyType : "enemy1";
+      enemyCurrentHp = Number.isInteger(gameState.enemyCurrentHp) && gameState.enemyCurrentHp >= 0 ? gameState.enemyCurrentHp : 15;
+      enemyMaxHp = Number.isInteger(gameState.enemyMaxHp) && gameState.enemyMaxHp >= 15 ? gameState.enemyMaxHp : 15;
+      enemyDamage = Number.isInteger(gameState.enemyDamage) && gameState.enemyDamage >= 1 ? gameState.enemyDamage : 1;
+      goldReward = Number.isInteger(gameState.goldReward) && gameState.goldReward >= 5 ? gameState.goldReward : 5;
+      isAttacking = typeof gameState.isAttacking === 'boolean' ? gameState.isAttacking : false;
+      attackCount = Number.isInteger(gameState.attackCount) && gameState.attackCount >= 0 ? gameState.attackCount : 0;
+      activeQuests = Array.isArray(gameState.activeQuests) && gameState.activeQuests.every(q => questTemplates.some(t => t.type === q.type) && Number.isInteger(q.goal) && q.goal >= 0) ? gameState.activeQuests : getRandomQuests();
+      questProgress = typeof gameState.questProgress === 'object' ? { ...questProgress } : {
+        killEnemies: 0,
+        defeatDragon: 0,
+        defeatDemon: 0,
+        defeatMath: 0,
+        defeatServer: 0,
+        defeatLinux: 0,
+        clearDungeon: 0,
+        upgradeWeapon: 0,
+        upgradeArmor: 0,
+        purchasePotions: 0,
+        collectGold: 0
+      };
+      Object.keys(questProgress).forEach(key => {
+        questProgress[key] = Number.isInteger(gameState.questProgress[key]) && gameState.questProgress[key] >= 0 ? gameState.questProgress[key] : 0;
+      });
+      questCompletions = typeof gameState.questCompletions === 'object' ? { ...questCompletions } : {
+        killEnemies: 0,
+        defeatDragon: 0,
+        defeatDemon: 0,
+        defeatMath: 0,
+        defeatServer: 0,
+        defeatLinux: 0,
+        clearDungeon: 0,
+        upgradeWeapon: 0,
+        upgradeArmor: 0,
+        purchasePotions: 0,
+        collectGold: 0
+      };
+      Object.keys(questCompletions).forEach(key => {
+        questCompletions[key] = Number.isInteger(gameState.questCompletions[key]) && gameState.questCompletions[key] >= 0 ? gameState.questCompletions[key] : 0;
+      });
+      ownedItems = typeof gameState.ownedItems === 'object' ? { ...ownedItems } : { excalibur: false, fireAspect: false, greenAmulet: false };
+      ownedItems.excalibur = typeof gameState.ownedItems.excalibur === 'boolean' ? gameState.ownedItems.excalibur : false;
+      ownedItems.fireAspect = typeof gameState.ownedItems.fireAspect === 'boolean' ? gameState.ownedItems.fireAspect : false;
+      ownedItems.greenAmulet = typeof gameState.ownedItems.greenAmulet === 'boolean' ? gameState.ownedItems.greenAmulet : false;
+      enemyDefeatCounts = typeof gameState.enemyDefeatCounts === 'object' ? { ...enemyDefeatCounts } : {
+        enemy1: 0,
+        enemy2: 0,
+        enemy3: 0,
+        hardEnemy1: 0,
+        hardEnemy2: 0,
+        boss1: 0,
+        boss2: 0,
+        boss3: 0,
+        boss4: 0,
+        boss5: 0
+      };
+      Object.keys(enemyDefeatCounts).forEach(key => {
+        enemyDefeatCounts[key] = Number.isInteger(gameState.enemyDefeatCounts[key]) && gameState.enemyDefeatCounts[key] >= 0 ? gameState.enemyDefeatCounts[key] : 0;
+      });
+      isMusicPlaying = typeof gameState.isMusicPlaying === 'boolean' ? gameState.isMusicPlaying : true;
+      musicVolume = typeof gameState.musicVolume === 'number' && gameState.musicVolume >= 0 && gameState.musicVolume <= 1 ? gameState.musicVolume : 0.5;
+      dungeonBackground = ["./res/img/dungeon.jpg", "./res/img/dungeon2.jpg", "./res/img/dungeon3.jpg"].includes(gameState.dungeonBackground) ? gameState.dungeonBackground : "./res/img/dungeon.jpg";
+      if (charHp > charMaxHp) charHp = charMaxHp;
+      saveGameState();
+      updateUI();
+      updateQuestList();
+      updateMusicState();
+      updateSpecialAttackButton();
+      showNotification("Game state loaded successfully!");
+    } catch (error) {
+      showNotification("Error loading file: Invalid format or corrupted data");
+    }
+    loadFileInput.value = "";
+  };
+  reader.onerror = () => {
+    showNotification("Error reading file");
+    loadFileInput.value = "";
+  };
+  reader.readAsText(file);
+};
+
+// Reset game state
+const resetGameState = () => {
+  if (confirm("Reset all progress?")) {
+    localStorage.clear();
+    money = 0;
+    diamonds = 0;
+    damage = 2;
+    charHp = 30;
+    charMaxHp = 30;
+    up3 = 0;
+    weaponUpgrades = 0;
+    armorUpgrades = 0;
+    potionPurchases = 0;
+    currentRoom = 1;
+    dungeonCompletions = 0;
+    enemyType = "enemy1";
+    enemyCurrentHp = 15;
+    enemyMaxHp = 15;
+    enemyDamage = 1;
+    goldReward = 5;
+    isAttacking = false;
+    attackCount = 0;
+    activeQuests = getRandomQuests();
+    questProgress = {
+      killEnemies: 0,
+      defeatDragon: 0,
+      defeatDemon: 0,
+      defeatMath: 0,
+      defeatServer: 0,
+      defeatLinux: 0,
+      clearDungeon: 0,
+      upgradeWeapon: 0,
+      upgradeArmor: 0,
+      purchasePotions: 0,
+      collectGold: 0
+    };
+    questCompletions = {
+      killEnemies: 0,
+      defeatDragon: 0,
+      defeatDemon: 0,
+      defeatMath: 0,
+      defeatServer: 0,
+      defeatLinux: 0,
+      clearDungeon: 0,
+      upgradeWeapon: 0,
+      upgradeArmor: 0,
+      purchasePotions: 0,
+      collectGold: 0
+    };
+    ownedItems = { excalibur: false, fireAspect: false, greenAmulet: false };
+    enemyDefeatCounts = {
+      enemy1: 0,
+      enemy2: 0,
+      enemy3: 0,
+      hardEnemy1: 0,
+      hardEnemy2: 0,
+      boss1: 0,
+      boss2: 0,
+      boss3: 0,
+      boss4: 0,
+      boss5: 0
+    };
+    isMusicPlaying = true;
+    musicVolume = 0.5;
+    dungeonBackground = "./res/img/dungeon.jpg";
+    if (enemyAttackInterval) clearInterval(enemyAttackInterval);
+    enemyAttackInterval = undefined;
+    if (regenInterval) clearInterval(regenInterval);
+    regenInterval = undefined;
+    if (merchantCycleInterval) clearInterval(merchantCycleInterval);
+    merchantCycleInterval = undefined;
+    updateUI();
+    updateQuestList();
+    updateMusicState();
+    updateSpecialAttackButton();
+    showNotification("Game reset!");
+  }
+};
+
+audio.volume = musicVolume;
+questAudio.volume = musicVolume;
+blackmarketAudio.volume = musicVolume;
+shopAudio.volume = musicVolume;
+dungeonAudio.volume = musicVolume;
+
+const enemies = [
+  { type: "enemy1", img: "./res/img/enemy1.png", baseHp: 15, baseDamage: 1, baseGold: 5 },
+  { type: "enemy2", img: "./res/img/enemy2.png", baseHp: 20, baseDamage: 2, baseGold: 7 },
+  { type: "enemy3", img: "./res/img/enemy3.png", baseHp: 25, baseDamage: 3, baseGold: 10 }
+];
+const hardEnemies = [
+  { type: "hardEnemy1", img: "./res/img/hardEnemy1.png", baseHp: 30, baseDamage: 4, baseGold: 15 },
+  { type: "hardEnemy2", img: "./res/img/hardEnemy2.png", baseHp: 40, baseDamage: 5, baseGold: 20 }
+];
+const bosses = [
+  { type: "boss1", img: "./res/img/toothless.gif", baseHp: 50, baseDamage: 8, baseGold: 50, name: "Dragon" },
+  { type: "boss2", img: "./res/img/boss2.png", baseHp: 50, baseDamage: 8, baseGold: 75, name: "Demon" },
+  { type: "boss3", img: "./res/img/boss3.png", baseHp: 50, baseDamage: 8, baseGold: 75, name: "Math" },
+  { type: "boss4", img: "./res/img/boss4.png", baseHp: 50, baseDamage: 8, baseGold: 75, name: "Server" },
+  { type: "boss5", img: "./res/img/boss5.png", baseHp: 50, baseDamage: 8, baseGold: 75, name: "Linux" }
+];
+
+// Update UI
+const updateUI = () => {
+  goldAmount.textContent = `Gold: ${money} | Diamonds: ${diamonds}`;
+  playerHp.textContent = `HP: ${charHp}/${charMaxHp}`;
+  enemyHp.textContent = `HP: ${enemyCurrentHp}/${enemyMaxHp}`;
+  roomNumber.textContent = currentRoom;
+  enemyImg.src = enemies.find(e => e.type === enemyType)?.img ||
+                 hardEnemies.find(e => e.type === enemyType)?.img ||
+                 bosses.find(e => e.type === enemyType)?.img ||
+                 "./res/img/enemy1.png";
+  excaliburItem.style.display = ownedItems.excalibur ? 'none' : 'flex';
+  fireAspectItem.style.display = ownedItems.fireAspect ? 'none' : 'flex';
+  greenAmuletItem.style.display = ownedItems.greenAmulet ? 'none' : 'flex';
+  weaponUpgradeButton.textContent = `Upgrade Weapon (${10 + weaponUpgrades * 5}g)`;
+  armorUpgradeButton.textContent = `Upgrade Armor (${10 + armorUpgrades * 5}g)`;
+  potionButton.textContent = `Buy Potion (${500 + potionPurchases * 50}g)`;
+  volumeSlider.value = musicVolume * 100;
+  playerStats.textContent = `Damage: ${damage} | Max HP: ${charMaxHp} | Potions: ${up3}`;
+  const items = [];
+  if (ownedItems.excalibur) items.push("Excalibur");
+  if (ownedItems.fireAspect) items.push("Fire Aspect");
+  if (ownedItems.greenAmulet) items.push("Green Amulet");
+  ownedItemsElement.textContent = `Items: ${items.length > 0 ? items.join(", ") : "None"}`;
+};
+
+// Update special attack button visibility
+const updateSpecialAttackButton = () => {
+  specialAttackButton.classList.toggle("hidden", !ownedItems.fireAspect || attackCount < 5);
+};
+
+// Update music state
+const updateMusicState = () => {
+  audio.pause();
+  questAudio.pause();
+  blackmarketAudio.pause();
+  shopAudio.pause();
+  dungeonAudio.pause();
+  audio.volume = isMusicPlaying ? musicVolume : 0;
+  questAudio.volume = isMusicPlaying ? musicVolume : 0;
+  blackmarketAudio.volume = isMusicPlaying ? musicVolume : 0;
+  shopAudio.volume = isMusicPlaying ? musicVolume : 0;
+  dungeonAudio.volume = isMusicPlaying ? musicVolume : 0;
+  if (isMusicPlaying) {
+    if (!questContainer.classList.contains("hidden")) {
+      questAudio.play();
+    } else if (!blackmarketContainer.classList.contains("hidden")) {
+      blackmarketAudio.play();
+    } else if (!shopContainer.classList.contains("hidden")) {
+      shopAudio.play();
+    } else if (!dungeonContainer.classList.contains("hidden")) {
+      dungeonAudio.play();
     } else {
-      typeOfEnchantment.innerHTML = `Unlucky :/`;
-      setTimeout(() => {
-        typeOfEnchantment.style.display = "none";
-      }, 300);
+      audio.play();
     }
   }
+  musicButton.style.display = isMusicPlaying ? "none" : "block";
+  musicMutedButton.style.display = isMusicPlaying ? "block" : "none";
 };
 
-resume.onclick = () => {
-  saveObal.style.display = "none";
-  mainObal.style.pointerEvents = "auto";
-  gameMenu.style.pointerEvents = "auto";
+// Volume slider
+volumeSlider.oninput = () => {
+  musicVolume = volumeSlider.value / 100;
+  audio.volume = isMusicPlaying ? musicVolume : 0;
+  questAudio.volume = isMusicPlaying ? musicVolume : 0;
+  blackmarketAudio.volume = isMusicPlaying ? musicVolume : 0;
+  shopAudio.volume = isMusicPlaying ? musicVolume : 0;
+  dungeonAudio.volume = isMusicPlaying ? musicVolume : 0;
+  saveGameState();
 };
 
-quit.onclick = () => {
-  window.close();
-};
-unsave.onclick = () => {
-  localStorage.clear();
-  location.reload();
+// Select 3 random quests
+const getRandomQuests = () => {
+  const shuffled = questTemplates.sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, 3).map(quest => ({
+    type: quest.type,
+    goal: quest.getGoal(questCompletions[quest.type] || 0)
+  }));
 };
 
-phoneMenu.onclick = () =>{
-  if (
-    saveObal.style.display == "none" &&
-    main.style.display != "block"
-  ) {
-    saveObal.style.display = "block";
-    mainObal.style.pointerEvents = "none";
-    gameMenu.style.pointerEvents = "none";
-  } else {
-    saveObal.style.display = "none";
-    mainObal.style.pointerEvents = "auto";
-    gameMenu.style.pointerEvents = "auto";
+// Select a single random quest
+const getSingleRandomQuest = (completedType) => {
+  const availableTemplates = questTemplates.filter(q => q.type !== completedType && !activeQuests.some(aq => aq.type === q.type));
+  if (availableTemplates.length === 0) {
+    const fallbackTemplates = questTemplates.filter(q => q.type !== completedType);
+    if (fallbackTemplates.length === 0) return null;
+    const quest = fallbackTemplates[Math.floor(Math.random() * fallbackTemplates.length)];
+    return {
+      type: quest.type,
+      goal: quest.getGoal((questCompletions[quest.type] || 0) + 1)
+    };
   }
-}
+  const quest = availableTemplates[Math.floor(Math.random() * availableTemplates.length)];
+  return {
+    type: quest.type,
+    goal: quest.getGoal((questCompletions[quest.type] || 0) + 1)
+  };
+};
 
-function esc(e) {
-  if (
-    e.key === "Escape" &&
-    saveObal.style.display == "none" &&
-    main.style.display != "block"
-  ) {
-    saveObal.style.display = "block";
-    mainObal.style.pointerEvents = "none";
-    gameMenu.style.pointerEvents = "none";
-  } else {
-    saveObal.style.display = "none";
-    mainObal.style.pointerEvents = "auto";
-    gameMenu.style.pointerEvents = "auto";
+// Update quest list
+const updateQuestList = () => {
+  questList.innerHTML = "";
+  activeQuests.forEach(quest => {
+    const questTemplate = questTemplates.find(q => q.type === quest.type);
+    const progress = questProgress[quest.type] || 0;
+    const goal = quest.type.startsWith("defeat") ? 1 : quest.goal;
+    const description = questTemplate.description(goal);
+    const questItem = document.createElement("div");
+    questItem.className = "quest-item";
+    questItem.innerHTML = `<span>${description} (${progress}/${goal})</span>`;
+    questList.appendChild(questItem);
+  });
+};
+
+// Complete a quest
+const completeQuest = (quest) => {
+  const questTemplate = questTemplates.find(q => q.type === quest.type);
+  const completions = questCompletions[quest.type] || 0;
+  const reward = questTemplate.reward(completions);
+  money += reward.gold;
+  diamonds += 1;
+  let rewardMessage = `Quest completed! Gained ${reward.gold} gold and 1 diamond`;
+  if (reward.upgrade === "weapon") {
+    damage += 1;
+    rewardMessage += ` and Weapon Upgrade! Damage: ${damage}`;
+  } else if (reward.upgrade === "armor") {
+    charMaxHp += 5;
+    charHp += 5;
+    rewardMessage += ` and Armor Upgrade! Max HP: ${charMaxHp}`;
+  } else if (reward.upgrade === "potion") {
+    up3 += 1;
+    rewardMessage += ` and Potion! Potions: ${up3}`;
   }
-}
+  questCompletions[quest.type] = completions + 1;
+  questProgress[quest.type] = 0;
+  const newQuest = getSingleRandomQuest(quest.type);
+  if (newQuest) {
+    activeQuests = activeQuests.filter(q => q.type !== quest.type);
+    activeQuests.push(newQuest);
+  }
+  saveGameState();
+  updateQuestList();
+  updateUI();
+  showNotification(rewardMessage);
+};
 
-body.addEventListener("keyup", esc);
+// Check quest progress
+const checkQuestProgress = (type, value) => {
+  activeQuests.forEach(quest => {
+    if (quest.type === type) {
+      if (type === "killEnemies" || type === "upgradeWeapon" || type === "upgradeArmor" || type === "purchasePotions") {
+        questProgress[type] = (questProgress[type] || 0) + 1;
+      } else if (type === "defeatDragon" && value === "boss1") {
+        questProgress[type] = 1;
+      } else if (type === "defeatDemon" && value === "boss2") {
+        questProgress[type] = 1;
+      } else if (type === "defeatMath" && value === "boss3") {
+        questProgress[type] = 1;
+      } else if (type === "defeatServer" && value === "boss4") {
+        questProgress[type] = 1;
+      } else if (type === "defeatLinux" && value === "boss5") {
+        questProgress[type] = 1;
+      } else if (type === "clearDungeon" && value === 5) {
+        questProgress[type] = 1;
+      } else if (type === "collectGold") {
+        questProgress[type] = money;
+      }
+      if (questProgress[type] >= quest.goal) {
+        completeQuest(quest);
+      } else {
+        saveGameState();
+        updateQuestList();
+      }
+    }
+  });
+};
+
+// Initialize game
+loadGameState();
+
+// Update background based on time or dungeon
+const updateBackground = () => {
+  if (!dungeonContainer.classList.contains("hidden")) {
+    const backgrounds = ["./res/img/dungeon.jpg", "./res/img/dungeon2.jpg", "./res/img/dungeon3.jpg"];
+    dungeonBackground = backgrounds[dungeonCompletions % 3];
+    document.body.style.backgroundImage = `url('${dungeonBackground}')`;
+    console.log("Setting dungeon background:", dungeonBackground);
+  } else {
+    const hour = new Date().getHours();
+    const isDay = hour >= 6 && hour < 18;
+    gameContainer.style.backgroundImage = isDay
+      ? "url('./res/img/townDay.jpg')"
+      : "url('./res/img/townNight.jpg')";
+  }
+};
+
+// Cycle merchant images
+const cycleMerchant = () => {
+  const merchantImages = [
+    './res/img/merchant1.png',
+    './res/img/merchant2.png',
+    './res/img/merchant3.png'
+  ];
+  let currentIndex = 0;
+  merchant.src = merchantImages[currentIndex];
+  merchantCycleInterval = setInterval(() => {
+    currentIndex = (currentIndex + 1) % merchantImages.length;
+    merchant.src = merchantImages[currentIndex];
+  }, 3000);
+};
+
+// Set enemy with infinite scaling and defeat-based progression
+const setEnemy = () => {
+  let enemyPool;
+  if (currentRoom === 1 || currentRoom === 2) {
+    enemyPool = enemies;
+  } else if (currentRoom === 4) {
+    enemyPool = hardEnemies;
+  } else if (currentRoom === 5) {
+    enemyPool = bosses;
+  }
+  const enemy = enemyPool[Math.floor(Math.random() * enemyPool.length)];
+  const defeatCount = enemyDefeatCounts[enemy.type] || 0;
+  const hpScale = 1 + (dungeonCompletions * 2) + (defeatCount * 0.2);
+  const damageScale = 1 + (dungeonCompletions) + (defeatCount * 0.15);
+  const goldScale = 1 + (dungeonCompletions * 0.5) + (defeatCount * 0.1);
+  enemyType = enemy.type;
+  enemyImg.src = enemy.img;
+  enemyCurrentHp = Math.round(enemy.baseHp * hpScale);
+  enemyMaxHp = enemyCurrentHp;
+  enemyDamage = Math.round(enemy.baseDamage * damageScale);
+  goldReward = Math.round(enemy.baseGold * goldScale);
+  enemyHp.textContent = `HP: ${enemyCurrentHp}/${enemyMaxHp}`;
+  saveGameState();
+};
+
+// Start enemy attack and Green Amulet regen
+const startEnemyAttack = () => {
+  if (enemyAttackInterval) clearInterval(enemyAttackInterval);
+  if (regenInterval) clearInterval(regenInterval);
+  const interval = currentRoom === 5 ? 3000 : 1000;
+  enemyAttackInterval = setInterval(() => {
+    if (chestContainer.classList.contains("hidden")) {
+      charHp -= enemyDamage;
+      playerHp.textContent = `HP: ${charHp}/${charMaxHp}`;
+      saveGameState();
+      if (charHp <= 0) {
+        showNotification("You died...");
+        charHp = charMaxHp;
+        currentRoom = 1;
+        saveGameState();
+        playerHp.textContent = `HP: ${charHp}/${charMaxHp}`;
+        roomNumber.textContent = currentRoom;
+        setEnemy();
+        dungeonContainer.classList.add("hidden");
+        gameContainer.classList.remove("hidden");
+        goldMenu.classList.remove("hidden");
+        updateBackground();
+        updateMusicState();
+        if (enemyAttackInterval) clearInterval(enemyAttackInterval);
+        enemyAttackInterval = undefined;
+        if (regenInterval) clearInterval(regenInterval);
+        regenInterval = undefined;
+        attackCount = 0;
+        updateSpecialAttackButton();
+      }
+    }
+  }, interval);
+  if (ownedItems.greenAmulet) {
+    regenInterval = setInterval(() => {
+      if (chestContainer.classList.contains("hidden") && charHp < charMaxHp) {
+        charHp = Math.min(charHp + 10, charMaxHp);
+        playerHp.textContent = `HP: ${charHp}/${charMaxHp}`;
+        saveGameState();
+      }
+    }, 2000);
+  }
+};
+
+// Stop enemy attack and Green Amulet regen
+const stopEnemyAttack = () => {
+  if (enemyAttackInterval) clearInterval(enemyAttackInterval);
+  enemyAttackInterval = undefined;
+  if (regenInterval) clearInterval(regenInterval);
+  regenInterval = undefined;
+};
+
+// Save/Load modal
+saveLoadButton.onclick = () => {
+  saveModal.classList.remove("hidden");
+};
+exportButton.onclick = () => {
+  exportGameState();
+  saveModal.classList.add("hidden");
+};
+loadButton.onclick = () => {
+  loadFileInput.click();
+};
+loadFileInput.onchange = (e) => {
+  if (e.target.files.length > 0) {
+    loadFromFile(e.target.files[0]);
+    saveModal.classList.add("hidden");
+  }
+};
+resetButton.onclick = () => {
+  resetGameState();
+  saveModal.classList.add("hidden");
+};
+closeSave.onclick = () => {
+  saveModal.classList.add("hidden");
+};
+
+// Music toggle
+musicButton.onclick = () => {
+  isMusicPlaying = true;
+  updateMusicState();
+  saveGameState();
+};
+musicMutedButton.onclick = () => {
+  isMusicPlaying = false;
+  audio.pause();
+  questAudio.pause();
+  blackmarketAudio.pause();
+  shopAudio.pause();
+  dungeonAudio.pause();
+  musicMutedButton.style.display = "none";
+  musicButton.style.display = "block";
+  saveGameState();
+};
+
+// Play button
+playButton.onclick = () => {
+  menuContainer.style.display = "none";
+  gameContainer.classList.remove("hidden");
+  goldMenu.classList.remove("hidden");
+  charHp = charMaxHp;
+  saveGameState();
+  playerHp.textContent = `HP: ${charHp}/${charMaxHp}`;
+  updateUI();
+  updateBackground();
+  updateMusicState();
+};
+
+// Game menu buttons
+dungeonButton.onclick = () => {
+  gameContainer.classList.add("hidden");
+  dungeonContainer.classList.remove("hidden");
+  goldMenu.classList.remove("hidden");
+  updateBackground();
+  updateUI();
+  updateMusicState();
+  if (currentRoom === 3) {
+    enemyContainer.classList.add("hidden");
+    chestContainer.classList.remove("hidden");
+    stopEnemyAttack();
+  } else {
+    enemyContainer.classList.remove("hidden");
+    chestContainer.classList.add("hidden");
+    setEnemy();
+    startEnemyAttack();
+  }
+};
+shopButton.onclick = () => {
+  gameContainer.classList.add("hidden");
+  shopContainer.classList.remove("hidden");
+  goldMenu.classList.remove("hidden");
+  document.body.style.backgroundImage = "url('./res/img/shop.png')";
+  updateUI();
+  updateMusicState();
+  cycleMerchant();
+};
+blackmarketButton.onclick = () => {
+  gameContainer.classList.add("hidden");
+  blackmarketContainer.classList.remove("hidden");
+  goldMenu.classList.remove("hidden");
+  document.body.style.backgroundImage = "url('./res/img/blackmarket.jpg')";
+  updateUI();
+  updateMusicState();
+};
+questsButton.onclick = () => {
+  gameContainer.classList.add("hidden");
+  questContainer.classList.remove("hidden");
+  goldMenu.classList.remove("hidden");
+  document.body.style.backgroundImage = "url('./res/img/questRoom.jpg')";
+  questList.classList.remove("hidden");
+  updateQuestList();
+  updateUI();
+  updateMusicState();
+};
+backToMenuButton.onclick = () => {
+  gameContainer.classList.add("hidden");
+  goldMenu.classList.add("hidden");
+  menuContainer.style.display = "block";
+  document.body.style.backgroundImage = "url('./res/img/gameMenu.jpg')";
+  charHp = charMaxHp;
+  saveGameState();
+  playerHp.textContent = `HP: ${charHp}/${charMaxHp}`;
+  stopEnemyAttack();
+  attackCount = 0;
+  updateSpecialAttackButton();
+  if (merchantCycleInterval) clearInterval(merchantCycleInterval);
+  merchantCycleInterval = undefined;
+  updateUI();
+  updateMusicState();
+};
+
+// Quest room buttons
+backToTownQuestButton.onclick = () => {
+  questContainer.classList.add("hidden");
+  gameContainer.classList.remove("hidden");
+  goldMenu.classList.remove("hidden");
+  charHp = charMaxHp;
+  saveGameState();
+  playerHp.textContent = `HP: ${charHp}/${charMaxHp}`;
+  updateBackground();
+  updateUI();
+  updateMusicState();
+};
+
+// Black Market buttons
+backToTownBlackmarketButton.onclick = () => {
+  blackmarketContainer.classList.add("hidden");
+  gameContainer.classList.remove("hidden");
+  goldMenu.classList.remove("hidden");
+  charHp = charMaxHp;
+  saveGameState();
+  playerHp.textContent = `HP: ${charHp}/${charMaxHp}`;
+  updateBackground();
+  updateUI();
+  updateMusicState();
+};
+buyExcaliburButton.onclick = () => {
+  if (ownedItems.excalibur) {
+    showNotification("You already own Excalibur!");
+  } else if (diamonds >= 50) {
+    diamonds -= 50;
+    ownedItems.excalibur = true;
+    excaliburItem.style.display = 'none';
+    damage += 25;
+    saveGameState();
+    updateUI();
+    showNotification("Purchased Excalibur! Damage: " + damage);
+  } else {
+    showNotification("Not enough diamonds!");
+  }
+};
+buyFireAspectButton.onclick = () => {
+  if (ownedItems.fireAspect) {
+    showNotification("You already own Fire Aspect!");
+  } else if (diamonds >= 75) {
+    diamonds -= 75;
+    ownedItems.fireAspect = true;
+    fireAspectItem.style.display = 'none';
+    saveGameState();
+    updateUI();
+    showNotification("Purchased Fire Aspect! Special attack enabled after 5 attacks.");
+  } else {
+    showNotification("Not enough diamonds!");
+  }
+};
+buyGreenAmuletButton.onclick = () => {
+  if (ownedItems.greenAmulet) {
+    showNotification("You already own Green Amulet!");
+  } else if (diamonds >= 100) {
+    diamonds -= 100;
+    ownedItems.greenAmulet = true;
+    greenAmuletItem.style.display = 'none';
+    saveGameState();
+    updateUI();
+    showNotification("Purchased Green Amulet! Regenerates 10 HP every 2 seconds in combat.");
+    if (!chestContainer.classList.contains("hidden") && !dungeonContainer.classList.contains("hidden")) {
+      startEnemyAttack();
+    }
+  } else {
+    showNotification("Not enough diamonds!");
+  }
+};
+
+// Shop buttons
+backToTownButton.onclick = () => {
+  shopContainer.classList.add("hidden");
+  gameContainer.classList.remove("hidden");
+  goldMenu.classList.remove("hidden");
+  charHp = charMaxHp;
+  saveGameState();
+  playerHp.textContent = `HP: ${charHp}/${charMaxHp}`;
+  updateBackground();
+  updateUI();
+  updateMusicState();
+  if (merchantCycleInterval) clearInterval(merchantCycleInterval);
+  merchantCycleInterval = undefined;
+};
+weaponUpgradeButton.onclick = () => {
+  const cost = 10 + weaponUpgrades * 5;
+  if (money >= cost) {
+    money -= cost;
+    damage += 1;
+    weaponUpgrades += 1;
+    checkQuestProgress("upgradeWeapon");
+    saveGameState();
+    updateUI();
+    showNotification(`Weapon upgraded! Damage: ${damage}`);
+  } else {
+    showNotification("Not enough gold!");
+  }
+};
+armorUpgradeButton.onclick = () => {
+  const cost = 10 + armorUpgrades * 5;
+  if (money >= cost) {
+    money -= cost;
+    charMaxHp += 5;
+    charHp += 5;
+    armorUpgrades += 1;
+    checkQuestProgress("upgradeArmor");
+    saveGameState();
+    updateUI();
+    showNotification(`Armor upgraded! Max HP: ${charMaxHp}`);
+  } else {
+    showNotification("Not enough gold!");
+  }
+};
+potionButton.onclick = () => {
+  const cost = 500 + potionPurchases * 50;
+  if (money >= cost) {
+    money -= cost;
+    up3 += 1;
+    potionPurchases += 1;
+    checkQuestProgress("purchasePotions");
+    saveGameState();
+    updateUI();
+    showNotification(`Potion purchased! Potions: ${up3}`);
+  } else {
+    showNotification("Not enough gold!");
+  }
+};
+
+// Dungeon buttons
+attackButton.onclick = () => {
+  if (!attackButton) {
+    console.error("Attack button is null");
+    showNotification("Error: Attack button not found!");
+    return;
+  }
+  if (!dungeonMainChar || !enemyHp) {
+    console.error("Missing dungeonMainChar or enemyHp element");
+    showNotification("Error: Game elements missing!");
+    return;
+  }
+  console.debug(`Attack button clicked: chestContainer.hidden=${chestContainer.classList.contains("hidden")}, isAttacking=${isAttacking}, currentRoom=${currentRoom}, enemyCurrentHp=${enemyCurrentHp}`);
+  if (!chestContainer.classList.contains("hidden") || isAttacking) {
+    console.debug("Attack blocked: chest visible or isAttacking true");
+    return;
+  }
+  isAttacking = true;
+  try {
+    dungeonMainChar.src = "./res/img/attack_kqv2.png";
+    dungeonMainChar.classList.add("attacking");
+    enemyCurrentHp -= damage;
+    if (ownedItems.fireAspect) {
+      attackCount += 1;
+      updateSpecialAttackButton();
+    }
+    enemyHp.textContent = `HP: ${enemyCurrentHp}/${enemyMaxHp}`;
+    saveGameState();
+    setTimeout(() => {
+      try {
+        dungeonMainChar.src = "./res/img/idle_kqv2.png";
+        dungeonMainChar.classList.remove("attacking");
+        isAttacking = false;
+      } catch (error) {
+        console.error("Error in attack animation reset:", error);
+        isAttacking = false;
+      }
+    }, 200);
+    if (enemyCurrentHp <= 0) {
+      enemyDefeatCounts[enemyType] = (enemyDefeatCounts[enemyType] || 0) + 1;
+      stopEnemyAttack();
+      money += goldReward;
+      checkQuestProgress("collectGold");
+      checkQuestProgress("killEnemies");
+      if (enemyType === "boss1") checkQuestProgress("defeatDragon", enemyType);
+      if (enemyType === "boss2") checkQuestProgress("defeatDemon", enemyType);
+      if (enemyType === "boss3") checkQuestProgress("defeatMath", enemyType);
+      if (enemyType === "boss4") checkQuestProgress("defeatServer", enemyType);
+      if (enemyType === "boss5") checkQuestProgress("defeatLinux", enemyType);
+      currentRoom += 1;
+      saveGameState();
+      if (currentRoom === 3) {
+        enemyContainer.classList.add("hidden");
+        chestContainer.classList.remove("hidden");
+      } else if (currentRoom > 5) {
+        dungeonCompletions += 1;
+        currentRoom = 1;
+        const backgrounds = ["./res/img/dungeon.jpg", "./res/img/dungeon2.jpg", "./res/img/dungeon3.jpg"];
+        dungeonBackground = backgrounds[dungeonCompletions % 3];
+        checkQuestProgress("clearDungeon", 5);
+        showNotification("Dungeon cleared!");
+        dungeonContainer.classList.add("hidden");
+        gameContainer.classList.remove("hidden");
+        goldMenu.classList.remove("hidden");
+        updateBackground();
+        updateMusicState();
+        attackCount = 0;
+        updateSpecialAttackButton();
+      } else {
+        setEnemy();
+        startEnemyAttack();
+      }
+      updateUI();
+    }
+  } catch (error) {
+    console.error("Error in attack handler:", error);
+    isAttacking = false;
+    showNotification("Error during attack!");
+  }
+};
+specialAttackButton.onclick = () => {
+  if (!chestContainer.classList.contains("hidden") || isAttacking || attackCount < 5) return;
+  isAttacking = true;
+  dungeonMainChar.src = "./res/img/attack_kqv2.png";
+  dungeonMainChar.classList.add("attacking");
+  enemyCurrentHp -= damage * 3;
+  attackCount = 0;
+  updateSpecialAttackButton();
+  enemyHp.textContent = `HP: ${enemyCurrentHp}/${enemyMaxHp}`;
+  saveGameState();
+  setTimeout(() => {
+    try {
+      dungeonMainChar.src = "./res/img/idle_kqv2.png";
+      dungeonMainChar.classList.remove("attacking");
+      isAttacking = false;
+    } catch (error) {
+      console.error("Error in special attack animation reset:", error);
+      isAttacking = false;
+    }
+  }, 200);
+  if (enemyCurrentHp <= 0) {
+    enemyDefeatCounts[enemyType] = (enemyDefeatCounts[enemyType] || 0) + 1;
+    stopEnemyAttack();
+    money += goldReward;
+    checkQuestProgress("collectGold");
+    checkQuestProgress("killEnemies");
+    if (enemyType === "boss1") checkQuestProgress("defeatDragon", enemyType);
+    if (enemyType === "boss2") checkQuestProgress("defeatDemon", enemyType);
+    if (enemyType === "boss3") checkQuestProgress("defeatMath", enemyType);
+    if (enemyType === "boss4") checkQuestProgress("defeatServer", enemyType);
+    if (enemyType === "boss5") checkQuestProgress("defeatLinux", enemyType);
+    currentRoom += 1;
+    saveGameState();
+    if (currentRoom === 3) {
+      enemyContainer.classList.add("hidden");
+      chestContainer.classList.remove("hidden");
+    } else if (currentRoom > 5) {
+      dungeonCompletions += 1;
+      currentRoom = 1;
+      const backgrounds = ["./res/img/dungeon.jpg", "./res/img/dungeon2.jpg", "./res/img/dungeon3.jpg"];
+      dungeonBackground = backgrounds[dungeonCompletions % 3];
+      checkQuestProgress("clearDungeon", 5);
+      showNotification("Dungeon cleared!");
+      dungeonContainer.classList.add("hidden");
+      gameContainer.classList.remove("hidden");
+      goldMenu.classList.remove("hidden");
+      updateBackground();
+      updateMusicState();
+      attackCount = 0;
+      updateSpecialAttackButton();
+    } else {
+      setEnemy();
+      startEnemyAttack();
+    }
+    updateUI();
+  }
+};
+usePotionButton.onclick = () => {
+  if (up3 <= 0) {
+    showNotification("No potions available!");
+    return;
+  }
+  if (charHp >= charMaxHp) {
+    showNotification("Health is already full!");
+    return;
+  }
+  up3 -= 1;
+  charHp = charMaxHp;
+  playerHp.textContent = `HP: ${charHp}/${charMaxHp}`;
+  saveGameState();
+  updateUI();
+  showNotification("Potion used! Health restored.");
+};
+openChestButton.onclick = () => {
+  money += 10;
+  checkQuestProgress("collectGold");
+  const upgrades = ["weapon", "armor", "potion"];
+  const upgrade = upgrades[Math.floor(Math.random() * 3)];
+  let rewardMessage = "Chest opened! Gained 10 gold";
+  if (upgrade === "weapon") {
+    damage += 1;
+    rewardMessage += ` and Weapon Upgrade! Damage: ${damage}`;
+  } else if (upgrade === "armor") {
+    charMaxHp += 5;
+    charHp += 5;
+    rewardMessage += ` and Armor Upgrade! Max HP: ${charMaxHp}`;
+  } else if (upgrade === "potion") {
+    up3 += 1;
+    rewardMessage += ` and Potion! Potions: ${up3}`;
+  }
+  currentRoom += 1;
+  chestContainer.classList.add("hidden");
+  enemyContainer.classList.remove("hidden");
+  setEnemy();
+  startEnemyAttack();
+  saveGameState();
+  updateUI();
+  showNotification(rewardMessage);
+};
+backToTownDungeonButton.onclick = () => {
+  dungeonContainer.classList.add("hidden");
+  gameContainer.classList.remove("hidden");
+  goldMenu.classList.remove("hidden");
+  charHp = charMaxHp;
+  saveGameState();
+  playerHp.textContent = `HP: ${charHp}/${charMaxHp}`;
+  roomNumber.textContent = currentRoom;
+  updateBackground();
+  updateUI();
+  updateMusicState();
+  stopEnemyAttack();
+  attackCount = 0;
+  updateSpecialAttackButton();
+};
+
+// Quit button
+quitButton.onclick = () => {
+  if (confirm("Are you sure you want to quit?")) {
+    window.close();
+  }
+};

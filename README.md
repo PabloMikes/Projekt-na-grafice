@@ -8,6 +8,7 @@ Michal Adámek
 Matěj Landa
 
 Podobnost postav s učiteli je čistě náhodná
+<img width="524" height="544" alt="mainChar" src="https://github.com/user-attachments/assets/48492d85-7a30-485e-bc62-122c3cbb2a94" />
 
 
 
